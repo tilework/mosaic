@@ -4,7 +4,7 @@
 const spawn = require('cross-spawn');
 const path = require('path');
 const kill = require('tree-kill');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@plugjs/dev-utils/logger');
 const debounce = require('debounce');
 const chokidar = require('chokidar');
 const { getDefinedPages, createMockPages } = require('./pages');

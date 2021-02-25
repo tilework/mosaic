@@ -1,10 +1,10 @@
 /* eslint-disable no-continue */
 /* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
-const { getParentThemePaths } = require('@scandipwa/scandipwa-dev-utils/parent-theme');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
-const createFilesystem = require('@scandipwa/scandipwa-dev-utils/create-filesystem');
+const { getParentThemePaths } = require('@plugjs/dev-utils/parent-theme');
+const extensions = require('@plugjs/dev-utils/extensions');
+const { getPackageJson } = require('@plugjs/dev-utils/package-json');
+const logger = require('@plugjs/dev-utils/logger');
+const createFilesystem = require('@plugjs/dev-utils/create-filesystem');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');

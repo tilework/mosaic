@@ -1,4 +1,4 @@
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
+const extensions = require('@plugjs/dev-utils/extensions');
 const safePath = require('./safe-path');
 
 const getIncludePaths = () => [

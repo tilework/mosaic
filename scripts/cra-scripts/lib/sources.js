@@ -1,4 +1,4 @@
-const { getParentThemeSources } = require('@scandipwa/scandipwa-dev-utils/parent-theme');
+const { getParentThemeSources } = require('@plugjs/dev-utils/parent-theme');
 
 const PROJECT = 'project';
 

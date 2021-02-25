@@ -5,8 +5,8 @@
 // TODO: add examples of transformations
 
 const path = require('path');
-const { getParentThemePaths } = require('@scandipwa/scandipwa-dev-utils/parent-theme');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
+const { getParentThemePaths } = require('@plugjs/dev-utils/parent-theme');
+const extensions = require('@plugjs/dev-utils/extensions');
 
 const allowedPaths = [
     ...getParentThemePaths(),

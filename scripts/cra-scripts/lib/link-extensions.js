@@ -1,8 +1,8 @@
 const path = require('path');
 
-const shouldUseYarn = require('@scandipwa/scandipwa-dev-utils/should-use-yarn');
-const execCommandAsync = require('@scandipwa/scandipwa-dev-utils/exec-command');
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
+const shouldUseYarn = require('@plugjs/dev-utils/should-use-yarn');
+const execCommandAsync = require('@plugjs/dev-utils/exec-command');
+const { getPackageJson } = require('@plugjs/dev-utils/package-json');
 
 module.exports = async () => {
     const { dependencies } = getPackageJson(process.cwd());

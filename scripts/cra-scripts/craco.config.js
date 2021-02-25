@@ -7,8 +7,8 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FallbackPlugin = require('@scandipwa/webpack-fallback-plugin');
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
+const { getPackageJson } = require('@plugjs/dev-utils/package-json');
+const extensions = require('@plugjs/dev-utils/extensions');
 const I18nPlugin = require('@scandipwa/webpack-i18n-plugin');
 
 const {

@@ -2,7 +2,7 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 
 const runNextJS = require('../lib/nextjs');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@plugjs/dev-utils/logger');
 
 // const linkExtensions = require('../lib/link-extensions');
 

@@ -21,7 +21,7 @@
     "dependencies": {
         "@scandipwa/craco": "0.1.1",
         "@scandipwa/eslint-config": "0.1.12",
-        "@scandipwa/scandipwa-dev-utils": "0.0.20",
+        "@plugjs/dev-utils": "0.0.1",
         "@scandipwa/scandipwa-extensibility": "2.0.2",
         "@scandipwa/webpack-extension-import-loader": "0.0.16",
         "@scandipwa/webpack-fallback-plugin": "1.2.0",

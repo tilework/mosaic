@@ -1,6 +1,6 @@
 const path = require('path');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const extensions = require('@plugjs/dev-utils/extensions');
+const logger = require('@plugjs/dev-utils/logger');
 
 // Generate aliases for preference first
 const {

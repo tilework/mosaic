@@ -19,7 +19,7 @@
         "@babel/plugin-transform-arrow-functions": "^7.10.4",
         "@babel/plugin-transform-async-to-generator": "^7.10.4",
         "@scandipwa/craco": "0.1.1",
-        "@scandipwa/scandipwa-dev-utils": "0.0.20",
+        "@plugjs/dev-utils": "0.0.1",
         "noop-loader": "^1.0.0",
         "null-loader": "^4.0.1"
     }

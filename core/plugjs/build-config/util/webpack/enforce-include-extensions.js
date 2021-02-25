@@ -1,4 +1,4 @@
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@plugjs/dev-utils/logger');
 const includePaths = require('../common/get-include-paths')();
 
 // TODO what if installed in node_modules?

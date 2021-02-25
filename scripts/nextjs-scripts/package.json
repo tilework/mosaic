@@ -15,7 +15,7 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@scandipwa/scandipwa-dev-utils": "^0.0.20",
+        "@plugjs/dev-utils": "0.0.1",
         "chokidar": "^3.5.1",
         "cross-spawn": "^7.0.3",
         "debounce": "^1.2.0",

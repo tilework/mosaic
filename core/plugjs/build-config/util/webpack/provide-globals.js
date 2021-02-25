@@ -1,4 +1,4 @@
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@plugjs/dev-utils/logger');
 
 const extUtilsDefinition = {
     ExtUtils: [

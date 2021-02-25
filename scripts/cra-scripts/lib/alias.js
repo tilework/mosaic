@@ -3,9 +3,9 @@
 /* eslint-disable fp/no-loops */
 const path = require('path');
 const { sources, PROJECT } = require('./sources');
-const { getParentThemeAliases } = require('@scandipwa/scandipwa-dev-utils/parent-theme');
-const writeJson = require('@scandipwa/scandipwa-dev-utils/write-json');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
+const { getParentThemeAliases } = require('@plugjs/dev-utils/parent-theme');
+const writeJson = require('@plugjs/dev-utils/write-json');
+const extensions = require('@plugjs/dev-utils/extensions');
 
 const aliasPostfixMap = {
     Style: `.${path.sep}${path.join('src', 'style')}`,

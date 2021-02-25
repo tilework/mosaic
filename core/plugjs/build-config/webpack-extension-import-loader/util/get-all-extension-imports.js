@@ -1,7 +1,7 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 const path = require('path');
 const fs = require('fs');
-const extensions = require('@scandipwa/scandipwa-dev-utils/extensions');
+const extensions = require('@plugjs/dev-utils/extensions');
 
 const isPluginFile = (entry) => /\.plugin\.js$/.test(entry);
 const isDirectory = (entry) => !!fs.lstatSync(entry).isDirectory();
