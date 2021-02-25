@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "The convenient plugin system for JS",
   "main": "index.js",
+  "private": "true",
   "scripts": {
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes"
@@ -24,5 +25,10 @@
   "homepage": "https://github.com/plugjs/plugjs#readme",
   "dependencies": {
     "lerna": "^3.22.1"
-  }
+  },
+  "workspaces": [
+    "runtime-packages/*",
+    "core/*",
+    "scripts/*"
+  ]
 }
