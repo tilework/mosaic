@@ -1,5 +1,4 @@
 /* eslint-disable no-continue */
-/* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 
 const spawn = require('cross-spawn');
 const path = require('path');

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 
 const runNextJS = require('../lib/nextjs');
 const logger = require('@plugjs/dev-utils/logger');

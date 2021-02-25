@@ -1,11 +1,8 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
-/* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
+/* eslint-disable arrow-body-style, no-param-reassign, max-len */
 
 const path = require('path');
-const configInjector = require('@scandipwa/scandipwa-extensibility/build-config/util');
-const getIncludePaths = require('@scandipwa/scandipwa-extensibility/build-config/util/common/get-include-paths');
+const configInjector = require('@plugjs/plugjs/build-config/util');
+const getIncludePaths = require('@plugjs/plugjs/build-config/util/common/get-include-paths');
 
 module.exports = () => {
     // const abstractStyle = FallbackPlugin.getFallbackPathname('src/style/abstract/_abstract.scss');
