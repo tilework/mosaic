@@ -1,0 +1,28 @@
+{
+  "name": "@plugjs/plugjs",
+  "version": "0.0.1",
+  "description": "The convenient plugin system for JS",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "clean": "lerna clean --yes"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plugjs/plugjs.git"
+  },
+  "keywords": [
+    "plugin",
+    "system",
+    "ioc"
+  ],
+  "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plugjs/plugjs/issues"
+  },
+  "homepage": "https://github.com/plugjs/plugjs#readme",
+  "dependencies": {
+    "lerna": "^3.22.1"
+  }
+}

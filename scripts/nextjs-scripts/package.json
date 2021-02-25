@@ -1,0 +1,30 @@
+{
+    "name": "@plugjs/nextjs-scripts",
+    "description": "Scripts and configuration used by CSA.",
+    "version": "0.0.0",
+    "bin": {
+        "nextjs-scripts": "./bin/nextjs-scripts.js"
+    },
+    "scandipwa": {
+        "extensions": {
+            "@plugjs/plugjs": true,
+            "@plugjs/nextjs-scripts": true
+        }
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "dependencies": {
+        "@scandipwa/scandipwa-dev-utils": "^0.0.20",
+        "chokidar": "^3.5.1",
+        "cross-spawn": "^7.0.3",
+        "debounce": "^1.2.0",
+        "glob": "^7.1.6",
+        "next": "10.0.5",
+        "tree-kill": "^1.2.2"
+    },
+    "license": "OSL-3.0",
+    "publishConfig": {
+        "access": "public"
+    }
+}
