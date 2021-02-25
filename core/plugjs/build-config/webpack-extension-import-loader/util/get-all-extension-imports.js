@@ -1,4 +1,3 @@
-/* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 const path = require('path');
 const fs = require('fs');
 const extensions = require('@plugjs/dev-utils/extensions');

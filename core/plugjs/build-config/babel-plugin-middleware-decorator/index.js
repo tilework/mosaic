@@ -1,6 +1,4 @@
 /* eslint-disable */
-/* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
-/* eslint-disable new-cap */
 // TODO: comment
 // TODO: add examples of transformations
 
