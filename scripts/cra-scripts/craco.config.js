@@ -6,10 +6,11 @@ const sassResourcesLoader = require('craco-sass-resources-loader');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FallbackPlugin = require('@scandipwa/webpack-fallback-plugin');
+
+const FallbackPlugin = require('@plugjs/webpack-fallback-plugin');
+const I18nPlugin = require('@plugjs/webpack-i18n-plugin');
 const { getPackageJson } = require('@plugjs/dev-utils/package-json');
 const extensions = require('@plugjs/dev-utils/extensions');
-const I18nPlugin = require('@scandipwa/webpack-i18n-plugin');
 
 const {
     ESLINT_MODES,
@@ -34,7 +35,7 @@ module.exports = () => {
 
     // Use ESLint config defined in package.json or fallback to default one
     const eslintConfig = getPackageJson(process.cwd()).eslintConfig || {
-        extends: [require.resolve('@scandipwa/eslint-config')]
+        extends: [require.resolve('@plugjs/eslint-config')]
     };
 
     // TODO: add legacy i18n support !
@@ -130,7 +131,7 @@ module.exports = () => {
                 }
 
                 const isNewI18n = extensions.some(
-                    ({ packageName }) => packageName === '@scandipwa/webpack-i18n-runtime'
+                    ({ packageName }) => packageName === '@plugjs/webpack-i18n-runtime'
                 );
 
                 // Include Legacy translations for everyone not using new translations
