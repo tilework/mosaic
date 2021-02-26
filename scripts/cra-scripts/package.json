@@ -24,7 +24,6 @@
         "@plugjs/dev-utils": "0.0.1",
         "@plugjs/plugjs": "0.0.1",
         "@plugjs/webpack-fallback-plugin": "0.0.1",
-        "@plugjs/webpack-i18n-plugin": "0.0.1",
         "babel-plugin-module-resolver": "^4.0.0",
         "babel-plugin-transform-rebem-jsx": "^0.3.3",
         "chokidar": "^3.4.2",
