@@ -2,7 +2,7 @@
 const addImportInjectorLoader = (webpackConfig, entryMatcher) => {
     webpackConfig.module.rules.push({
         test: entryMatcher || webpackConfig.entry,
-        loader: require.resolve('../../webpack-extension-import-loader')
+        loader: require.resolve('@plugjs/webpack-plugjs-import-loader')
     });
 
     return webpackConfig;

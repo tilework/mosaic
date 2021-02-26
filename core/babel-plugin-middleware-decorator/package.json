@@ -1,0 +1,9 @@
+{
+  "name": "@plugjs/babel-plugin-middleware-decorator",
+  "version": "0.0.1",
+  "description": "Babel plugin to transform @namespace comments into JS functionality",
+  "main": "index.js",
+  "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
+  "license": "MIT",
+  "private": false
+}

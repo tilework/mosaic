@@ -3,11 +3,20 @@ const provideGlobals = require('./provide-globals');
 const supportLegacy = require('./support-legacy');
 const enforceIncludeExtensions = require('./enforce-include-extensions');
 
+const getOptionalWebpack = () => {
+    try {
+        return require('webpack');
+    } catch {
+        return null;
+    }
+};
+
 /** @type {import('@plugjs/plugjs').WebpackInjectorConfig} */
 const defaultOptions = {
     provideGlobals: true,
     supportLegacy: false,
-    disableExcludeWarning: false
+    disableExcludeWarning: false,
+    webpack: getOptionalWebpack()
 };
 
 /**
@@ -28,8 +37,10 @@ const injectWebpackConfig = (
         entryMatcher
     } = Object.assign(defaultOptions, providedOptions);
 
+    // TODO handle webpackConfig.resolve.symlinks
+
     injectLoader(webpackConfig, entryMatcher);
-    enforceIncludeExtensions(webpackConfig, isDisableExcludeWarning);
+    enforceIncludeExtensions(webpackConfig);
 
     if (isProvideGlobals) {
         provideGlobals(webpackConfig, webpack);

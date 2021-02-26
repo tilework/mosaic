@@ -3,8 +3,8 @@
  * It has no effect for applications without the build configuration plugin system
  */
 
-const injectBabelConfig = require('./util/babel');
-const injectWebpackConfig = require('./util/webpack');
+const injectBabelConfig = require('@plugjs/config-injectors/lib/babel');
+const injectWebpackConfig = require('@plugjs/config-injectors/lib/webpack');
 
 module.exports = {
     plugin: {

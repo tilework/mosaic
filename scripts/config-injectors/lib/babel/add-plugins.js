@@ -3,8 +3,9 @@ const asyncGeneratorTransformer = '@babel/plugin-transform-async-to-generator';
 
 const addBabelPlugins = (babelConfig) => {
     const additionalPlugins = [
-        // Enable 3.x middleware decorators!
-        require.resolve('@plugjs/plugjs/build-config/babel-plugin-middleware-decorator')
+        // Enable middleware decorators
+        // This provides @namespace comments
+        require.resolve('@plugjs/babel-plugin-middleware-decorator')
     ].concat(
         ...[arrowFunctionsTransformer, asyncGeneratorTransformer].filter((plugin) => {
             // If already present in plugin list -> prevent duplicates

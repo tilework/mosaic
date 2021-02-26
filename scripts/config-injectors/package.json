@@ -1,0 +1,11 @@
+{
+  "name": "@plugjs/config-injectors",
+  "version": "0.0.1",
+  "description": "Configuration injectors for @plugjs/plugjs",
+  "main": "lib",
+  "license": "MIT",
+  "dependencies": {
+    "is-valid-npm-name": "^0.0.5",
+    "webpack": "^5"
+  }
+}
