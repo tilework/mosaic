@@ -32,36 +32,42 @@ const enforceIncludeExtensions = (webpackConfig) => {
     if (middlewareDecoratorRules.length === 1) {
         // The most frequent case - 1 babel rule that processes the application
         // Make sure that all the extensions are processed by it
-        const [babelRule] = babelRules;
-        babelRule.exclude = (filepath) => {
-            // Allow  @namespace only in `src` directory
-            if (includePaths.find((one) => filepath.startsWith(path.join(one, 'src')))) {
-                return false;
+        const [middlewareDecoratorRule] = middlewareDecoratorRules;
+
+        // Modify exclude rule so that it does not exclude the extensions
+        // Only if it already exists
+        const initialMiddlewareDecoratorExclude = middlewareDecoratorRule.exclude;
+        if (initialMiddlewareDecoratorExclude) {
+            middlewareDecoratorRule.exclude = (filepath) => {
+                // Allow  @namespace only in `src` directory
+                if (includePaths.find((one) => filepath.startsWith(path.join(one, 'src')))) {
+                    return false;
+                }
+                
+                return getConditionAppliesToFile(initialMiddlewareDecoratorExclude, filepath);
             }
-            
-            return getConditionAppliesToFile(babelRule.exclude, filepath);
         }
+
+        // Ensure include exists
+        if (!middlewareDecoratorRule.include) {
+            middlewareDecoratorRule.include = [];
+        }
+
+        // Ensure all the extensions are included into the transpilation
+        middlewareDecoratorRule.include.push(
+            ...includePaths.map((filepath) => new RegExp(filepath))
+        );
 
         // TODO remove ?
         // Ensure everything working after modifications
         const excludedExtensionFile = potentiallyNamespacedFiles.find(
-            (includePath) => !getRuleAppliesToFile(babelRule, includePath)
+            (includePath) => !getRuleAppliesToFile(middlewareDecoratorRule, includePath)
         );
 
         if (excludedExtensionFile) {
             handleExcludedExtensionFile(excludedExtensionFile)
             process.exit(1);
         }
-
-        // Ensure include exists
-        if (!babelRule.include) {
-            babelRule.include = [];
-        }
-
-        // Ensure all the extensions are included into the transpilation
-        babelRule.include.push(
-            ...includePaths.map((filepath) => new RegExp(filepath))
-        );
     }
 
     // Handle multiple Babel rules case
