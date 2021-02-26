@@ -3,27 +3,17 @@ const provideGlobals = require('./provide-globals');
 const supportLegacy = require('./support-legacy');
 const enforceIncludeExtensions = require('./enforce-include-extensions');
 
-const getOptionalWebpack = () => {
-    try {
-        return require('webpack');
-    } catch {
-        return null;
-    }
-};
-
-/** @type {import('@plugjs/plugjs').WebpackInjectorConfig} */
+/** @type {import('@plugjs/config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
     provideGlobals: true,
-    supportLegacy: false,
-    disableExcludeWarning: false,
-    webpack: getOptionalWebpack()
+    supportLegacy: false
 };
 
 /**
  * Inject webpack configuration with necessary things for the e11y package
  *
  * @param {any} webpackConfig
- * @param {import('@plugjs/plugjs').WebpackInjectorConfig} providedOptions
+ * @param {import('@plugjs/config-injectors').WebpackInjectorConfig} providedOptions
  */
 const injectWebpackConfig = (
     webpackConfig,
@@ -32,7 +22,6 @@ const injectWebpackConfig = (
     const {
         supportLegacy: isSupportLegacy,
         provideGlobals: isProvideGlobals,
-        disableExcludeWarning: isDisableExcludeWarning,
         webpack,
         entryMatcher
     } = Object.assign(defaultOptions, providedOptions);

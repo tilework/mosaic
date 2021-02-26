@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Configuration injectors for @plugjs/plugjs",
   "main": "lib",
+  "types": "./typings",
   "license": "MIT",
   "dependencies": {
     "is-valid-npm-name": "^0.0.5",

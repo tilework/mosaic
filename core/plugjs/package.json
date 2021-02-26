@@ -3,17 +3,8 @@
     "description": "Core plugjs plugin system package",
     "version": "0.0.1",
     "license": "MIT",
-    "types": "./typings",
     "publishConfig": {
         "access": "public"
-    },
-    "scandipwa": {
-        "type": "extension",
-        "build": {
-            "cracoPlugins": [
-                "build-config/config.plugin.js"
-            ]
-        }
     },
     "dependencies": {
         "@babel/plugin-transform-arrow-functions": "^7.10.4",
