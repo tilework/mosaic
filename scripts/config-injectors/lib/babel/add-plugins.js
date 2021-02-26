@@ -2,6 +2,10 @@ const arrowFunctionsTransformer = '@babel/plugin-transform-arrow-functions';
 const asyncGeneratorTransformer = '@babel/plugin-transform-async-to-generator';
 
 const addBabelPlugins = (babelConfig) => {
+    if (!babelConfig.plugins) {
+        babelConfig.plugins = [];
+    }
+
     const additionalPlugins = [
         // Enable middleware decorators
         // This provides @namespace comments
