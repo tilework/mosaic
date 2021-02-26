@@ -1,41 +1,15 @@
 /* eslint-disable arrow-body-style, no-param-reassign, max-len */
 
 const path = require('path');
-const configInjector = require('@plugjs/plugjs/build-config/util');
-const getIncludePaths = require('@plugjs/plugjs/build-config/util/common/get-include-paths');
+const configInjector = require('@plugjs/config-injectors');
+const getIncludePaths = require('@plugjs/config-injectors/lib/common/get-include-paths');
 
 module.exports = () => {
-    // const abstractStyle = FallbackPlugin.getFallbackPathname('src/style/abstract/_abstract.scss');
-
     return {
         webpack: (config, { webpack }) => {
-            config.plugins.push(...[
-            // In development mode, provide simple translations and React
-                new webpack.ProvidePlugin({
-                    React: 'react',
-                    // legacy support
-                    PureComponent: ['react', 'PureComponent']
-                }),
-
-                // Provide BEM specific variables
-                new webpack.DefinePlugin({
-                    'process.env': {
-                        REBEM_MOD_DELIM: JSON.stringify('_'),
-                        REBEM_ELEM_DELIM: JSON.stringify('-')
-                    }
-                })
-
-                // new CircularDependencyPlugin()
-            ]);
-
             // ===================================
             // EXTENSIBILITY SPECIFIC FEATURES
             // ===================================
-
-            configInjector.injectWebpackConfig(config, {
-                webpack,
-                entryMatcher: /[\\/]src[\\/]pages[\\/][^_]/
-            });
 
             // * Next-specific plugin system stuff
 
@@ -76,6 +50,12 @@ module.exports = () => {
                 }
             });
             // ===================================
+
+            // * Inject the prepared config
+            configInjector.injectWebpackConfig(config, {
+                webpack,
+                entryMatcher: /[\\/]src[\\/]pages[\\/][^_]/
+            });
 
             // Important: return the modified config
             return config;

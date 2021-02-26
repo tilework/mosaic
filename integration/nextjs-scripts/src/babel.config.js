@@ -12,7 +12,7 @@ module.exports = {
     plugins: [
         // ===================================
         // Extensibility imports
-        '@plugjs/plugjs/build-config/babel-plugin-middleware-decorator',
+        '@plugjs/babel-plugin-middleware-decorator',
         '@babel/plugin-transform-arrow-functions',
         '@babel/plugin-transform-async-to-generator'
         // ===================================
