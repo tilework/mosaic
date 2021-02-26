@@ -5,6 +5,6 @@
     "packages": [
         "runtime-packages/*",
         "core/*",
-        "scripts/*"
+        "integration/*"
     ]
 }

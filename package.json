@@ -29,6 +29,6 @@
   "workspaces": [
     "runtime-packages/*",
     "core/*",
-    "scripts/*"
+    "integration/*"
   ]
 }
