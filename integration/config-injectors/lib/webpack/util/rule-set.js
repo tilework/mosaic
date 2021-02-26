@@ -18,8 +18,7 @@ function calculateConditionalCondition(condition, filepath) {
 }
 
 function getConditionAppliesToFile(condition, filepath) {
-    // Handle null-ish condition passed
-    if (!condition) {
+    if (!filepath || !condition) {
         return false;
     }
 
@@ -40,7 +39,7 @@ function getConditionAppliesToFile(condition, filepath) {
 
     // Find a condition that evaluates to something at the other conditions
     if (Array.isArray(condition)) {
-        return condition.find(getConditionAppliesToFile);
+        return condition.some((subcondition) => getConditionAppliesToFile(subcondition, filepath));
     }
 
     // If condition is an { and, or, not } object -> calculate it
