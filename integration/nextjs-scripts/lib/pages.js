@@ -115,70 +115,7 @@ const createMockPages = (pages, projectRoot) => createFilesystem(
     }
 );
 
-// const getPageRoutesFileSystem = async () => {
-//     const possiblePaths = [
-//         rootDir,
-//         ...themePaths,
-//         ...extensionsPaths
-//     ].map(
-//         // we only allow pages inside of the src folder!
-//         (pathname) => path.join(pathname, 'src')
-//     );
-
-//     const pagePathsPromise = possiblePaths.map(
-//         (source) => new Promise((resolve, reject) => {
-//             glob('pages/**/*', { cwd: source, absolute: true }, (err, files) => {
-//                 if (err) {
-//                     reject(err);
-//                 }
-
-//                 resolve(files);
-//             });
-//         })
-//     );
-
-//     const pagePaths = (await Promise.all(pagePathsPromise)).reduce(
-//         (acc, sourcePagePaths) => {
-//             // eslint-disable-next-line fp/no-let
-//             for (let i = 0; i < sourcePagePaths.length; i++) {
-//                 const sourcePagePath = sourcePagePaths[i];
-//                 const match = sourcePagePath.match(/[/\\]pages[/\\](.*)\.\D{2,3}/);
-
-//                 if (!match) {
-//                     continue;
-//                 }
-
-//                 const [, pageRoute] = match;
-
-//                 // ignore invalid paths
-//                 if (!pageRoute) {
-//                     continue;
-//                 }
-
-//                 if (!acc[pageRoute]) {
-//                     acc[pageRoute] = sourcePagePath;
-//                     continue;
-//                 }
-
-//                 logger.warn(
-//                     `The page ${ logger.style.file(pageRoute) } has two or more sources:`,
-//                     `    1) ${ logger.style.file(acc[pageRoute]) }`,
-//                     `    2) ${ logger.style.file(sourcePagePath) }`,
-//                     // TODO: remove when Fallback Plugin is added
-//                     'Using the 1) impleemntation.'
-//                 );
-//             }
-
-//             return acc;
-//         },
-//         {}
-//     );
-
-//     return pagePaths;
-// }
-
 module.exports = {
     getDefinedPages,
     createMockPages
-    // getPageRoutesFileSystem
 };
