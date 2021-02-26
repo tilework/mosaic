@@ -1,5 +1,11 @@
+const fs = require('fs');
 
-function getBabelRules(rules) {
+/**
+ * Extracts all babel-related rules from the given rules array
+ * 
+ * @param {object} rules 
+ */
+const getBabelRules = (rules) => {
     const babelLoaderMatcher = /babel-loader/;
 
     const isUsableBabel = (usable) => babelLoaderMatcher.test(usable) || babelLoaderMatcher.test(usable.loader);
@@ -35,7 +41,12 @@ function getBabelRules(rules) {
     return acc;
 };
 
-function isMiddlewareDecorator(babelPlugin) {
+/**
+ * Checks whether the given babel plugin transpiles @namespace magic comments
+ * 
+ * @param {string|array} babelPlugin 
+ */
+const isBabelPluginMiddlewareDecorator = (babelPlugin) => {
     const middlewareDecoratorMatcher = /babel-plugin-middleware-decorator/;
 
     if (Array.isArray(babelPlugin)) {
@@ -49,18 +60,92 @@ function isMiddlewareDecorator(babelPlugin) {
     throw new Error(`Unexpected type of a babel plugin: ${typeof babelPlugin}`);
 }
 
+/**
+ * Checks whether the provided babel config contains a plugin
+ * To transpile @namespace magic comments
+ * 
+ * @param {object} babelConfig 
+ */
+const isBabelConfigWithMiddlewareDecorator = (babelConfig) => {
+    const { plugins = [] } = babelConfig;
+
+    return plugins.some(isBabelPluginMiddlewareDecorator);
+}
+
+/**
+ * Determines whether 'use' key of webpack config
+ * Provides a rule to transpile @namespace magic comments
+ * 
+ * @param {object} useEntry 
+ */
+const isUseEntryMiddlewareDecorator = (useEntry) => {
+    /**
+     * Reads the given Babel config file
+     * 
+     * @param {string} filename 
+     */
+    const readBabelConfig = (filename) => {
+        // Assume JSON
+        if (filename.endsWith('.babelrc')) {
+            return JSON.parse(fs.readFileSync(options.configFile));
+        } else {
+        // Assume JS\JSON
+            return require(filename);
+        }
+    }
+
+    // Handle use: { loader: ... , options: {...} }
+    if (typeof useEntry === 'object') {
+        const { options } = Array.isArray(useEntry) 
+            // When 'use' entry is an array, its second cell contains loader's options
+            ? useEntry[1] 
+            // Otherwise, the object IS options itself
+            : useEntry;
+
+        if (options.configFile) {
+            const babelConfig = readBabelConfig(options.configFile);
+            return isBabelConfigWithMiddlewareDecorator(babelConfig)
+        }
+
+        if (options.plugins) {
+            return isBabelConfigWithMiddlewareDecorator(options);
+        }
+
+        return false;
+    }
+
+
+    // Currently, babel transforms with webpack rules where 'use' is a function
+    // Are not allowed
+    if (typeof useEntry === 'function') {
+        // TODO notify ?
+    }
+
+    return false;
+}
+
+/**
+ * Checks if the given webpack rule transpiles @namespace magic comments
+ * 
+ * @param {object} rule 
+ */
+const isRuleMiddlewareDecorator = (rule) => {
+    if (!rule || (!rule.options && !rule.use)) {
+        return false;
+    }
+
+    if (rule.use) {
+        return isUseEntryMiddlewareDecorator(rule.use);
+    }
+
+    if (rule.options.plugins) {
+        return isBabelConfigWithMiddlewareDecorator(rule.options);
+    }
+};
 
 module.exports = function getMiddlewareDecoratorRules(webpackConfig) {
     const babelRules = getBabelRules(webpackConfig.module.rules);
-    const middlewareDecoratorRules = babelRules.filter(
-        (rule) => {
-            if (!rule || !rule.options || !rule.options.plugins) {
-                return false;
-            }
-
-            return !!rule.options.plugins.find(isMiddlewareDecorator);
-        }
-    );
+    const middlewareDecoratorRules = babelRules.filter(isRuleMiddlewareDecorator);
 
     return middlewareDecoratorRules;
 }
