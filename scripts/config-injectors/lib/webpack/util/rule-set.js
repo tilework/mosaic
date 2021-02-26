@@ -61,9 +61,13 @@ function getRuleAppliesToFile(rule, filepath) {
 
     // TODO figure out the `issuer` rule
 
-    return [test, include, exclude, resource]
+    const includeRulesOK = [test, include, resource]
         .filter(Boolean)
         .every((condition) => getConditionAppliesToFile(condition, filepath));
+
+    const excludeRuleOK = !exclude || !getConditionAppliesToFile(exclude, filepath);
+
+    return includeRulesOK && excludeRuleOK;
 }
 
 module.exports = {
