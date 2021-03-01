@@ -49,7 +49,7 @@ module.exports = (script) => {
          * - anything else to kill parent immediately
          */
         child = spawn(
-            require.resolve('@scandipwa/craco/bin/craco'),
+            require.resolve('@plugjs/craco/bin/craco'),
             [
                 ...args,
                 '--config', path.join(__dirname, '../craco.config.js')

@@ -1,5 +1,5 @@
 const path = require('path');
-const { whenDev } = require('@scandipwa/craco');
+const { whenDev } = require('@plugjs/craco');
 const escapeRegex = require('@plugjs/dev-utils/escape-regex');
 
 const supportLegacy = (webpackConfig) => {

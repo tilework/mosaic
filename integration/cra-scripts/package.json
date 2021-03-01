@@ -19,7 +19,7 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@scandipwa/craco": "0.1.1",
+        "@plugjs/craco": "0.0.1",
         "@plugjs/dev-utils": "0.0.1",
         "@plugjs/plugjs": "0.0.1",
         "@plugjs/webpack-fallback-plugin": "0.0.1",

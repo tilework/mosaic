@@ -13,7 +13,7 @@ const injectWebpackConfig = require('@plugjs/config-injectors/lib/webpack');
 const {
     ESLINT_MODES,
     whenDev
-} = require('@scandipwa/craco');
+} = require('@plugjs/craco');
 
 const { cracoPlugins } = require('./lib/build-plugins');
 
