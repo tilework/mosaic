@@ -67,6 +67,10 @@ module.exports = () => {
         }),
         webpack: {
             plugins: [
+                new webpack.ProvidePlugin({
+                    React: 'react'
+                }),
+
                 // Show progress bar when building
                 new ProgressBarPlugin()
             ],
