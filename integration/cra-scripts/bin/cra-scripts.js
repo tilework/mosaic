@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const linkExtensions = require('@plugjs/dev-utils/link-extensions');
-const runCraco = require('../lib/craco');
+const runCraco = (...args) => require('../lib/craco')(...args);
 
 const args = process.argv.slice(2);
 
