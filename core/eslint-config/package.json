@@ -8,7 +8,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@scandipwa/eslint-plugin-scandipwa-guidelines": "2.0.9",
+        "@plugjs/eslint-plugin": "0.0.1",
         "@typescript-eslint/eslint-plugin": "^4.5.0",
         "@typescript-eslint/parser": "^4.5.0",
         "babel-eslint": "^10.1.0",

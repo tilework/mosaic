@@ -1,6 +1,6 @@
-# eslint-plugin-scandipwa-guidelines
+# @plugjs/eslint-plugin
 
-Eslint plugin for ScandiPWA development
+Eslint plugin for PlugJS
 
 ## Installation
 
@@ -10,22 +10,22 @@ You'll first need to install [ESLint](http://eslint.org):
 npm i eslint --save-dev
 ```
 
-Next, install `@scandipwa/eslint-plugin-scandipwa-guidelines`:
+Next, install `@plugjs/eslint-plugin`:
 
 ```bash
-npm install @scandipwa/eslint-plugin-scandipwa-guidelines --save-dev
+npm install @plugjs/eslint-plugin --save-dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `@scandipwa/eslint-plugin-scandipwa-guidelines` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `@plugjs/eslint-plugin` globally.
 
 ## Usage
 
-Add `@scandipwa/scandipwa-guidelines` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `@plugjs/eslint-plugin` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "@scandipwa/scandipwa-guidelines"
+        "@plugjs"
     ]
 }
 ```
@@ -36,7 +36,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "@scandipwa/scandipwa-guidelines/rule-name": 2
+        "@plugjs/rule-name": 2
     }
 }
 ```

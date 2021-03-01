@@ -2501,14 +2501,6 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@scandipwa/eslint-plugin-scandipwa-guidelines@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@scandipwa/eslint-plugin-scandipwa-guidelines/-/eslint-plugin-scandipwa-guidelines-2.0.9.tgz#66378d16c244212b41a6284cfd93c8d3aa6b881e"
-  integrity sha512-O6iSPIhCxUcQtXTFDSEorCqs23GpeMKgffsM2yDQe18O9duNjMKZVdFifQZgHyFfLfyg6sZz5WzHgttVPa5/Hw==
-  dependencies:
-    eslint-traverse "^1.0.0"
-    requireindex "~1.1.0"
-
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
