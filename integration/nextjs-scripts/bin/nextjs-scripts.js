@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
-const runNextJS = require('../lib/nextjs');
-const logger = require('@plugjs/dev-utils/logger');
+// Delay import in order to prevent fails on dependency tree
+// It goes into extensions, if the packages are not linked - throws errors
+// Because it cannot resolve local modules that are not yet linked
+const runNextJS = (...args) => require('../lib/nextjs')(...args);
 
-// const linkExtensions = require('../lib/link-extensions');
+const logger = require('@plugjs/dev-utils/logger');
+const linkExtensions = require('@plugjs/dev-utils/link-extensions');
 
 const args = process.argv.slice(2);
 
 const scriptMap = {
     start: runNextJS,
     build: runNextJS,
-    dev: runNextJS
-    // link: linkExtensions
+    dev: runNextJS,
+    link: linkExtensions.bind(null, process.cwd())
 };
 
 const script = args[0];
