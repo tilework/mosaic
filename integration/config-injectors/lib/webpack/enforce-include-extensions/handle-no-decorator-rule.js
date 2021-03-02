@@ -7,4 +7,6 @@ module.exports = function handleNoMiddlewareDecoratorRules() {
         `${logger.style.code('@namespace')} magic comments will not work in this setup.`,
         'Consider introducing Babel to your application in order to use the functionality like it is intended to be used.'
     );
+
+    process.exit(1);
 }

@@ -1,12 +1,12 @@
-const logger = require('@plugjs/dev-utils/logger');
 const path = require('path');
-
-const includePaths = require('../common/get-include-paths')();
-const getMiddlewareDecoratorRules = require('./util/get-decorator-rules');
-const handleNoMiddlewareDecoratorRules = require('./util/handle-no-decorator-rule');
-const handleExcludedExtensionFile = require('./util/handle-excluded-extension');
-const { getConditionAppliesToFile, getRuleAppliesToFile } = require('./util/rule-set');
 const isValidNpmName = require('is-valid-npm-name');
+
+const includePaths = require('../../common/get-include-paths')();
+const getMiddlewareDecoratorRules = require('./get-decorator-rules');
+const { getConditionAppliesToFile, getRuleAppliesToFile } = require('../util/rule-set');
+const handleNoMiddlewareDecoratorRules = require('./handle-no-decorator-rule');
+const handleExcludedExtensionFile = require('./handle-excluded-extension');
+const handleNoContext = require('./handle-no-context');
 
 const potentiallyNamespacedFiles = includePaths
     .filter((includePath) => path.isAbsolute(includePath) || isValidNpmName(includePath))
@@ -25,8 +25,8 @@ const enforceIncludeExtensions = (webpackConfig) => {
     // Handle nothing being transpiled by babel
     // Advise against such approach, endorse introducing babel to the app
     if (!middlewareDecoratorRules.length) {
+        // TODO add a rule
         handleNoMiddlewareDecoratorRules();
-        process.exit(1);
     }
 
     if (middlewareDecoratorRules.length === 1) {
@@ -40,7 +40,9 @@ const enforceIncludeExtensions = (webpackConfig) => {
         if (initialMiddlewareDecoratorExclude) {
             middlewareDecoratorRule.exclude = (filepath) => {
                 // Allow  @namespace only in `src` directory
-                if (includePaths.find((one) => filepath.startsWith(path.join(one, 'src')))) {
+                if (includePaths.find(
+                    (one) => filepath.startsWith(one) && !filepath.startsWith(path.join(one, 'node_modules'))
+                )) {
                     return false;
                 }
                 
@@ -50,7 +52,14 @@ const enforceIncludeExtensions = (webpackConfig) => {
 
         // Ensure include exists
         if (!middlewareDecoratorRule.include) {
-            middlewareDecoratorRule.include = [];
+            const { context } = webpackConfig;
+            if (!context) {
+                handleNoContext();
+            }
+
+            middlewareDecoratorRule.include = [context];
+        } else if (!Array.isArray(middlewareDecoratorRule.include)) {
+            middlewareDecoratorRule.include = [middlewareDecoratorRule.include];
         }
 
         // Ensure all the extensions are included into the transpilation
@@ -58,7 +67,6 @@ const enforceIncludeExtensions = (webpackConfig) => {
             ...includePaths.map((filepath) => new RegExp(filepath))
         );
 
-        // TODO remove ?
         // Ensure everything working after modifications
         const excludedExtensionFile = potentiallyNamespacedFiles.find(
             (includePath) => !getRuleAppliesToFile(middlewareDecoratorRule, includePath)
@@ -66,7 +74,6 @@ const enforceIncludeExtensions = (webpackConfig) => {
 
         if (excludedExtensionFile) {
             handleExcludedExtensionFile(excludedExtensionFile)
-            process.exit(1);
         }
     }
 
@@ -82,7 +89,6 @@ const enforceIncludeExtensions = (webpackConfig) => {
 
         if (excludedExtensionFile) {
             handleExcludedExtensionFile(excludedExtensionFile);
-            process.exit(1);
         }
 
         return webpackConfig;

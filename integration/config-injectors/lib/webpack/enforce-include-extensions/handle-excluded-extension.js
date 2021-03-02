@@ -6,4 +6,6 @@ module.exports = function handleExcludedExtensionFile(excludedExtensionFile) {
         `Plese make sure that it is transpiled by Babel: ${logger.style.file(excludedExtensionFile)}`,
         'You will not see this message when all the extension files are transpiled by Babel.'
     );
+    
+    process.exit(1);
 }

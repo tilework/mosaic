@@ -14,9 +14,22 @@ const extUtilsDefinition = {
  * @param {object} webpack
  */
 const provideGlobals = (webpackConfig, webpack) => {
+    if (!webpackConfig.plugins) {
+        webpackConfig.plugins = [];
+    }
+
     const providePlugin = webpackConfig.plugins.find(
-        (one) => (webpack && one instanceof webpack.ProvidePlugin) 
-            || Object.getPrototypeOf(one).constructor.name === 'ProvidePlugin'
+        (one) => {
+            if (webpack && one instanceof webpack.ProvidePlugin) {
+                return true;
+            } 
+
+            if (Object.getPrototypeOf(one).constructor.name === 'ProvidePlugin') {
+                return true;
+            }
+
+            return false;
+        }
     );
 
     // Handle plugin already defined
