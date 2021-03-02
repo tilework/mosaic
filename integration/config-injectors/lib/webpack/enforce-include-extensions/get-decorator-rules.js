@@ -1,4 +1,5 @@
 const fs = require('fs');
+const UnexpectedBabelPluginTypeException = require('../../../exceptions/unexpected-babel-plugin-type');
 
 /**
  * Extracts all babel-related rules from the given rules array
@@ -57,7 +58,7 @@ const isBabelPluginMiddlewareDecorator = (babelPlugin) => {
         return middlewareDecoratorMatcher.test(babelPlugin);
     }
 
-    throw new Error(`Unexpected type of a babel plugin: ${typeof babelPlugin}`);
+    throw new UnexpectedBabelPluginTypeException(typeof(babelPlugin));
 }
 
 /**

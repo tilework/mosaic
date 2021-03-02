@@ -1,5 +1,6 @@
 const path = require('path');
-const handleNoContext = require('./enforce-include-extensions/handle-no-context');
+const UnableToResolveEntryException = require('../../exceptions/unable-to-resolve-entry');
+const NoContextException = require('../../exceptions/no-context');
 
 const resolveStringEntry = (entry, context) => {
     if (path.isAbsolute(entry)) {
@@ -7,7 +8,7 @@ const resolveStringEntry = (entry, context) => {
     }
 
     if (!context) {
-        handleNoContext();
+        throw new NoContextException();
     }
     
     return path.resolve(context, entry);
@@ -25,10 +26,7 @@ const resolveObjectEntry = (entryObject, context) => {
             }
         }
 
-        throw new Error(
-            'Unable to resolve entry point(s)! It is possible that your configuration is invalid. ' +
-            'If you are certain that it is not, please create a github issue about this!'
-        )
+        throw new UnableToResolveEntryException();
     }, []);
 }
 
