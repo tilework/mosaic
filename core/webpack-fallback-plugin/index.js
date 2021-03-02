@@ -324,7 +324,7 @@ class FallbackPlugin {
                 packagePath,
                 relativePath,
                 absolutePath
-            } = getExtensionProvisionedPath(requestToRelativePathname);
+            } = getExtensionProvisionedPath(requestToPathname);
 
             if (packagePath) {
                 if (!this.fileExists(absolutePath)) {

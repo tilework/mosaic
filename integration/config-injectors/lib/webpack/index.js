@@ -2,6 +2,7 @@ const injectLoader = require('./inject-loader');
 const provideGlobals = require('./provide-globals');
 const supportLegacy = require('./support-legacy');
 const enforceIncludeExtensions = require('./enforce-include-extensions');
+const resolveFileExtensions = require('./resolve-file-extensions');
 
 /** @type {import('@plugjs/config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
@@ -30,6 +31,7 @@ const injectWebpackConfig = (
 
     injectLoader(webpackConfig, entryMatcher);
     enforceIncludeExtensions(webpackConfig);
+    resolveFileExtensions(webpackConfig);
 
     if (isProvideGlobals) {
         provideGlobals(webpackConfig, webpack);
