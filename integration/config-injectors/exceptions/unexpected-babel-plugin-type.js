@@ -1,6 +1,6 @@
 class UnexpectedBabelPluginTypeException extends Error {
     constructor(type) {
-        this.message = `Unexpected type of a babel plugin: ${type}`;
+        super(`Unexpected type of a babel plugin: ${type}`);
     }
 }
 
