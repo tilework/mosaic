@@ -1,0 +1,8 @@
+{
+    "name": "sample-module",
+    "version": "0.0.1",
+    "scandipwa": {
+        "type": "extension"
+    }
+}
+  

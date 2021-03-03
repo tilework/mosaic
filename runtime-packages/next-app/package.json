@@ -1,0 +1,22 @@
+{
+  "name": "next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nextjs-scripts dev",
+    "build": "nextjs-scripts build",
+    "start": "nextjs-scripts start",
+    "link": "nextjs-scripts link"
+  },
+  "scandipwa": {
+    "extensions": {
+      "@plugjs/sample-page": true
+    }
+  },
+  "dependencies": {
+    "@plugjs/nextjs-scripts": "0.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "@plugjs/sample-page": "file:packages/sample-page"
+  }
+}

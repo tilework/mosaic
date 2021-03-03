@@ -1,0 +1,11 @@
+{
+    "name": "@plugjs/sample-page",
+    "version": "0.0.1",
+    "scandipwa": {
+        "type": "extension",
+        "nextPages": {
+            "sample": "server"
+        }
+    }
+  }
+  
