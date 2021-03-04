@@ -6,7 +6,7 @@
   "types": "./typings",
   "license": "MIT",
   "dependencies": {
-    "is-valid-npm-name": "^0.0.5",
-    "webpack": "^5"
+    "babel-loader": "^8.2.2",
+    "is-valid-npm-name": "^0.0.5"
   }
 }
