@@ -49,7 +49,11 @@ const getExtensionImports = (pathname) => {
     }
 
     return findPluginFiles(pathname).map(
-        (pluginFile) => `require('${pluginFile}').default`
+        (pluginFile) => `(function(){
+            let required = require('${pluginFile}');
+            if (required.default) return required.default;
+            return required;
+        })()`
     );
 };
 
