@@ -25,7 +25,7 @@
         "@plugjs/webpack-fallback-plugin": "0.0.1",
         "babel-plugin-module-resolver": "^4.0.0",
         "babel-plugin-transform-rebem-jsx": "^0.3.3",
-        "chokidar": "^3.4.2",
+        "chokidar": "^3.5.1",
         "craco-sass-resources-loader": "^1.1.0",
         "cross-spawn": "^7.0.0",
         "debounce": "^1.2.0",

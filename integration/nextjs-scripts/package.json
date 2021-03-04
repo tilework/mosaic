@@ -16,8 +16,11 @@
     },
     "dependencies": {
         "@plugjs/dev-utils": "0.0.1",
+        "@plugjs/plugjs": "0.0.1",
+        "@plugjs/config-injectors": "0.0.1",
+        "@plugjs/babel-plugin-middleware-decorator": "0.0.1",
         "chokidar": "^3.5.1",
-        "cross-spawn": "^7.0.3",
+        "cross-spawn": "^7.0.0",
         "debounce": "^1.2.0",
         "glob": "^7.1.6",
         "next": "10.0.5",
