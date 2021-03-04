@@ -30,11 +30,9 @@ const handleOneDecoratorRule = (middlewareDecoratorRule, webpackConfig) => {
         }
     }
 
-    // Ensure include exists
     if (!middlewareDecoratorRule.include) {
-        const context = getContextFromConfig(webpackConfig);
-
-        middlewareDecoratorRule.include = [context];
+        // By default, webpack treats config file directory as `context`
+        // Hence, all of its contents are transpiled => include === /context/
     } else if (!Array.isArray(middlewareDecoratorRule.include)) {
         middlewareDecoratorRule.include = [middlewareDecoratorRule.include];
     }

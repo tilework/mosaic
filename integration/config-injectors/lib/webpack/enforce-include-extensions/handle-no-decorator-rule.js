@@ -1,14 +1,9 @@
 const logger = require('@plugjs/dev-utils/logger');
 const injectBabelConfig = require('../../babel');
-const getContextFromConfig = require('./get-context-from-config');
 
 const handleNoMiddlewareDecoratorRule = (webpackConfig) => {
-    const context = getContextFromConfig(webpackConfig);
-
     const generatedBabelRule = {
         test: /\.(m|c)?[tj]sx?$/,
-        // TODO check whether necessary
-        include: [context],
         use: {
             loader: require.resolve('babel-loader'),
             options: injectBabelConfig({})

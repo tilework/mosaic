@@ -1,8 +1,8 @@
 class NoContextException extends Error {
     constructor() {
         super(
-            'Unable to resolve an absolute path to the application\'s entry point! ' +
-            'Please, provide a `context` field in your webpack configuration.'
+            'Please, provide a `context` field in your webpack configuration. ' +
+            'It is necessary to determine the files to transplie, potential @namespace users.'
         );
     }
 }
