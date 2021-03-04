@@ -38,6 +38,18 @@ const extractNamespaceFromComments = (comments = []) => comments.reduce(
     ''
 );
 
+const isParentExportDefaultDeclaration = (path) => {
+    const { parent: { type } } = path;
+
+    return type === 'ExportDefaultDeclaration';
+}
+
+const isParentExportNamedDeclaration = (path) => {
+    const { parent: { type } } = path;
+
+    return type === 'ExportNamedDeclaration';
+}
+
 const getLeadingComments = (path) => {
     const { node: { leadingComments } } = path;
     if (leadingComments) {
@@ -45,7 +57,7 @@ const getLeadingComments = (path) => {
     }
 
     if (
-        path.parent.type === 'ExportNamedDeclaration'
+        (isParentExportNamedDeclaration(path) || isParentExportDefaultDeclaration(path))
         && path.parent.leadingComments
     ) {
         return path.parent.leadingComments;
@@ -100,7 +112,7 @@ module.exports = (options) => {
     return {
         name: 'middleware-decorators',
         visitor: {
-        // Transform leading comments of anonymous arrow functions
+            // Transform leading comments of anonymous arrow functions
             ArrowFunctionExpression: (path, state) => {
                 if (!isMustProcessNamespace(state)) {
                     return;
@@ -182,6 +194,7 @@ module.exports = (options) => {
                 path.replaceWith(declaration);
             },
 
+            // TODO make this work with class expressions ?
             ClassDeclaration: (path, state) => {
                 if (!isMustProcessNamespace(state)) {
                     return;
@@ -193,68 +206,96 @@ module.exports = (options) => {
                     return;
                 }
 
+                // Extract all the contents of a class
                 const superClass = path.get('superClass');
+                const id = path.get('id');
+                const body = path.get('body');
+                const decorators = path.get('decorators');
+                const initialImplements = path.get('implements');
+                const mixins = path.get('mixins');
+                const superTypeParameters = path.get('superTypeParameters');
+                const typeParameters = path.get('typeParameters');
+
+                // ExtUtils.Extensible(SuperClass || undefined)
                 const superExpression = types.callExpression(
                     types.memberExpression(
                         types.identifier('ExtUtils'),
                         types.Identifier('Extensible')
                     ),
-                    [types.Identifier(superClass.node ? superClass.node.name : '')]
+                    [(superClass && superClass.node) || types.Identifier('')]
                 );
 
+                // If the middlewarable class did not have a base class before
+                // We should add a super() call to its constructor
                 if (!superClass.node) {
                     addSuperToConstructor(path, types);
                 }
 
+                // Set the new base class
                 superClass.replaceWith(superExpression);
 
                 const { node: { name } } = path.get('id');
-                const newName = path.scope.generateUidIdentifier(name);
-                // eslint-disable-next-line no-param-reassign
-                path.get('id').node.name = newName.name;
 
+                // Generate the middlewarable class as an expression, 
+                // To be able to operate with it as with a variable, not as with a declaration
+                // ClassExpression != ClassDeclaration
+                const classExpression = types.classExpression(
+                    id.node,
+                    superClass.node,
+                    body.node,
+                    decorators.node
+                );
+
+                // Return all the stuff that's been on the initial class
+                if (Array.isArray(initialImplements)) {
+                    classExpression.implements = initialImplements.map(x => x.node);
+                }
+
+                if (Array.isArray(decorators)) {
+                    classExpression.decorators = decorators.map(x => x.node);
+                }
+
+                classExpression.mixins = mixins.node;
+                classExpression.superTypeParameters = superTypeParameters.node;
+                classExpression.typeParameters = typeParameters.node;
+
+                // Generate the final middleware expression
+                // ExtUtils.middleware(class SomeClass {}, 'namespace')
                 const wrappedInMiddeware = types.callExpression(
                     types.memberExpression(
                         types.identifier('ExtUtils'),
                         types.identifier('middleware')
                     ),
-                    [newName, types.stringLiteral(namespace.trim())]
+                    [
+                        classExpression,
+                        types.stringLiteral(namespace.trim())
+                    ]
                 );
 
+                // SomeClass = ExtUtils...<generated above thing>
                 const declarator = types.variableDeclarator(
                     types.identifier(name),
                     wrappedInMiddeware
                 );
 
+                // const SomeClass = ...
                 const newDeclaration = types.variableDeclaration('const', [declarator]);
-                const newExport = types.exportNamedDeclaration(newDeclaration, []);
 
-                const renaming = parse(
-                    `Object.defineProperty(${newName.name}, 'name', { value: '${name}' })`,
-                    {
-                        // ! This fixes "Preset /* your preset */ requires a filename to be set when babel is called directly"
-                        filename: state.file.opts.filename,
-                        sourceType: 'module'
-                    }
-                );
+                // If the class was export default'ed initially
+                // We need to remove the initial exdf, because `export default const x = ...` is not valid
+                // And generate a new exdf with just the class' name
+                if (isParentExportDefaultDeclaration(path)) {
+                    const newExportDefaultDeclaration = types.exportDefaultDeclaration(
+                        types.identifier(name)
+                    );
 
-                path.insertAfter(newExport);
-
-                // trying to only include expression, not whole program
-                // path.insertAfter(renaming);
-                // ! This fixes two instances "Identifier 'React' has already been declared"
-                path.insertAfter(renaming.program.body[0]);
-
-                /**
-                 * Remove export from initial classes declaration
-                 *
-                 * TODO: fix AST explorer handles this OK, but our babel throws
-                 *
-                 * if (path.parentPath.type === 'ExportNamedDeclaration') {
-                 *     path.parentPath.skip();
-                 *     path.parentPath.replaceWith(path);
-                 * }
-                 */
+                    path.insertAfter(newExportDefaultDeclaration);
+                    path.parentPath.replaceWith(newDeclaration);
+                } else {
+                    // In all the other cases - just replace the generated thing
+                    // With a new declaration
+                    path.replaceWith(newDeclaration);
+                }
             }
         }
     };
