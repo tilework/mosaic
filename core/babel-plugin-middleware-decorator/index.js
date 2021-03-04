@@ -50,20 +50,23 @@ const isParentExportNamedDeclaration = (path) => {
     return type === 'ExportNamedDeclaration';
 }
 
+/**
+ * Gets leading comments directly from the path.node
+ * Or from the parent, if path.parent is exdf or named exp.
+ */
+const getLeadingCommentsPath = (path) => {
+    if (path.node.leadingComments) return path;
+    if (isParentExportNamedDeclaration(path) || isParentExportDefaultDeclaration(path)) {
+        return path.parentPath;
+    }
+
+    return path;
+}
+
 const getLeadingComments = (path) => {
-    const { node: { leadingComments } } = path;
-    if (leadingComments) {
-        return leadingComments;
-    }
+    const { node: { leadingComments } } = getLeadingCommentsPath(path);
 
-    if (
-        (isParentExportNamedDeclaration(path) || isParentExportDefaultDeclaration(path))
-        && path.parent.leadingComments
-    ) {
-        return path.parent.leadingComments;
-    }
-
-    return null;
+    return leadingComments;
 };
 
 const getNamespaceFromPath = (path) => {
@@ -75,6 +78,25 @@ const getNamespaceFromPath = (path) => {
     return extractNamespaceFromComments(leadingComments);
 };
 
+/**
+ * This removes the defined namespace from the comments belonging to the path
+ * Or to the path's parents, if it's exdf or named exp.
+ */
+const removeNamespaceFromPath = (path, namespace) => {
+    const leadingCommentsPath = getLeadingCommentsPath(path);
+
+    leadingCommentsPath.node.leadingComments.forEach((comment) => {
+        comment.value = comment.value.replace(
+            new RegExp(`@namespace +${namespace}`), 
+            `#namespace ${namespace}`
+        )
+    });
+}
+
+/**
+ * If a constructor exists for the class {path}
+ * This adds a super() call on top of it
+ */
 const addSuperToConstructor = (path, types) => {
     const constructor = path
         .get('body')
@@ -92,6 +114,9 @@ const addSuperToConstructor = (path, types) => {
     constructor.get('body').unshiftContainer('body', superCall);
 };
 
+/**
+ * Checks the filename in order to verify that it belongs to an extension
+ */
 const isMustProcessNamespace = (state) => {
     const { filename } = state.file.opts;
 
@@ -107,7 +132,7 @@ const isMustProcessNamespace = (state) => {
 };
 
 module.exports = (options) => {
-    const { types, parse } = options;
+    const { types } = options;
 
     return {
         name: 'middleware-decorators',
@@ -123,6 +148,8 @@ module.exports = (options) => {
                 if (!namespace) {
                     return;
                 }
+
+                removeNamespaceFromPath(path, namespace);
 
                 path.replaceWith(
                     types.callExpression(
@@ -144,6 +171,8 @@ module.exports = (options) => {
                 if (!namespace) {
                     return;
                 }
+
+                removeNamespaceFromPath(path, namespace);
 
                 const declarator = path.get('declarations')[0];
                 const init = declarator.get('init');
@@ -168,6 +197,8 @@ module.exports = (options) => {
                 if (!namespace) {
                     return;
                 }
+
+                removeNamespaceFromPath(path, namespace);
 
                 const { node: { id: { name }, params, body } } = path;
 
@@ -201,10 +232,12 @@ module.exports = (options) => {
                 }
 
                 const namespace = getNamespaceFromPath(path);
-
                 if (!namespace) {
                     return;
                 }
+
+                // Consume the used namespace: prevent middleware(middleware(...))
+                removeNamespaceFromPath(path, namespace);
 
                 // Extract all the contents of a class
                 const superClass = path.get('superClass');
