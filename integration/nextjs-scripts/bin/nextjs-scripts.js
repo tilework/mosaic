@@ -4,6 +4,7 @@
 // It goes into extensions, if the packages are not linked - throws errors
 // Because it cannot resolve local modules that are not yet linked
 const runNextJS = (...args) => require('../lib/nextjs')(...args);
+const runTests = () => require('../scripts/test')();
 
 const logger = require('@plugjs/dev-utils/logger');
 const linkExtensions = require('@plugjs/dev-utils/link-extensions');
@@ -14,7 +15,8 @@ const scriptMap = {
     start: runNextJS,
     build: runNextJS,
     dev: runNextJS,
-    link: linkExtensions.bind(null, process.cwd())
+    link: linkExtensions.bind(null, process.cwd()),
+    test: runTests
 };
 
 const script = args[0];

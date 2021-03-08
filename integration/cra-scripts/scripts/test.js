@@ -70,7 +70,7 @@ if (
 const createJestConfig = require('react-scripts/scripts/utils/createJestConfig');
 const path = require('path');
 const paths = require('react-scripts/config/paths');
-const middlewareJestConfig = require('../config/jest/middleware-jest-config');
+const { middlewareJestConfig, ENV_TYPES } = require('@plugjs/test-utils/jest/middleware-jest-config');
 const getPackagePath = require('@plugjs/dev-utils/package-path');
 const reactScriptsAbsolute = getPackagePath('react-scripts');
 
@@ -81,7 +81,8 @@ argv.push(
             relativePath => path.resolve(reactScriptsAbsolute, relativePath),
             path.resolve(paths.appSrc, '..'),
             false
-        )
+        ),
+        ENV_TYPES.cra
     ))
 );
 

@@ -6,6 +6,7 @@
     "dev": "nextjs-scripts dev",
     "build": "nextjs-scripts build",
     "start": "nextjs-scripts start",
+    "test": "nextjs-scripts test",
     "link": "nextjs-scripts link"
   },
   "scandipwa": {

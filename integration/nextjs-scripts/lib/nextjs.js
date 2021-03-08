@@ -7,35 +7,12 @@ const logger = require('@plugjs/dev-utils/logger');
 const debounce = require('debounce');
 const chokidar = require('chokidar');
 const { getDefinedPages, createMockPages } = require('./pages');
+const getDirFromArgs = require('./args/get-dir-from-args');
 
-const processArgs = (args) => {
-    const possibleDir = args[0];
-
-    // if there are no args
-    if (!possibleDir) {
-        return {
-            args,
-            dir: process.cwd()
-        };
-    }
-
-    // if the dir is not argument
-    if (possibleDir.startsWith('--')) {
-        return {
-            args,
-            dir: process.cwd()
-        };
-    }
-
-    return {
-        args: args.slice(1),
-        dir: path.join(process.cwd(), possibleDir)
-    };
-};
 
 module.exports = async (script, restArgs) => {
     // TODO: use this dir to resolve pages
-    const { dir, args } = processArgs(restArgs);
+    const { dir, args } = getDirFromArgs(restArgs);
     const isProd = script === 'build';
 
     // eslint-disable-next-line fp/no-let
