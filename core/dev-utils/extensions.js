@@ -12,7 +12,7 @@ const { getExtensionsForCwd } = require('./extensions-core');
  * @property {String} packageName - extension package name
  */
 
-/** @type {*} */
+/** @type {ExtensionObject[]} */
 const extensions = getExtensionsForCwd();
 
 module.exports = extensions;
