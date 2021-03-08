@@ -3,7 +3,7 @@
 const linkExtensions = require('@plugjs/dev-utils/link-extensions');
 const logger = require('@plugjs/dev-utils/logger');
 const runCraco = (...args) => require('../lib/craco')(...args);
-const runTests = () => require('react-scripts/scripts/test');
+const runTests = () => require('../scripts/test');
 
 const args = process.argv.slice(2);
 
