@@ -19,7 +19,9 @@ class ExtUtils {
     }
 
     setPlugins(importArray) {
-        pluginStorage.setPlugins(importArray);
+        pluginStorage.setPlugins(importArray.map(
+            (importedModule) => importedModule.default || importedModule
+        ));
     }
 
     Extensible(BaseClass = EmptyBase) {
