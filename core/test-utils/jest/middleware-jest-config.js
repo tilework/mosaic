@@ -24,7 +24,7 @@ const provideProperBabelTransform = (jestConfig, envType) => {
 }
 
 const provideGlobals = (jestConfig) => {
-    jestConfig.setupFiles.push(require.resolve('./provideGlobals'));
+    jestConfig.setupFiles.push(require.resolve('./provide-globals'));
 }
 
 const includeExternals = (jestConfig) => {
@@ -46,9 +46,13 @@ const setupJestExtensions = (jestConfig) => {
     jestConfig.setupFilesAfterEnv.push(require.resolve('./next-jest-extensions'));
 }
 
+const provideAdditionalGlobals = (jestConfig) => {
+    jestConfig.setupFilesAfterEnv.push(require.resolve('./provide-nextjs-globals'));
+}
+
 const envSpecificSteps = {
     [ENV_TYPES.cra]: [],
-    [ENV_TYPES.next]: [setupJestExtensions]
+    [ENV_TYPES.next]: [setupJestExtensions, provideAdditionalGlobals]
 }
 
 const middlewareJestConfig = (jestConfig, envType) => {

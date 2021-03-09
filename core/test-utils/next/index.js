@@ -1,5 +1,5 @@
-const getByNamespace = require('./get-by-namespace');
+const getGenerated = require('./get-generated');
 
 module.exports = {
-    getByNamespace
+    getGenerated
 };

@@ -18,7 +18,7 @@ const getPageFileByName = (name) => {
  * Returns object { Page, getServerSideProps } of the specified namespace
  * @param {stringn} namespace 
  */
-const getByNamespace = (namespace) => {
+const getGenerated = (namespace) => {
     // Pages/sample/Page
     const [base, name, item] = namespace.split('/');
     if (base !== 'Pages') {
@@ -49,4 +49,4 @@ const getByNamespace = (namespace) => {
     return searchResult;
 }
 
-module.exports = getByNamespace;
+module.exports = getGenerated;
