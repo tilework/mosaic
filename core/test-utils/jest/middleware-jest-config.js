@@ -1,5 +1,4 @@
 const extensions = require('@plugjs/dev-utils/extensions');
-const getPackagePath = require('@plugjs/dev-utils/package-path');
 const path = require('path');
 
 const ENV_TYPES = {
