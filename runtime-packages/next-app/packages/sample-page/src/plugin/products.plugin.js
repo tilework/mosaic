@@ -2,6 +2,6 @@
 
 export default {
     'Pages/sample/Page': {
-        function: () => 'It works!'
+        function: () => <> 'It works!' </>
     }
 };
