@@ -12,22 +12,6 @@ module.exports = (script) => {
     before.forEach((beforeRun) => beforeRun(script));
 
     const isProd = script === 'build';
-    const localeArgIndex = args.indexOf('--locale');
-    const locale = localeArgIndex === -1 ? 'en_US' : args[localeArgIndex + 1];
-
-    // TODO: remove locale aeg in next MAJOR
-    // check if the locale matches expected Regex
-    if (!/^[a-z]{2}_[A-Z]{2}$/.test(locale)) {
-        logger.error(
-            'The locale format is wrong.',
-            `The argument ${ logger.style.misc('--locale') } is expected to match following pattern:`,
-            logger.style.command('<2 digit language code>_<2 digit country code (in uppercase)>'),
-            `The value received: ${ logger.style.misc(locale) }.`
-        );
-
-        process.exit(1);
-    }
-
     const TIMEOUT_BETWEEN_KILL_TRIGGERS = 500;
 
     if (args.length === 0) {
@@ -64,7 +48,6 @@ module.exports = (script) => {
                     // TODO: resolve the plugins not toggling fast-refresh!
                     FAST_REFRESH: true,
                     FORCE_COLOR: true,
-                    PWA_LOCALE: locale,
                     ...(isProd ? { GENERATE_SOURCEMAP: false } : {})
                 }
             }
