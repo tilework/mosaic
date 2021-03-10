@@ -45,19 +45,25 @@ class FallbackPlugin {
      * @return {string} - absolute path to top-priority matching source
      * @memberof FallbackPlugin
      */
-    static getFallbackPathname(pathname, cwd = process.cwd()) {
+    static getFallbackPathname(pathname, cwd = process.cwd(), alternatives = []) {
         const sourcePaths = [
             cwd,
             ...getParentThemePaths(cwd)
         ];
 
+        const searchables = [pathname, ...alternatives];
+
         for (let i = 0; i < sourcePaths.length; i++) {
             const sourcePath = sourcePaths[i];
-            const sourcePathname = path.join(sourcePath, pathname);
-            const isFileExists = fs.existsSync(sourcePathname);
 
-            if (isFileExists) {
-                return sourcePathname;
+            for (let i = 0; i < searchables.length; i++) {
+                const searchable = searchables[i];
+                const sourcePathname = path.join(sourcePath, searchable);
+                const isFileExists = fs.existsSync(sourcePathname);
+
+                if (isFileExists) {
+                    return sourcePathname;
+                }
             }
         }
 

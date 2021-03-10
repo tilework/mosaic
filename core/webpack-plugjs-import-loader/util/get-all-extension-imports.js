@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const extensions = require('@plugjs/dev-utils/extensions');
 
-const isPluginFile = (entry) => /\.plugin\.js$/.test(entry);
+const isPluginFile = (entry) => /\.plugin\.[jt]sx?$/.test(entry);
 const isDirectory = (entry) => !!fs.lstatSync(entry).isDirectory();
 
 /**

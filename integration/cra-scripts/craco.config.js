@@ -36,13 +36,17 @@ const getESLintConfig = () => {
 }
 
 module.exports = () => {
-    const appIndexJs = FallbackPlugin.getFallbackPathname('src/index.js');
+    const appIndex = FallbackPlugin.getFallbackPathname(
+        'src/index.js',
+        undefined, 
+        ['src/index.ts', 'src/index.jsx', 'src/index.tsx']
+    );
     const appHtml = FallbackPlugin.getFallbackPathname('public/index.html');
 
     return {
         paths: {
             // Simply fallback to core, this why it's here
-            appIndexJs,
+            appIndexJs: appIndex,
 
             // Assume store-front use normal HTML (defined in /public/index.html)
             appHtml
@@ -50,7 +54,7 @@ module.exports = () => {
         // Use ESLint config defined in package.json
         eslint: getESLintConfig(),
         // TODO make sure this actually injects babel config, otherwise y do we need this
-        babel: injectBabelConfig({
+        babel: {
             loaderOptions: (babelLoaderOptions) => {
                 babelLoaderOptions.presets = [
                     [
@@ -63,9 +67,9 @@ module.exports = () => {
                     ]
                 ];
 
-                return babelLoaderOptions;
+                return injectBabelConfig(babelLoaderOptions);
             }
-        }),
+        },
         webpack: {
             plugins: [
                 new webpack.ProvidePlugin({
@@ -90,17 +94,15 @@ module.exports = () => {
 
                 // Allow having empty entry point
                 if (isDev) {
-                    webpackConfig.entry[1] = appIndexJs;
+                    webpackConfig.entry[1] = appIndex;
                 } else {
-                    webpackConfig.entry = appIndexJs;
+                    webpackConfig.entry = appIndex;
                 }
 
                 // Disable LICENSE comments extraction in production
                 webpackConfig.optimization.minimizer[0].options.extractComments = whenDev(() => true, false);
 
-                return injectWebpackConfig(webpackConfig, {
-                    webpack
-                });
+                return injectWebpackConfig(webpackConfig, { webpack });
             }
         },
         devServer: (devServerConfig, { proxy }) => {
