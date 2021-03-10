@@ -1,4 +1,4 @@
-const getMiddlewareDecoratorRules = require('./get-decorator-rules');
+const getMiddlewareDecoratorRules = require('./rule-helpers/get-decorator-rules');
 const handleNoDecoratorRules = require('./handle-no-decorator-rule');
 const handleOneDecoratorRule = require('./handle-one-decorator-rule');
 const handleManyDecoratorRules = require('./handle-many-decorator-rules');
