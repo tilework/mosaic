@@ -14,13 +14,22 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "@plugjs/cra-scripts": "0.0.1",
+    "@plugjs/plugjs": "0.0.1",
+    "sample-module": "file:/Users/yegor/Projects/plugjs/runtime-packages/react-app/packages/sample-module"
+  },
+  "scandipwa": {
+    "extensions": {
+      "sample-module": true,
+      "@plugjs/plugjs": false
+    }
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "cra-scripts start",
+    "build": "cra-scripts build",
+    "link": "cra-scripts link",
+    "test": "cra-scripts test"
   },
   "eslintConfig": {
     "extends": [
