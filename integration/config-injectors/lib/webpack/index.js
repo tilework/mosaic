@@ -21,8 +21,6 @@ const injectWebpackConfigObject = (
         entryMatcher
     } = Object.assign(defaultOptions, providedOptions);
 
-    // TODO handle webpackConfig.resolve.symlinks
-
     injectLoader(webpackConfig, entryMatcher);
     enforceIncludeExtensions(webpackConfig);
     resolveFileExtensions(webpackConfig);

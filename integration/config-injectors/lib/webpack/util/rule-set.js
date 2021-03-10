@@ -50,15 +50,13 @@ function getConditionAppliesToFile(condition, filepath) {
     return false;
 };
 
-function getRuleAppliesToFile(rule, filepath) {
+function getRuleAppliesToFile(rule, filepath, context = process.cwd()) {
     const {
         test,
-        include,
+        include = context,
         exclude,
         resource
     } = rule;
-
-    // TODO figure out the `issuer` rule
 
     const includeRulesOK = [test, include, resource]
         .filter(Boolean)

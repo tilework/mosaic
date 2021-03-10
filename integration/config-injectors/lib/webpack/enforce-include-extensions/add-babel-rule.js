@@ -1,12 +1,13 @@
 const injectBabelConfig = require('../../babel');
 
-const handleNoMiddlewareDecoratorRule = (webpackConfig) => {
+const addBabelRule = (webpackConfig) => {
     const generatedBabelRule = {
         test: /\.(m|c)?[tj]sx?$/,
         use: {
             loader: require.resolve('babel-loader'),
             options: injectBabelConfig({})
-        }
+        },
+        // TODO include
     }
 
     if (!webpackConfig.module) {
@@ -21,4 +22,4 @@ const handleNoMiddlewareDecoratorRule = (webpackConfig) => {
     return webpackConfig;
 }
 
-module.exports = handleNoMiddlewareDecoratorRule;
+module.exports = addBabelRule;

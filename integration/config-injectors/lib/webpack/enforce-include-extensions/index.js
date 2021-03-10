@@ -1,7 +1,6 @@
-const getMiddlewareDecoratorRules = require('./rule-helpers/get-decorator-rules');
-const handleNoDecoratorRules = require('./handle-no-decorator-rule');
-const handleOneDecoratorRule = require('./handle-one-decorator-rule');
-const handleManyDecoratorRules = require('./handle-many-decorator-rules');
+const getBabelRules = require('./get-babel-rules');
+const addBabelRule = require('./add-babel-rule');
+const processBabelRule = require('./process-babel-rule');
 
 /**
  * Ensure extensions' files to be transpiled by babel
@@ -10,21 +9,14 @@ const handleManyDecoratorRules = require('./handle-many-decorator-rules');
  * @param {object} webpackConfig
  */
 const enforceIncludeExtensions = (webpackConfig) => {
-    // Get all rules that process stuff with the middleware decorator transformer
-    const middlewareDecoratorRules = getMiddlewareDecoratorRules(webpackConfig);
-    
-    // Handle nothing being transpiled by babel
-    // Advise against such approach, endorse introducing babel to the app
-    if (!middlewareDecoratorRules.length) {
-        return handleNoDecoratorRules(webpackConfig);
-    }
+    const babelRules = getBabelRules(webpackConfig.module.rules, webpackConfig.entry);
 
-    if (middlewareDecoratorRules.length === 1) {
-        return handleOneDecoratorRule(middlewareDecoratorRules.pop(), webpackConfig);
-    }
-
-    if (middlewareDecoratorRules.length > 1) {
-        return handleManyDecoratorRules(middlewareDecoratorRules, webpackConfig)
+    if (babelRules.length) {
+        // Include the extensions into each rule
+        babelRules.forEach((rule) => processBabelRule(rule, webpackConfig));
+    } else {
+        // Generate a new rule
+        addBabelRule(webpackConfig);
     }
 
     return webpackConfig;

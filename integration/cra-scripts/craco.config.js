@@ -53,7 +53,6 @@ module.exports = () => {
         },
         // Use ESLint config defined in package.json
         eslint: getESLintConfig(),
-        // TODO make sure this actually injects babel config, otherwise y do we need this
         babel: {
             loaderOptions: (babelLoaderOptions) => {
                 babelLoaderOptions.presets = [
