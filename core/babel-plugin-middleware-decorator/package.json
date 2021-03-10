@@ -5,5 +5,8 @@
   "main": "index.js",
   "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "@plugjs/dev-utils": "0.0.1"
+  }
 }

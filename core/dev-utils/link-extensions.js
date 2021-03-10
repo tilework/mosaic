@@ -1,8 +1,8 @@
 const path = require('path');
 
-const shouldUseYarn = require('@plugjs/dev-utils/should-use-yarn');
-const execCommandAsync = require('@plugjs/dev-utils/exec-command');
-const { getPackageJson } = require('@plugjs/dev-utils/package-json');
+const shouldUseYarn = require('./should-use-yarn');
+const execCommandAsync = require('./exec-command');
+const { getPackageJson } = require('./package-json');
 
 module.exports = async (cwd = process.cwd()) => {
     const { dependencies } = getPackageJson(cwd);

@@ -2,11 +2,17 @@
   "name": "@plugjs/config-injectors",
   "version": "0.0.1",
   "description": "Configuration injectors for @plugjs/plugjs",
-  "main": "lib",
+  "main": "lib/index.js",
   "types": "./typings",
   "license": "MIT",
   "dependencies": {
     "babel-loader": "8.1.0",
-    "is-valid-npm-name": "^0.0.5"
+    "is-valid-npm-name": "^0.0.5",
+    "@plugjs/dev-utils": "0.0.1",
+    "@plugjs/babel-plugin-middleware-decorator": "0.0.1",
+    "@babel/plugin-transform-arrow-functions": "7.13.0",
+    "@babel/plugin-transform-async-to-generator": "7.13.0",
+    "@plugjs/craco": "0.0.1",
+    "@plugjs/webpack-plugjs-import-loader": "0.0.1"
   }
 }

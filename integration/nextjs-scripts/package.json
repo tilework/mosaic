@@ -15,10 +15,8 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@plugjs/babel-plugin-middleware-decorator": "0.0.1",
         "@plugjs/config-injectors": "0.0.1",
         "@plugjs/dev-utils": "0.0.1",
-        "@plugjs/plugjs": "0.0.1",
         "chokidar": "^3.5.1",
         "cross-spawn": "^7.0.0",
         "debounce": "^1.2.0",
@@ -31,8 +29,8 @@
         "access": "public"
     },
     "devDependencies": {
-        "@testing-library/jest-dom": "^5.11.9",
-        "@testing-library/react": "^11.2.5",
-        "@testing-library/user-event": "^12.8.1"
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10"
     }
 }

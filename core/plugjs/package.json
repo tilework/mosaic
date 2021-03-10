@@ -6,13 +6,5 @@
     "license": "MIT",
     "publishConfig": {
         "access": "public"
-    },
-    "dependencies": {
-        "@babel/plugin-transform-arrow-functions": "^7.10.4",
-        "@babel/plugin-transform-async-to-generator": "^7.10.4",
-        "@plugjs/craco": "0.0.1",
-        "@plugjs/dev-utils": "0.0.1",
-        "noop-loader": "^1.0.0",
-        "null-loader": "^4.0.1"
     }
 }
