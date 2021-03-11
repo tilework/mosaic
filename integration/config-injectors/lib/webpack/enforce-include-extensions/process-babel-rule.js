@@ -1,15 +1,7 @@
 const path = require('path');
-const includePaths = require('../../common/get-include-paths')();
 const { getConditionAppliesToFile, getRuleAppliesToFile } = require('../util/rule-set');
 const getContextFromConfig = require('./get-context-from-config');
-const ExcludedExtensionException = require('../../../exceptions/excluded-extension');
-const isValidNpmName = require('is-valid-npm-name');
-
-const potentiallyNamespacedFiles = includePaths
-    // Take only requirables
-    .filter((includePath) => path.isAbsolute(includePath) || isValidNpmName(includePath))
-    // Generate mockup plugin files
-    .map((includePath) => path.join(includePath, 'src', 'plugin', 'some.plugin.tsx'));
+const includePaths = require('../../common/include-paths');
 
 /**
  * The most frequent case - 1 babel rule that processes the application
@@ -47,15 +39,6 @@ const processBabelRule = (rule, webpackConfig) => {
         rule.include = [...rule.include, ...includeMatchers];
     } else {
         rule.include = [rule.include, ...includeMatchers];
-    }
-
-    // Ensure that everything is working after modifications
-    const excludedExtensionFile = potentiallyNamespacedFiles.find(
-        (includePath) => !getRuleAppliesToFile(rule, includePath)
-    );
-
-    if (excludedExtensionFile) {
-        throw new ExcludedExtensionException(excludedExtensionFile);
     }
 }
 
