@@ -1,0 +1,64 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "jsx": "react",
+        "paths": {
+            "ParentStyle/*": [
+                "../parent-ts-react-app/src/style/*"
+            ],
+            "ParentComponent/*": [
+                "../parent-ts-react-app/src/component/*"
+            ],
+            "ParentRoute/*": [
+                "../parent-ts-react-app/src/route/*"
+            ],
+            "ParentStore/*": [
+                "../parent-ts-react-app/src/store/*"
+            ],
+            "ParentUtil/*": [
+                "../parent-ts-react-app/src/util/*"
+            ],
+            "ParentQuery/*": [
+                "../parent-ts-react-app/src/query/*"
+            ],
+            "ParentType/*": [
+                "../parent-ts-react-app/src/type/*"
+            ],
+            "Parent/*": [
+                "../parent-ts-react-app/src/*"
+            ],
+            "Style/*": [
+                "../parent-ts-react-app/src/style/*",
+                "src/style/*"
+            ],
+            "Component/*": [
+                "../parent-ts-react-app/src/component/*",
+                "src/component/*"
+            ],
+            "Route/*": [
+                "../parent-ts-react-app/src/route/*",
+                "src/route/*"
+            ],
+            "Store/*": [
+                "../parent-ts-react-app/src/store/*",
+                "src/store/*"
+            ],
+            "Util/*": [
+                "../parent-ts-react-app/src/util/*",
+                "src/util/*"
+            ],
+            "Query/*": [
+                "../parent-ts-react-app/src/query/*",
+                "src/query/*"
+            ],
+            "Type/*": [
+                "../parent-ts-react-app/src/type/*",
+                "src/type/*"
+            ],
+            "/*": [
+                "../parent-ts-react-app/src/*",
+                "src/*"
+            ]
+        }
+    }
+}

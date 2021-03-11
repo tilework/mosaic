@@ -11,13 +11,14 @@
     "@plugjs/cra-scripts": "0.0.1",
     "@plugjs/plugjs": "0.0.1",
     "web-vitals": "^1.0.1",
-    "parent-react-app": "file:../parent-react-app"
+    "parent-react-app": "file:../parent-react-app",
+    "parent-ts-react-app": "file:../parent-ts-react-app"
   },
   "scandipwa": {
     "extensions": {
       "@plugjs/plugjs": false
     },
-    "parentTheme": "parent-react-app"
+    "parentTheme": "parent-ts-react-app"
   },
   "scripts": {
     "start": "cra-scripts start",

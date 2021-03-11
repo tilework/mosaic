@@ -4,7 +4,7 @@ import './App.css';
 /** @namespace App */
 function App() {
   return <>
-    hello wordec
+    This is written in JS
     <ParentApp />
   </>;
 }
