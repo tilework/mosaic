@@ -18,7 +18,7 @@ const {
 const { cracoPlugins } = require('./lib/build-plugins');
 
 // we still need Sources for aliases, etc
-const { sources } = require('./lib/sources');
+const { sources } = require('@plugjs/dev-utils/sources');
 
 const isDev = process.env.NODE_ENV === 'development';
 

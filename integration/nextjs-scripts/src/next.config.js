@@ -2,7 +2,7 @@
 
 const path = require('path');
 const configInjector = require('@plugjs/config-injectors');
-const getIncludePaths = require('@plugjs/config-injectors/lib/common/get-include-paths');
+const includePaths = require('@plugjs/config-injectors/lib/common/include-paths');
 
 module.exports = () => {
     return {
@@ -16,7 +16,6 @@ module.exports = () => {
             // * This fixes "Cannot use import statement outside a module"
             // ? is this a breaking change? should we move it to @scandipwa/extensibility?
             // TODO investigate
-            const extensionPaths = getIncludePaths();
             if (Array.isArray(config.externals)) {
                 config.externals = config.externals.map((external) => {
                     if (typeof external !== 'function') {
@@ -24,7 +23,7 @@ module.exports = () => {
                     }
 
                     return (ctx, req, cb) => {
-                        return extensionPaths.filter(Boolean).find((include) => (req.startsWith('.')
+                        return includePaths.filter(Boolean).find((include) => (req.startsWith('.')
                             ? new RegExp(include).test(path.resolve(ctx, req))
                             : new RegExp(include).test(req)))
                             ? cb()
