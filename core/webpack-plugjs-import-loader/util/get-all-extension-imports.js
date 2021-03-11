@@ -40,26 +40,25 @@ const findPluginFiles = (basepath) => (
 
 /**
  * Get the list of import declaration strings
+ * Relative to filename
  *
- * @param {String} pathname
+ * @param {string} pathname
+ * @param {string} filename
  */
-const getExtensionImports = (pathname) => {
+const getExtensionImports = (pathname, filename) => {
     if (!fs.existsSync(pathname)) {
         return [];
     }
 
     return findPluginFiles(pathname).map(
-        (pluginFile) => `require('${pluginFile}')`
+        (pluginFile) => `require('${path.relative(path.dirname(filename), pluginFile)}')`
     );
 };
 
-module.exports = function getAllExtensionImports() {
+module.exports = function getAllExtensionImports(filename) {
     const rootExtensionImports = getExtensionImports(
-        path.join(
-            process.cwd(),
-            'src',
-            'plugin'
-        )
+        path.join(process.cwd(), 'src', 'plugin'),
+        filename
     );
 
     const allExtensionImports = extensions.reduce(
@@ -74,7 +73,7 @@ module.exports = function getAllExtensionImports() {
                 return acc;
             }
 
-            return acc.concat(getExtensionImports(pluginDirectory));
+            return acc.concat(getExtensionImports(pluginDirectory, filename));
         },
         rootExtensionImports
     );

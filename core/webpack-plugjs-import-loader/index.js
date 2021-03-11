@@ -5,7 +5,8 @@ const getAllExtensionImports = require('./util/get-all-extension-imports');
  * ExtUtils must be globally provided for this
  */
 module.exports = function injectImports(source) {
-    const injectableCode = `ExtUtils.setPlugins([${ getAllExtensionImports() }]);\n`;
+    const filename = this._module.resource;
+    const injectableCode = `ExtUtils.setPlugins([${ getAllExtensionImports(filename) }]);\n`;
 
     return [
         injectableCode,
