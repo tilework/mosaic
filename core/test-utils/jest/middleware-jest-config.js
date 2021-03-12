@@ -1,5 +1,5 @@
-const extensions = require('@plugjs/dev-utils/extensions');
 const path = require('path');
+const testablePaths = require('./testable-paths');
 
 const ENV_TYPES = {
     cra: 'cra',
@@ -27,8 +27,8 @@ const provideGlobals = (jestConfig) => {
 }
 
 const includeExternals = (jestConfig) => {
-    const modulesRelativePaths = extensions.map(
-        ({ packagePath }) => path.relative(process.cwd(), packagePath)
+    const modulesRelativePaths = testablePaths.map(
+        (packagePath) => path.relative(process.cwd(), packagePath)
     );
 
     jestConfig.rootDir = process.cwd();
@@ -36,8 +36,15 @@ const includeExternals = (jestConfig) => {
         '<rootDir>',
         ...modulesRelativePaths.map((moduleRelative) => ['<rootDir>', moduleRelative].join(path.sep))
     ];
-    jestConfig.testMatch = jestConfig.testMatch.map(
-        (match) => match.replace(/\<rootDir\>\/?/, '**/')
+
+    // Ensure src and lib dirs are searched in each module
+    jestConfig.testMatch = jestConfig.testMatch.flatMap(
+        (match) => {
+            const relativeMatch = match.replace(/\<rootDir\>\/?/, '**/');
+            const libMatch = relativeMatch.replace(/^\*\*\/src\//, '**/lib/');
+
+            return [relativeMatch, libMatch];
+        }
     );
 }
 
