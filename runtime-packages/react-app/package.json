@@ -12,11 +12,17 @@
     "@plugjs/plugjs": "0.0.1",
     "web-vitals": "^1.0.1",
     "parent-react-app": "file:../parent-react-app",
-    "parent-ts-react-app": "file:../parent-ts-react-app"
+    "parent-ts-react-app": "file:../parent-ts-react-app",
+    "child-extension": "file:packages/child-extension"
   },
   "scandipwa": {
+    "type": "theme",
     "extensions": {
-      "@plugjs/plugjs": false
+      "child-extension": true
+    },
+    "tests": {
+      "@plugjs/plugjs": true,
+      "parent-ts-react-app": true
     },
     "parentTheme": "parent-ts-react-app"
   },
@@ -24,7 +30,9 @@
     "start": "cra-scripts start",
     "build": "cra-scripts build",
     "link": "cra-scripts link",
-    "test": "cra-scripts test"
+    "test": "cra-scripts test",
+    "postinstall": "scandipwa-scripts link",
+    "postupdate": "scandipwa-scripts link"
   },
   "browserslist": {
     "production": [

@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          This is written in TS!
+          This is written in TS!x
         </p>
         <a
           className="App-link"
