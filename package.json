@@ -27,7 +27,7 @@
     "lerna": "^3.22.1"
   },
   "workspaces": [
-    "runtime-packages/*",
+    "sample-packages/*",
     "core/*",
     "integration/*"
   ]

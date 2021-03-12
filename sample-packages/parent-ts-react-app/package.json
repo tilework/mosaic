@@ -25,13 +25,12 @@
     }
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "cra-scripts start",
+    "build": "cra-scripts build",
+    "test": "cra-scripts test",
     "link": "cra-scripts link",
-    "eject": "react-scripts eject",
-    "postinstall": "scandipwa-scripts link",
-    "postupdate": "scandipwa-scripts link"
+    "postinstall": "cra-scripts link",
+    "postupdate": "cra-scripts link"
   },
   "eslintConfig": {
     "extends": [

@@ -3,7 +3,7 @@
     "useWorkspaces": true,
     "version": "independent",
     "packages": [
-        "runtime-packages/*",
+        "sample-packages/*",
         "core/*",
         "integration/*"
     ]

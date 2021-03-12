@@ -16,10 +16,10 @@
     "themeAlias": "Parent"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "cra-scripts start",
+    "build": "cra-scripts build",
+    "test": "cra-scripts test",
+    "eject": "cra-scripts eject"
   },
   "eslintConfig": {
     "extends": [

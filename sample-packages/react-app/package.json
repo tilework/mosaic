@@ -31,8 +31,8 @@
     "build": "cra-scripts build",
     "link": "cra-scripts link",
     "test": "cra-scripts test",
-    "postinstall": "scandipwa-scripts link",
-    "postupdate": "scandipwa-scripts link"
+    "postinstall": "cra-scripts link",
+    "postupdate": "cra-scripts link"
   },
   "browserslist": {
     "production": [

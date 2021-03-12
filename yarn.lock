@@ -2557,7 +2557,7 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@plugjs/sample-page@file:runtime-packages/next-app/packages/sample-page":
+"@plugjs/sample-page@file:sample-packages/next-app/packages/sample-page":
   version "0.0.1"
 
 "@pmmmwh/react-refresh-webpack-plugin@0.4.3":
@@ -4869,6 +4869,9 @@ check-types@^11.1.1:
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/check-types/-/check-types-11.1.2.tgz#86a7c12bf5539f6324eb0e70ca8896c0e38f3e2f"
   integrity sha512-tzWzvgePgLORb9/3a0YenggReLKAIb2owL03H2Xdoe5pKcUyWRSEQ8xfCar8t2SIAuEDwtmx2da1YB52YuHQMQ==
+
+"child-extension@file:sample-packages/react-app/packages/child-extension":
+  version "0.0.0"
 
 child_process@^1.0.2:
   version "1.0.2"
@@ -11638,6 +11641,9 @@ param-case@^3.0.3:
     dot-case "^3.0.4"
     tslib "^2.0.3"
 
+"parent-extension@file:sample-packages/parent-ts-react-app/packages/parent-extension":
+  version "0.0.0"
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -11645,7 +11651,7 @@ parent-module@^1.0.0:
   dependencies:
     callsites "^3.0.0"
 
-"parent-react-app@file:runtime-packages/parent-react-app":
+"parent-react-app@file:sample-packages/parent-react-app":
   version "0.1.0"
   dependencies:
     "@testing-library/jest-dom" "^5.11.4"
@@ -11656,7 +11662,7 @@ parent-module@^1.0.0:
     react-scripts "4.0.3"
     web-vitals "^1.0.1"
 
-"parent-ts-react-app@file:runtime-packages/parent-ts-react-app":
+"parent-ts-react-app@file:sample-packages/parent-ts-react-app":
   version "0.1.0"
   dependencies:
     "@testing-library/jest-dom" "^5.11.4"
@@ -11666,6 +11672,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
+    parent-extension "file:../../Library/Caches/Yarn/v6/npm-parent-ts-react-app-0.1.0-ac87a8a5-48ce-4c8d-bd28-25b94630bf0a-1615552494227/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
@@ -13864,7 +13871,7 @@ safe-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-"sample-module@file:runtime-packages/sample-module":
+"sample-module@file:sample-packages/sample-module":
   version "0.0.1"
 
 sane@^4.0.3:
