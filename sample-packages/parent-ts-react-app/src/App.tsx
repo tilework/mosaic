@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          This is written in TS!x
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Typescript
-        </a>
-      </header>
-    </div>
-  );
+import { PureComponent } from 'react';
+
+class App extends PureComponent<{}, {}> {
+  renderContent() {
+    return <p>This is written in the parent theme in TS</p>;
+  }
+
+  render() {
+    return (
+      <div className="Application">
+        { this.renderContent() }
+      </div>
+    );
+  }
 }
 
 export default App;

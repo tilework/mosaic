@@ -1,12 +1,14 @@
-import ParentApp from 'Parent/App';
-import './App.css';
+import { PureComponent } from 'react';
 
-/** @namespace App */
-function App() {
-  return <>
-    This is written in JS
-    <ParentApp />
-  </>;
+import ParentApp from 'Parent/App';
+
+class App extends ParentApp {
+  renderContent() {
+    return <>
+      <p>This is written in the child theme in JS</p>
+      { super.renderContent() }
+    </>;
+  }
 }
 
 export default App;
