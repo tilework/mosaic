@@ -1,0 +1,6 @@
+{
+    "include": [
+        "src/**/*"
+    ],
+    "extends": "./extendconfig.json"
+}

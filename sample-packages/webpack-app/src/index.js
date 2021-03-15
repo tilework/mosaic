@@ -1,3 +1,9 @@
-const application = require('./somefile');
+/** @namespace Application/getData */
+const getData = () => {
+    return [];
+}
 
-application();
+const data = getData();
+
+
+console.log(data);

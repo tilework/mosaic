@@ -1,9 +1,12 @@
 export default {
-    Application: {
+    'Application/getData': {
         function: (args, callback, context) => {
-            console.log('Hello from plugin!');
+            const data = callback(...args);
 
-            callback(...args);
+            return [
+                ...data,
+                'Data from the plugin'
+            ];
         }
     }
 }
