@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style, no-param-reassign, max-len */
 
 const path = require('path');
-const configInjector = require('@plugjs/config-injectors');
+const ConfigInjectors = require('@plugjs/config-injectors');
 const includePaths = require('@plugjs/config-injectors/lib/common/include-paths');
 
 module.exports = () => {
@@ -14,7 +14,7 @@ module.exports = () => {
             // * Next-specific plugin system stuff
 
             // * This fixes "Cannot use import statement outside a module"
-            // ? is this a breaking change? should we move it to @scandipwa/extensibility?
+            // ? is this a breaking change? should we move it to @plugjs/plugjs?
             // TODO investigate
             if (Array.isArray(config.externals)) {
                 config.externals = config.externals.map((external) => {
@@ -51,7 +51,7 @@ module.exports = () => {
             // ===================================
 
             // * Inject the prepared config
-            configInjector.injectWebpackConfig(config, {
+            ConfigInjectors.injectWebpackConfig(config, {
                 webpack,
                 entryMatcher: /[\\/]src[\\/]pages[\\/][^_]/
             });
