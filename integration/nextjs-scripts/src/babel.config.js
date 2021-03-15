@@ -1,4 +1,6 @@
-module.exports = {
+const ConfigInjectors = require('@plugjs/config-injectors');
+
+module.exports = ConfigInjectors.injectBabelConfig({
     presets: [
         [
             'next/babel',
@@ -8,13 +10,5 @@ module.exports = {
                 }
             }
         ]
-    ],
-    plugins: [
-        // ===================================
-        // Extensibility imports
-        '@plugjs/babel-plugin-middleware-decorator',
-        '@babel/plugin-transform-arrow-functions',
-        '@babel/plugin-transform-async-to-generator'
-        // ===================================
     ]
-};
+});
