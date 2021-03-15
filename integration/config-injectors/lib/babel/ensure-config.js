@@ -181,16 +181,18 @@ const ensureTypescriptFile = () => {
 }
 
 const createFromScratch = (generatedJsConfig) => {
+    const isTs = hasFilesOfType('ts');
     const configPath = path.resolve(
         process.cwd(), 
-        hasFilesOfType('ts') ? 'tsconfig.json' : 'jsconfig.json'
+        isTs ? 'tsconfig.json' : 'jsconfig.json'
     );
 
-    // Without this TSC will fail
-    const dummyTsFile = ensureTypescriptFile();
+    const initialConfig = { include: ["src/**/*"] };
 
-    const initialConfig = {
-        include: ["src/**/*", dummyTsFile].filter(Boolean)
+    // Without this TSC will fail
+    if (isTs) {
+        const dummyTsFile = ensureTypescriptFile();
+        initialConfig.include.push(dummyTsFile);
     }
 
     writeJson(configPath, initialConfig);
