@@ -8,6 +8,41 @@ Find out more in the [official documentation](https://app.gitbook.com/@plugjs/s/
 
 #### 🧞‍♂️ Plugins
 
+Initial code
+```js
+// @creator/application/src/index.js
+
+/** @namespace Application/getData */
+const getData = () => {
+    return ['Initial data'];
+}
+
+const data = getData();
+```
+
+With this plugin
+```js
+// @creator/extension/src/plugin/some.plugin.js
+
+module.exports = {
+    'Application/getData': {
+        function: (args, callback, context) => {
+            const data = callback(...args);
+
+            return [
+                ...data,
+                'Data from the plugin'
+            ];
+        }
+    }
+}
+```
+
+Produces this
+```js
+['Initial data', 'Data from the plugin']
+```
+
 #### 🦾 Overrides
 
 ## Why
@@ -18,7 +53,7 @@ By using PlugJS plugins, you may make any part of your project extensible and mo
 
 #### ✨ Use granular micro-frontend architecture
 
-Make dependencies injected instead of importing them! This way, you keep ALL the logic related to the module WITHIN the module, even its use cases!
+Make dependencies injected with plugins instead of importing them! This way, you keep ALL the logic related to the module WITHIN the module, even its use cases!
 
 #### 🎨 Theming
 
