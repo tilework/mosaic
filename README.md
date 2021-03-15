@@ -4,9 +4,31 @@
 
 Find out more in the [official documentation](https://app.gitbook.com/@plugjs/s/plugjs/)!
 
+## Why
+
+#### 🥷🏼 Make your application extensible
+
+By using PlugJS plugins, you may make any part of your project extensible and modifiable either from within the application itself or from installed PlugJS modules.
+
+#### ✨ Use granular micro-frontend architecture
+
+Make dependencies injected with plugins instead of importing them! This way, you keep ALL the logic related to the module WITHIN the module, even its use cases!
+
+#### 🎨 Theming
+
+Build your project by overriding an existing project's functionality! Have infinite amount of parent projects. Similar to straight up forking, but with actual core updating potential. 
+
+#### 🤝 Integrations with existing technologies
+
+No manual configuration tinkering required, we got you covered 🤝
+
+There are several ways on how to get PlugJS in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned 😎
+
 ## What
 
 #### 🧞‍♂️ Plugins
+
+Plugins can easily stack onto one another, such way modifying the same place of the application multiple times. It is recommended to use the plugin system to implement functionality reusable among several projects.
 
 Initial code
 ```js
@@ -45,22 +67,52 @@ Produces this
 
 #### 🦾 Overrides
 
-## Why
+Overrides are the base of the theming mechanism. Use overrides to build your application on top of a parent application.
 
-#### 🥷🏼 Make your application extensible
+Initial code in the parent theme
+```ts
+// parent-ts-react-app/src/App.tsx
 
-By using PlugJS plugins, you may make any part of your project extensible and modifiable either from within the application itself or from installed PlugJS modules.
+class App extends PureComponent<{}, {}> {
+  renderContent() {
+    return <p>This is written in the parent theme in TS</p>;
+  }
 
-#### ✨ Use granular micro-frontend architecture
+  render() {
+    return (
+      <div className="Application">
+        { this.renderContent() }
+      </div>
+    );
+  }
+}
 
-Make dependencies injected with plugins instead of importing them! This way, you keep ALL the logic related to the module WITHIN the module, even its use cases!
+export default App;
+```
 
-#### 🎨 Theming
+With this override in the child theme
+```js
+// react-app/src/App.js
 
-Build your project by overriding an existing project's functionality! Have infinite amount of parent projects. Similar to straight up forking, but with actual core updating potential. 
+import ParentApp from 'Parent/App';
 
-#### 🤝 Integrations with existing technologies
+class App extends ParentApp {
+  renderContent() {
+    return <>
+      <p>This is written in the child theme in JS</p>
+      { super.renderContent() }
+    </>;
+  }
+}
 
-No manual configuration tinkering required, we got you covered 🤝
+export default App;
+```
 
-There are several ways on how to get PlugJS in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned 😎
+Produces this HTML output
+
+```html
+<div class="Application">
+  <p>This is written in the child theme in JS</p>
+  <p>This is written in the parent theme in TS</p>
+</div>
+```
