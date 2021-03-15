@@ -18,7 +18,15 @@ const hasFilesOfType = (type, rootOnly = false) => (
         const getMain = () => {
             const { main } = getPackageJson(includePath);
             if (main) {
-                return path.resolve(includePath, main);
+                const mainPath = path.resolve(includePath, main);
+
+                // Handle main being file
+                if (!fs.lstatSync(mainPath).isDirectory()) {
+                    return path.dirname(mainPath);
+                }
+
+                // Main is directory -> use it
+                return mainPath;
             }
 
             return includePath;
