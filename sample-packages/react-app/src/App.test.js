@@ -10,6 +10,6 @@ test('is proxy', () => {
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/This is written in JS/i);
+  const linkElement = screen.getByText(/This is written in the child theme in JS/i);
   expect(linkElement).toBeInTheDocument();
 });

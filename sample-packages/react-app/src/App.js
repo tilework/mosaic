@@ -2,6 +2,7 @@ import { PureComponent } from 'react';
 
 import ParentApp from 'Parent/App';
 
+/** @namespace ReactApp/App */
 class App extends ParentApp {
   renderContent() {
     return <>

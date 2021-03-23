@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/This is written in TS!/i);
+  const linkElement = screen.getByText(/This is written in the parent theme in TS/i);
   expect(linkElement).toBeInTheDocument();
 });
