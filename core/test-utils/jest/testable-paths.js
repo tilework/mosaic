@@ -20,7 +20,7 @@ const packageJsons = [
 const mainPackageJson = getPackageJson(process.cwd());
 const { 
     scandipwa: { 
-        test: testablePackages = {} 
+        tests: testablePackages = {} 
     } = {} 
 } = mainPackageJson;
 
