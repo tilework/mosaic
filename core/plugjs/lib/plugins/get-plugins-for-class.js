@@ -5,9 +5,8 @@ export default function getPluginsForClass(namespaces) {
     // Is an actual, not an inherited one.
     const outerNamespace = namespaces[namespaces.length - 1];
 
-    try {
-        return pluginStorage.plugins[outerNamespace].class || [];
-    } catch (e) {
-        return [];
-    }
+    return (
+        pluginStorage.plugins[outerNamespace] 
+        && pluginStorage.plugins[outerNamespace].class
+    ) || []
 }

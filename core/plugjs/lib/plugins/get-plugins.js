@@ -10,37 +10,29 @@ import pluginStorage from './plugin-storage';
  * @param {string|undefined} memberName
  * @param {object} plugins
  */
-export default function getPluginsFromConfig(namespaces, targetSpecifier, memberName) {
-    return namespaces.reduce(
-        (acc, namespace) => {
-        // Handle no member name: return all plugins for the provided section
-            if (!memberName) {
-                try {
-                    const pluginsOfType = pluginStorage.plugins[namespace][targetSpecifier];
+export default (namespaces, targetSpecifier, memberName) => namespaces.reduce(
+    (acc, namespace) => {
+        const pluginsOfType = pluginStorage.plugins
+            && pluginStorage.plugins[namespace]
+            && pluginStorage.plugins[namespace][targetSpecifier];
 
-                    if (pluginsOfType) {
-                        return acc.concat(pluginsOfType);
-                    }
-                } catch (e) {
-                    // ignore the error
-                }
-            } else {
-                try {
-                    // Handle member name present
-                    const { value } = Object.getOwnPropertyDescriptor(
-                        pluginStorage.plugins[namespace][targetSpecifier] || {},
-                        memberName
-                    ) || {};
-
-                    if (value) {
-                        return acc.concat(value);
-                    }
-                } catch (e) {
-                    // ignore the error
-                }
+        if (!memberName) {
+            // Handle cases with reduced sections (e.g. function plugins)
+            if (pluginsOfType) {
+                return acc.concat(pluginsOfType);
             }
+        } else {
+            // Handle member name present (i.e. class plugins)
+            const { value } = Object.getOwnPropertyDescriptor(
+                pluginsOfType || {},
+                memberName
+            ) || {};
 
-            return acc;
-        }, []
-    );
-}
+            if (value) {
+                return acc.concat(value);
+            }
+        }
+
+        return acc;
+    }, []
+);
