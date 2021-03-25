@@ -1,5 +1,5 @@
 {
-  "name": "@plugjs/plugjs",
+  "name": "@plugjs/monorepo",
   "version": "0.0.1",
   "description": "The convenient plugin system for JS",
   "main": "index.js",
