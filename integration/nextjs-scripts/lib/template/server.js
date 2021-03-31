@@ -15,8 +15,11 @@ const Page = () => (
         : renderEmptyPage(JSON.parse('<%- emptyPageArgs %>'))
 );
 
+/** @namespace Pages/getCommonServerSideProps */
+const getCommonServerSideProps = () => ({ props: {} });
+
 /** @namespace <%= server_namespace %> */
-const getServerSideProps = () => ({ props: {} });
+const getServerSideProps = () => getCommonServerSideProps();
 
 export { getServerSideProps };
 export default Page;
