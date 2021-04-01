@@ -11,7 +11,6 @@
     "@plugjs/cra-scripts": "0.0.1",
     "@plugjs/plugjs": "0.0.1",
     "web-vitals": "^1.0.1",
-    "parent-react-app": "file:../parent-react-app",
     "parent-ts-react-app": "file:../parent-ts-react-app",
     "child-extension": "file:packages/child-extension"
   },
