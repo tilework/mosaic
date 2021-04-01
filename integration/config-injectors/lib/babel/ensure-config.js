@@ -161,6 +161,12 @@ const extendConfig = (configPath, additionalConfig) => {
             return destination;
         }
     });
+
+    // Handle nothing has changed
+    if (JSON.stringify(extendsConfig) === JSON.stringify(resultingExtendsConfig)) {
+        return;
+    }
+
     writeJson(extendsAbsolute, resultingExtendsConfig);
 
     // Ensure correct "extends" path in the base config
