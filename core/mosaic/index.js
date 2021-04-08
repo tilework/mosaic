@@ -7,7 +7,8 @@ import { cacheIdentityKey, EmptyBase, extensible } from './lib/extensible/consta
 import generateApplyHandler from './lib/handlers/apply';
 import generateConstructHandler from './lib/handlers/construct';
 import generateGetHandler from './lib/handlers/get';
-import generateMiddlewaredClass from './lib/middleware/class';
+// TODO provide API similar to the class plugins
+// import generateMiddlewaredClass from './lib/middleware/class';
 import addNamespaceToMiddlewarable from './lib/namespace/add-namespace-to-middlewarable';
 import getNamespacesFromMiddlewarable from './lib/namespace/get-namespaces-from-middlewarable';
 import pluginStorage from './lib/plugins/plugin-storage';
@@ -89,7 +90,7 @@ class Mosaic {
             const proxy = new Proxy(Middlewarable, handler);
 
             // TODO check if class
-            return generateMiddlewaredClass(proxy);
+            return proxy;
         } catch (e) {
             console.log(`Failed to apply middleware to: ${ Middlewarable } (${ namespace }).`);
             console.log(e);
