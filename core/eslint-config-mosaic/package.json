@@ -3,7 +3,7 @@
     "description": "Shareable ESLint configuration used by Mosaic.",
     "version": "0.0.1",
     "main": "index.js",
-    "license": "OSL-3.0",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },

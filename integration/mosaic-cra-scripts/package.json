@@ -37,7 +37,7 @@
         "react-scripts": "4.0.3",
         "tree-kill": "^1.2.2"
     },
-    "license": "OSL-3.0",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     }

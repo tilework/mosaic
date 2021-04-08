@@ -22,7 +22,7 @@
     "peerDependencies": {
         "react-scripts": "4.0.1"
     },
-    "license": "Apache-2.0",
+    "license": "MIT",
     "version": "0.0.1",
     "publishConfig": {
         "access": "public"

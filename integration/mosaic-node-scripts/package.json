@@ -14,7 +14,7 @@
     "dependencies": {
         "@tilework/mosaic-dev-utils": "0.0.1"
     },
-    "license": "OSL-3.0",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     }
