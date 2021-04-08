@@ -2,7 +2,7 @@ const path = require('path');
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 
 /**
- * Sources available for ScandiPWA Fallback mechanism
+ * Sources available for Mosaic Fallback mechanism
  * @typedef {Object} Sources
  * @property {array} firstEntry - Get the top-level entry (i.e. project)
  * @property {array} lastEntry - Get the least-level entry (i.e. core)

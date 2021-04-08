@@ -5,7 +5,7 @@ const THEME_TYPE = 'theme';
 const MAGENTO_TYPE = 'magento';
 
 /**
- * Bubble up from the given directory to find a ScandiPWA module
+ * Bubble up from the given directory to find a Mosaic module
  * The module's type should match the expected type(s)
  *
  * @param {string} pathname
@@ -18,7 +18,7 @@ const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
     }
 
     try {
-        const { scandipwa: { type } } = require(path.join(pathname, 'package.json'));
+        const { mosaic: { type } } = require(path.join(pathname, 'package.json'));
 
         // Handle type matching
         if (expectedType && (!Array.isArray(expectedType) || expectedType.length)) {

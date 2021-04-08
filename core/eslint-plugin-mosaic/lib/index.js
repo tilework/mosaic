@@ -1,7 +1,5 @@
-/* eslint-disable scandipwa-extensibility/no-non-extensible-components */
-
 /**
- * @fileoverview Eslint plugin for ScandiPWA development
+ * @fileoverview Eslint plugin for Mosaic development
  * @author Alfreds Genkins
  */
 

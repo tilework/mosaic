@@ -29,7 +29,7 @@ const getDefinedPages = async (rootDir) => {
     ].reduce(
         // we only allow pages inside of the src folder!
         (acc, pathname) => {
-            const { scandipwa: { nextPages = {} } = {} } = getPackageJson(pathname);
+            const { mosaic: { nextPages = {} } = {} } = getPackageJson(pathname);
 
             // eslint-disable-next-line fp/no-let
             for (let i = 0; i < Object.entries(nextPages).length; i++) {

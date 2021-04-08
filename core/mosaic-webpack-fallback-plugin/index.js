@@ -243,7 +243,7 @@ class FallbackPlugin {
             ...extensions.values
         ];
 
-        // Check if request is coming from ScandiPWA
+        // Check if request is coming from Mosaic
         // sources or extension folders (/src or /pub)
         for (let i = 0; i < paths.length; i++) {
             const sourcePath = paths[i];

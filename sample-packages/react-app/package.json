@@ -14,7 +14,7 @@
     "parent-ts-react-app": "file:../parent-ts-react-app",
     "child-extension": "file:packages/child-extension"
   },
-  "scandipwa": {
+  "mosaic": {
     "type": "theme",
     "extensions": {
       "child-extension": true

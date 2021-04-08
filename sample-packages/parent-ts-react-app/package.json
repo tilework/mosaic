@@ -17,7 +17,7 @@
     "web-vitals": "^1.0.1",
     "parent-extension": "file:packages/parent-extension"
   },
-  "scandipwa": {
+  "mosaic": {
     "type": "theme",
     "themeAlias": "Parent",
     "extensions": {

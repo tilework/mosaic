@@ -63,7 +63,7 @@ const generatePreferenceAliases = () => {
     
         // Take provide field, check if pathname is not available in provisioned names
         const {
-            scandipwa: {
+            mosaic: {
                 preference = ''
             } = {}
         } = packageJson;

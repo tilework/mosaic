@@ -22,7 +22,7 @@ const getAllExtensions = (modulePath) => {
 
     const {
         dependencies = {},
-        scandipwa: {
+        mosaic: {
             extensions = {}
         } = {}
     } = getPackageJson(modulePath);
@@ -73,7 +73,7 @@ const getExtensionsForCwd = memoize((cwd = process.cwd()) => getEnabledExtension
             `Loading of plugin ${ logger.style.misc(packageName) } failed.`,
             `Try installing it using ${ logger.style.command(`${ installCommand } ${ packageName } command.`) }`,
             `Otherwise, disable the extension in the root ${ logger.style.file('package.json') } file:`,
-            `Append ${ logger.style.code(`"${ packageName }": false`) } line to the end of the ${ logger.style.code('scandipwa.extensions') } field.`
+            `Append ${ logger.style.code(`"${ packageName }": false`) } line to the end of the ${ logger.style.code('mosaic.extensions') } field.`
         );
 
         process.exit();

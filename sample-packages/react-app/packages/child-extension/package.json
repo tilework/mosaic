@@ -2,10 +2,10 @@
     "name": "child-extension",
     "version": "0.0.0",
     "license": "OSL-3.0",
-    "scandipwa": {
+    "mosaic": {
         "type": "extension"
     },
     "eslintConfig": {
-        "extends": "@scandipwa"
+        "extends": "@tilework/mosaic"
     }
 }

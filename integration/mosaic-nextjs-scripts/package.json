@@ -5,7 +5,7 @@
     "bin": {
         "nextjs-scripts": "./bin/nextjs-scripts.js"
     },
-    "scandipwa": {
+    "mosaic": {
         "extensions": {
             "@tilework/mosaic": true,
             "@tilework/mosaic-nextjs-scripts": true

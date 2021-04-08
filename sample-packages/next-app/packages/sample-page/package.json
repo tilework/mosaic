@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-sample-page",
     "version": "0.0.1",
-    "scandipwa": {
+    "mosaic": {
         "type": "extension",
         "nextPages": {
             "sample": "server"

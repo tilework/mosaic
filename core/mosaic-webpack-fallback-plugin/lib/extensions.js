@@ -5,7 +5,7 @@ const logger = require('@tilework/mosaic-dev-utils/logger');
 const path = require('path');
 
 /**
- * Extensions available for ScandiPWA Fallback mechanism
+ * Extensions available for Mosaic Fallback mechanism
  * @typedef {Object} Extensions
  * @extends Sources
  * @property {Bool} isExtension - Is extension source or not
@@ -49,7 +49,7 @@ const getExtensionProvisionedPath = (pathname, cwd) => {
         // Take provide field, check if pathname is not available in provisioned names
         const {
             name,
-            scandipwa: {
+            mosaic: {
                 provide = [],
                 preference = ''
             } = {},

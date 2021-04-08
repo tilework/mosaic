@@ -5,7 +5,7 @@
     "bin": {
         "cra-scripts": "./bin/cra-scripts.js"
     },
-    "scandipwa": {
+    "mosaic": {
         "extensions": {
             "@tilework/mosaic": true
         }

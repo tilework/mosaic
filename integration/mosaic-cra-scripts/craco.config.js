@@ -24,7 +24,7 @@ const getESLintConfig = () => {
     if (usersESLintConfig) {
         return {
             mode: ESLINT_MODES.extends,
-            // Ensure we are extending the scandipwa-eslint config
+            // Ensure we are extending the mosaic-eslint config
             configure: usersESLintConfig
         }
     }
@@ -103,7 +103,7 @@ module.exports = () => {
                 // initially added by https://github.com/facebook/create-react-app/issues/1676
                 // removing X-Forwarded-* headers so Kubernetes won't panic
                 // question is - how do they help and why are they needed?
-                // maybe they should be ScandiPWA specific?
+                // maybe they should be Mosaic - specific?
                 proxy[0].xfwd = false;
             }
 

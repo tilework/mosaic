@@ -17,7 +17,7 @@ const {
     // Take provide field, check if pathname is not available in provisioned names
     const {
         name,
-        scandipwa: {
+        mosaic: {
             build: {
                 before = '',
                 cracoPlugins = []

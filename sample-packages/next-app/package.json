@@ -9,7 +9,7 @@
     "test": "nextjs-scripts test",
     "link": "nextjs-scripts link"
   },
-  "scandipwa": {
+  "mosaic": {
     "extensions": {
       "@tilework/mosaic-sample-page": true
     }

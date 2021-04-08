@@ -4,7 +4,7 @@ const getPackagePath = require('./package-path');
 
 const getParentTheme = (pathname) => {
     const {
-        scandipwa: {
+        mosaic: {
             parentTheme
         } = {}
     } = getPackageJson(pathname);
@@ -33,7 +33,7 @@ const getParentThemeSources = () => {
     return parentThemeList.reduce((acc, pathname) => {
         const {
             name,
-            scandipwa: {
+            mosaic: {
                 themeAlias
             } = {}
         } = getPackageJson(pathname);
@@ -44,7 +44,7 @@ const getParentThemeSources = () => {
 
             logger.error(
                 `The parent theme registered in package ${ logger.style.misc(name) } is invalid.`,
-                `The required field ${ logger.style.code('scandipwa.themeAlias') } is missing in ${ logger.style.file('package.json') }`
+                `The required field ${ logger.style.code('mosaic.themeAlias') } is missing in ${ logger.style.file('package.json') }`
             );
 
             process.exit(1);
@@ -59,7 +59,7 @@ const getParentThemeSources = () => {
 
             logger.error(
                 `The parent theme registered in package ${ logger.style.misc(name) } is invalid.`,
-                `The required field ${ logger.style.code('scandipwa.themeName') } contains invalid value.`,
+                `The required field ${ logger.style.code('mosaic.themeName') } contains invalid value.`,
                 `The theme with the name ${ logger.style.misc(themeAlias) } already exist.`,
                 `It was previously declared in the ${ logger.style.misc(sameNamePackage) } package.`
             );

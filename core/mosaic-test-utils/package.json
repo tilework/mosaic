@@ -2,7 +2,7 @@
   "name": "@tilework/mosaic-test-utils",
   "version": "0.0.1",
   "description": "Testing utils for Mosaic",
-  "author": "Jegors Batovs <jegors.batovs@scandipwa.com>",
+  "author": "Jegors Batovs <yegor@scandipwa.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {

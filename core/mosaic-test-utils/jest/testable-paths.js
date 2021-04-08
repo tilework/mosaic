@@ -19,7 +19,7 @@ const packageJsons = [
 
 const mainPackageJson = getPackageJson(process.cwd());
 const { 
-    scandipwa: { 
+    mosaic: { 
         tests: testablePackages = {} 
     } = {} 
 } = mainPackageJson;

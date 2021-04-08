@@ -1,6 +1,6 @@
-# @scandipwa/webpack-fallback-plugin
+# @tilework/mosaic-webpack-fallback-plugin
 
-This package includes fallback plugin used by [Create Scandipwa App](https://github.com/scandipwa/create-scandipwa-app).
+This package includes fallback plugin used by [Mosaic](https://github.com/tilework/mosaic).
 
 Package is currently under development. Docs too.
 
