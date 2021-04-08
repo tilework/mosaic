@@ -97,7 +97,21 @@ const addSuperToConstructor = (path, types) => {
     const constructor = path
         .get('body')
         .get('body')
-        .find((member) => member.get('key').node.name === 'constructor');
+        .find((member) => {
+            // Search for a constructor
+            const isConstructor = member.get('key').node.name === 'constructor';
+            if (!isConstructor) {
+                return false;
+            }
+
+            // Handle TS overloads: ensure that the retrieved thing indeed is a method
+            const isMethod = member.get('type').node === 'ClassMethod';
+            if (!isMethod) {
+                return false;
+            }
+
+            return true;
+        });
 
     if (!constructor) {
         return;
@@ -106,8 +120,15 @@ const addSuperToConstructor = (path, types) => {
     const superCall = types.expressionStatement(
         types.callExpression(types.super(), [])
     );
+    
 
-    constructor.get('body').unshiftContainer('body', superCall);
+    try {
+        constructor.get('body').unshiftContainer('body', superCall);
+    } catch {
+        console.log(constructor);
+        process.exit(0);
+    }
+
 };
 
 /**
