@@ -6,27 +6,27 @@ Find out more in the [official documentation](https://app.gitbook.com/@plugjs/s/
 
 ## Why
 
-#### 🔌 Make your application extensible
+#### 🔌  Make your application extensible
 
 By using Mosaic plugins, you may make any part of your project extensible and modifiable either from within the application itself or from installed Mosaic modules.
 
-#### 🍇 Use granular micro-frontend architecture
+#### 🍇  Use granular micro-frontend architecture
 
 Make dependencies injected with plugins instead of importing them! This way, you keep ALL the logic related to the module WITHIN the module, even its use cases!
 
-#### 🖌️ Theming
+#### 🖌️  Theming
 
 Build your project by overriding an existing project's functionality! Have infinite amount of parent projects. Similar to straight up forking, but with actual core updating potential. 
 
-#### 🤝 Integrations with existing technologies
+#### 🤝  Integrations with existing technologies
 
-No manual configuration tinkering required, we got you covered 🤝
+No manual configuration tinkering required, we got you covered  🤝
 
-There are several ways on how to get Mosaic in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned 😎
+There are several ways on how to get Mosaic in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned  😎
 
 ## What
 
-#### 🧞 Plugins
+#### 🧞  Plugins
 
 Plugins can easily stack onto one another, such way modifying the same place of the application multiple times. It is recommended to use the plugin system to implement functionality reusable among several projects.
 
@@ -65,7 +65,7 @@ Produces this
 ['Initial data', 'Data from the plugin']
 ```
 
-#### 📔 Overrides
+#### 📔  Overrides
 
 Overrides are the base of the theming mechanism. Use overrides to build your application on top of a parent application.
 
