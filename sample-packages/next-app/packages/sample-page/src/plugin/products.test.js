@@ -1,4 +1,4 @@
-import ExtUtils from '@plugjs/plugjs';
+import ExtUtils from '@tilework/mosaic';
 import { render, screen } from '@testing-library/react';
 
 test('Is successfully plugged into the application', () => {

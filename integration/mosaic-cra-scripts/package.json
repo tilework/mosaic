@@ -1,0 +1,44 @@
+{
+    "name": "@tilework/mosaic-cra-scripts",
+    "description": "CRA wrapper for Mosaic.",
+    "version": "0.0.1",
+    "bin": {
+        "cra-scripts": "./bin/cra-scripts.js"
+    },
+    "scandipwa": {
+        "extensions": {
+            "@tilework/mosaic": true
+        }
+    },
+    "files": [
+        "bin",
+        "craco.config.js",
+        "/lib"
+    ],
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "dependencies": {
+        "@tilework/mosaic-config-injectors": "0.0.1",
+        "@tilework/mosaic-craco": "0.0.1",
+        "@tilework/mosaic-dev-utils": "0.0.1",
+        "@tilework/mosaic-webpack-fallback-plugin": "0.0.1",
+        "babel-jest": "26.6.3",
+        "babel-plugin-module-resolver": "^4.0.0",
+        "babel-plugin-transform-rebem-jsx": "^0.3.3",
+        "chokidar": "^3.5.1",
+        "craco-sass-resources-loader": "^1.1.0",
+        "cross-spawn": "^7.0.0",
+        "debounce": "^1.2.0",
+        "jest": "26.6.0",
+        "node-sass": "4.14.1",
+        "progress-bar-webpack-plugin": "^2.1.0",
+        "react-dev-utils": "^10.2.1",
+        "react-scripts": "4.0.3",
+        "tree-kill": "^1.2.2"
+    },
+    "license": "OSL-3.0",
+    "publishConfig": {
+        "access": "public"
+    }
+}

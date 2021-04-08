@@ -11,7 +11,7 @@
     "build-prod": "webpack --mode production"
   },
   "dependencies": {
-    "@plugjs/config-injectors": "0.0.1"
+    "@tilework/mosaic-config-injectors": "0.0.1"
   },
   "devDependencies": {
     "webpack": "^5.24.2",

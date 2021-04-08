@@ -1,5 +1,5 @@
 {
-  "name": "@plugjs/monorepo",
+  "name": "@tilework/mosaic-monorepo",
   "version": "0.0.1",
   "description": "The convenient plugin system for JS",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plugjs/plugjs.git"
+    "url": "git+https://github.com/tilework/mosaic.git"
   },
   "keywords": [
     "plugin",
@@ -20,9 +20,9 @@
   "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/plugjs/plugjs/issues"
+    "url": "https://github.com/tilework/mosaic/issues"
   },
-  "homepage": "https://github.com/plugjs/plugjs#readme",
+  "homepage": "https://github.com/tilework/mosaic#readme",
   "dependencies": {
     "lerna": "^3.22.1"
   },

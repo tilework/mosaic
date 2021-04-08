@@ -1,0 +1,21 @@
+{
+    "name": "@tilework/mosaic-node-scripts",
+    "description": "Node helper scripts for Mosaic.",
+    "version": "0.0.1",
+    "bin": {
+        "node-scripts": "./bin/node-scripts.js"
+    },
+    "files": [
+        "bin"
+    ],
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "dependencies": {
+        "@tilework/mosaic-dev-utils": "0.0.1"
+    },
+    "license": "OSL-3.0",
+    "publishConfig": {
+        "access": "public"
+    }
+}

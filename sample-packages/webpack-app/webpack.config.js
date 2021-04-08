@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ConfigInjectors = require('@plugjs/config-injectors');
+const ConfigInjectors = require('@tilework/mosaic-config-injectors');
 
 const config = ConfigInjectors.injectWebpackConfig({
     entry: './src/index.js',

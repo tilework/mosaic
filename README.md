@@ -1,4 +1,4 @@
-# ⚡️ Plug.js
+# 🀄️ Mosaic
 
 [comment]: # (TODO replace the link below)
 
@@ -8,7 +8,7 @@ Find out more in the [official documentation](https://app.gitbook.com/@plugjs/s/
 
 #### 🥷🏼 Make your application extensible
 
-By using PlugJS plugins, you may make any part of your project extensible and modifiable either from within the application itself or from installed PlugJS modules.
+By using Mosaic plugins, you may make any part of your project extensible and modifiable either from within the application itself or from installed Mosaic modules.
 
 #### ✨ Use granular micro-frontend architecture
 
@@ -22,7 +22,7 @@ Build your project by overriding an existing project's functionality! Have infin
 
 No manual configuration tinkering required, we got you covered 🤝
 
-There are several ways on how to get PlugJS in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned 😎
+There are several ways on how to get Mosaic in your application - we support Next.js, create-react-app, and simple Webpack installation. Some other technologies are coming soon, stay tuned 😎
 
 ## What
 
