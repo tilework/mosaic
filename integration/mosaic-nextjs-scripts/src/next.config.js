@@ -66,7 +66,7 @@ module.exports = () => {
 
             // config.watchOptions.ignored = ignored;
 
-            // TODO: add smarted watch options
+            // TODO: add smarter watch options
             // console.log(config);
 
             return config;

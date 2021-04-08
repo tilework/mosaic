@@ -9,7 +9,6 @@ const fs = require('fs');
 const glob = require('glob');
 
 const getDefinedPages = async (rootDir) => {
-    // TODO: use Fallback plugin here!!!
     const themePaths = getParentThemePaths(rootDir);
     const extensionsPaths = extensions.map(({ packagePath }) => packagePath);
 

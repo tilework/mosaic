@@ -1,5 +1,3 @@
-/* eslint-disable no-continue */
-
 const spawn = require('cross-spawn');
 const path = require('path');
 const kill = require('tree-kill');
@@ -11,7 +9,6 @@ const getDirFromArgs = require('./args/get-dir-from-args');
 
 
 module.exports = async (script, restArgs) => {
-    // TODO: use this dir to resolve pages
     const { dir, args } = getDirFromArgs(restArgs);
     const isProd = script === 'build';
 

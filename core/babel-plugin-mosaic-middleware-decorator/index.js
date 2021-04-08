@@ -1,7 +1,3 @@
-/* eslint-disable */
-// TODO: comment
-// TODO: add examples of transformations
-
 const path = require('path');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
