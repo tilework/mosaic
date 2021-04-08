@@ -3,6 +3,7 @@ const provideGlobals = require('./provide-globals');
 const supportLegacy = require('./support-legacy');
 const enforceIncludeExtensions = require('./enforce-include-extensions');
 const resolveFileExtensions = require('./resolve-file-extensions');
+const injectWebpackFallbackPlugin = require('./inject-fallback-plugin');
 
 /** @type {import('@plugjs/config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
@@ -24,6 +25,7 @@ const injectWebpackConfigObject = (
     injectLoader(webpackConfig, entryMatcher);
     enforceIncludeExtensions(webpackConfig);
     resolveFileExtensions(webpackConfig);
+    injectWebpackFallbackPlugin(webpackConfig);
 
     if (isProvideGlobals) {
         provideGlobals(webpackConfig, webpack);

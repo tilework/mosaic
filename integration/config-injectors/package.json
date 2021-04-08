@@ -9,6 +9,7 @@
     "@babel/plugin-transform-arrow-functions": "7.13.0",
     "@babel/plugin-transform-async-to-generator": "7.13.0",
     "@plugjs/babel-plugin-middleware-decorator": "0.0.1",
+    "@plugjs/webpack-fallback-plugin": "0.0.1",
     "@plugjs/craco": "0.0.1",
     "@plugjs/dev-utils": "0.0.1",
     "@plugjs/webpack-plugjs-import-loader": "0.0.1",

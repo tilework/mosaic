@@ -17,9 +17,6 @@ const {
 
 const { cracoPlugins } = require('./lib/build-plugins');
 
-// we still need Sources for aliases, etc
-const { sources } = require('@plugjs/dev-utils/sources');
-
 const isDev = process.env.NODE_ENV === 'development';
 
 const getESLintConfig = () => {
@@ -84,9 +81,6 @@ module.exports = () => {
                 webpackConfig.resolve.plugins = webpackConfig.resolve.plugins.filter(
                     (plugin) => plugin.constructor.name !== ModuleScopePlugin.name
                 );
-
-                // Add FallbackPlugin
-                webpackConfig.resolve.plugins.push(new FallbackPlugin({ sources }));
 
                 // Allow importing .style, .ts and .tsx files without specifying the extension
                 webpackConfig.resolve.extensions.push(...['.scss', '.ts', '.tsx']);

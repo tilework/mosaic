@@ -17,6 +17,10 @@ const escapeRegex = require('@plugjs/dev-utils/escape-regex');
  * @returns {Sources} sources appended with helper methods
  */
 const prepareSources = (sources) => {
+    if (sources.isPrepared) {
+        return sources;
+    }
+
     Object.defineProperties(sources, {
         firstEntry: {
             enumerable: false,
@@ -44,6 +48,10 @@ const prepareSources = (sources) => {
                 escapeRegex(path.join(sources[source], 'src')),
                 escapeRegex(path.join(sources[source], 'public'))
             ].join('|'))
+        },
+        isPrepared: {
+            enumerable: false,
+            value: true
         }
     });
 
