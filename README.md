@@ -2,7 +2,7 @@
 
 [comment]: # (TODO replace the link below)
 
-Find out more in the [official documentation](https://app.gitbook.com/@plugjs/s/plugjs/)!
+Find out more in the [official documentation](https://scandipwa.gitbook.io/mosaic/)!
 
 ## Why
 
