@@ -1,3 +1,3 @@
-const ExtUtils = require('@tilework/mosaic').default;
+const Mosaic = require('@tilework/mosaic').default;
 
-global.ExtUtils = ExtUtils;
+global.Mosaic = Mosaic;

@@ -154,7 +154,7 @@ module.exports = (options) => {
                 path.replaceWith(
                     types.callExpression(
                         types.memberExpression(
-                            types.identifier('ExtUtils'),
+                            types.identifier('Mosaic'),
                             types.identifier('middleware')
                         ),
                         [path.node, types.stringLiteral(namespace)]
@@ -180,7 +180,7 @@ module.exports = (options) => {
                 init.replaceWith(
                     types.callExpression(
                         types.memberExpression(
-                            types.identifier('ExtUtils'),
+                            types.identifier('Mosaic'),
                             types.identifier('middleware')
                         ),
                         [init.node, types.stringLiteral(namespace)]
@@ -210,7 +210,7 @@ module.exports = (options) => {
 
                 const middlewaredFunctionExpression = types.callExpression(
                     types.memberExpression(
-                        types.identifier('ExtUtils'),
+                        types.identifier('Mosaic'),
                         types.identifier('middleware')
                     ),
                     [functionExpression, types.stringLiteral(namespace)]
@@ -249,10 +249,10 @@ module.exports = (options) => {
                 const superTypeParameters = path.get('superTypeParameters');
                 const typeParameters = path.get('typeParameters');
 
-                // ExtUtils.Extensible(SuperClass || undefined)
+                // Mosaic.Extensible(SuperClass || undefined)
                 const superExpression = types.callExpression(
                     types.memberExpression(
-                        types.identifier('ExtUtils'),
+                        types.identifier('Mosaic'),
                         types.Identifier('Extensible')
                     ),
                     [(superClass && superClass.node) || types.Identifier('')]
@@ -293,10 +293,10 @@ module.exports = (options) => {
                 classExpression.typeParameters = typeParameters.node;
 
                 // Generate the final middleware expression
-                // ExtUtils.middleware(class SomeClass {}, 'namespace')
+                // Mosaic.middleware(class SomeClass {}, 'namespace')
                 const wrappedInMiddeware = types.callExpression(
                     types.memberExpression(
-                        types.identifier('ExtUtils'),
+                        types.identifier('Mosaic'),
                         types.identifier('middleware')
                     ),
                     [
@@ -305,7 +305,7 @@ module.exports = (options) => {
                     ]
                 );
 
-                // SomeClass = ExtUtils...<generated above thing>
+                // SomeClass = Mosaic...<generated above thing>
                 const declarator = types.variableDeclarator(
                     types.identifier(name),
                     wrappedInMiddeware

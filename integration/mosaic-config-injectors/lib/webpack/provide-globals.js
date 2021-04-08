@@ -1,14 +1,14 @@
 const logger = require('@tilework/mosaic-dev-utils/logger');
 
-const extUtilsDefinition = {
-    ExtUtils: [
-        '@tilework/mosaic/ExtUtils',
+const additionalProvideDefinitions = {
+    Mosaic: [
+        '@tilework/mosaic/index.js',
         'default'
     ]
 };
 
 /**
- * Provide ExtUtils globally
+ * Provide Mosaic globally
  *
  * @param {object} webpackConfig
  * @param {object} webpack
@@ -34,7 +34,7 @@ const provideGlobals = (webpackConfig, webpack) => {
 
     // Handle plugin already defined
     if (providePlugin) {
-        Object.assign(providePlugin.definitions, extUtilsDefinition);
+        Object.assign(providePlugin.definitions, additionalProvideDefinitions);
 
     // Handle not defined -> define
     } else {
@@ -48,7 +48,7 @@ const provideGlobals = (webpackConfig, webpack) => {
         }
 
         webpackConfig.plugins.push(
-            new webpack.ProvidePlugin(extUtilsDefinition)
+            new webpack.ProvidePlugin(additionalProvideDefinitions)
         );
     }
 

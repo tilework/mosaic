@@ -7,7 +7,7 @@ declare module '@tilework/mosaic-config-injectors' {
         supportLegacy: boolean,
     
         // They may be several entry points for plugins
-        // These files will be injected with ExtUtils.setPlugins
+        // These files will be injected with Mosaic.setPlugins
         entryMatcher: string | ((filepath: string) => boolean) | RegExp,
     
         // Instance of webpack that the application uses

@@ -12,7 +12,7 @@ import addNamespaceToMiddlewarable from './lib/namespace/add-namespace-to-middle
 import getNamespacesFromMiddlewarable from './lib/namespace/get-namespaces-from-middlewarable';
 import pluginStorage from './lib/plugins/plugin-storage';
 
-class ExtUtils {
+class Mosaic {
     constructor() {
         // Cache to optimise class generation
         this.generated = [];
@@ -99,4 +99,4 @@ class ExtUtils {
     }
 }
 
-export default new ExtUtils();
+export default new Mosaic();
