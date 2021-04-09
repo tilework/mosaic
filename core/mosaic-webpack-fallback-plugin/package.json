@@ -13,5 +13,6 @@
     },
     "dependencies": {
         "@tilework/mosaic-dev-utils": "0.0.1"
-    }
+    },
+    "gitHead": "db123e1eb8de1fc6e1528171d85a081fc48c4eb7"
 }

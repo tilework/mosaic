@@ -17,5 +17,6 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "deepmerge": "^4.2.2",
     "globby": "^11.0.2"
-  }
+  },
+  "gitHead": "db123e1eb8de1fc6e1528171d85a081fc48c4eb7"
 }
