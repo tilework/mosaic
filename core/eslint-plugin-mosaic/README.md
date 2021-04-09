@@ -25,7 +25,7 @@ Add `@tilework/eslint-plugin-mosaic` to the plugins section of your `.eslintrc` 
 ```json
 {
     "plugins": [
-        "@mosaic"
+        "@tilework/mosaic"
     ]
 }
 ```
@@ -36,16 +36,8 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "@tilework/mosaic-rule-name": 2
+        "@tilework/mosaic/rule-name": 2
     }
 }
 ```
-
-## Supported Rules
-
-* Fill in provided rules here
-
-
-
-
 
