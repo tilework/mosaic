@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic",
     "description": "Core mosaic plugin system package",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "license": "MIT",
     "publishConfig": {
         "access": "public"

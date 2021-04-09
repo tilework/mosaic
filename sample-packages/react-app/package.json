@@ -1,18 +1,18 @@
 {
   "name": "react-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@tilework/mosaic": "0.0.1",
+    "@tilework/mosaic-cra-scripts": "0.0.1",
+    "child-extension": "file:packages/child-extension",
+    "parent-ts-react-app": "file:../parent-ts-react-app",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "@tilework/mosaic-cra-scripts": "0.0.1",
-    "@tilework/mosaic": "0.0.1",
-    "web-vitals": "^1.0.1",
-    "parent-ts-react-app": "file:../parent-ts-react-app",
-    "child-extension": "file:packages/child-extension"
+    "web-vitals": "^1.0.1"
   },
   "mosaic": {
     "type": "theme",
