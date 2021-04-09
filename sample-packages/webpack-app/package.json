@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "private": "true",
+  "private": true,
   "author": "",
   "license": "MIT",
   "scripts": {
