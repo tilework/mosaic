@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-node-scripts",
     "description": "Node helper scripts for Mosaic.",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "bin": {
         "node-scripts": "./bin/node-scripts.js"
     },
