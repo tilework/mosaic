@@ -27,7 +27,8 @@ const processBabelRule = (rule, webpackConfig) => {
     }
 
     // Ensure all the extensions are included into the transpilation
-    const includeMatchers = includePaths.map((one) => new RegExp(one));
+    // Remember to exclude their node_modules
+    const includeMatchers = includePaths.map((one) => new RegExp(`${one}(?![/]node_modules)`));
     if (!rule.include) {
         rule.include = [...includeMatchers];
 
