@@ -1,7 +1,7 @@
 {
     "name": "@tilework/eslint-config-mosaic",
     "description": "Shareable ESLint configuration used by Mosaic.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "license": "MIT",
     "publishConfig": {
@@ -11,7 +11,7 @@
         "eslint": ">= 3"
     },
     "dependencies": {
-        "@tilework/eslint-plugin-mosaic": "0.0.1"
+        "@tilework/eslint-plugin-mosaic": "0.0.2"
     },
     "gitHead": "db123e1eb8de1fc6e1528171d85a081fc48c4eb7"
 }

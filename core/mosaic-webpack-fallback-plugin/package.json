@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-webpack-fallback-plugin",
     "description": "Webpack fallback plugin used by CSA.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "types": "index.d.ts",
     "license": "MIT",
@@ -12,7 +12,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@tilework/mosaic-dev-utils": "0.0.1"
+        "@tilework/mosaic-dev-utils": "0.0.2"
     },
     "gitHead": "db123e1eb8de1fc6e1528171d85a081fc48c4eb7"
 }
