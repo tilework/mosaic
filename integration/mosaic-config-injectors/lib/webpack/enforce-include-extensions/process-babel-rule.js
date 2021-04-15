@@ -1,5 +1,5 @@
 const path = require('path');
-const { getConditionAppliesToFile, getRuleAppliesToFile } = require('../util/rule-set');
+const { getConditionAppliesToFile } = require('../util/rule-set');
 const getContextFromConfig = require('./get-context-from-config');
 const includePaths = require('../../common/include-paths');
 
