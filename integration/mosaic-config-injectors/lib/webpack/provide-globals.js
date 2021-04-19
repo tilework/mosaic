@@ -1,10 +1,7 @@
 const logger = require('@tilework/mosaic-dev-utils/logger');
 
 const additionalProvideDefinitions = {
-    Mosaic: [
-        '@tilework/mosaic/index.js',
-        'default'
-    ]
+    Mosaic: ['@tilework/mosaic/dist/mosaic.js']
 };
 
 /**
