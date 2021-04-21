@@ -1,0 +1,36 @@
+{
+  "name": "storybook-next-app",
+  "version": "0.1.2",
+  "private": true,
+  "scripts": {
+    "dev": "nextjs-scripts dev",
+    "build": "nextjs-scripts build",
+    "start": "nextjs-scripts start",
+    "test": "nextjs-scripts test",
+    "link": "nextjs-scripts link",
+    "sb": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "mosaic": {
+    "extensions": {
+      "@tilework/mosaic-sample-page": true
+    },
+    "sourceDirectories!": [
+      "./.storybook"
+    ]
+  },
+  "dependencies": {
+    "@tilework/mosaic-nextjs-scripts": "0.0.2",
+    "@tilework/mosaic-sample-page": "file:packages/sample-page",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/react": "^6.2.8",
+    "babel-loader": "^8.2.2"
+  }
+}
