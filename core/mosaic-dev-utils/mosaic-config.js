@@ -1,4 +1,4 @@
-const { getPackageJson } = require('./package-json')
+const { getPackageJson } = require('./package-json');
 
 /**
  * Get mosaic config from package.json file
@@ -13,12 +13,14 @@ const getMosaicConfig = (pathname, context = process.cwd()) => {
 
     if (packageJson.mosaic) {
         return packageJson.mosaic;
-    } else if (packageJson.scandipwa) { // fallback to legacy field
+    }
+    
+    if (packageJson.scandipwa) { // fallback to legacy field
         return packageJson.scandipwa;
     }
 
     return {};
-}
+};
 
 module.exports = {
     getMosaicConfig
