@@ -38,26 +38,28 @@ const isParentExportDefaultDeclaration = (path) => {
     const { parent: { type } } = path;
 
     return type === 'ExportDefaultDeclaration';
-}
+};
 
 const isParentExportNamedDeclaration = (path) => {
     const { parent: { type } } = path;
 
     return type === 'ExportNamedDeclaration';
-}
+};
 
 /**
  * Gets leading comments directly from the path.node
  * Or from the parent, if path.parent is exdf or named exp.
  */
 const getLeadingCommentsPath = (path) => {
-    if (path.node.leadingComments) return path;
+    if (path.node.leadingComments) {
+        return path;
+    }
     if (isParentExportNamedDeclaration(path) || isParentExportDefaultDeclaration(path)) {
         return path.parentPath;
     }
 
     return path;
-}
+};
 
 const getLeadingComments = (path) => {
     const { node: { leadingComments } } = getLeadingCommentsPath(path);
@@ -85,9 +87,9 @@ const removeNamespaceFromPath = (path, namespace) => {
         comment.value = comment.value.replace(
             new RegExp(`@namespace +${namespace}`), 
             `#namespace ${namespace}`
-        )
+        );
     });
-}
+};
 
 /**
  * If a constructor exists for the class {path}
@@ -270,9 +272,9 @@ module.exports = (options) => {
                 const superExpression = types.callExpression(
                     types.memberExpression(
                         types.identifier('Mosaic'),
-                        types.Identifier('Extensible')
+                        types.identifier('Extensible')
                     ),
-                    [(superClass && superClass.node) || types.Identifier('')]
+                    [(superClass && superClass.node) || types.identifier('')]
                 );
 
                 // If the middlewarable class did not have a base class before

@@ -1,6 +1,6 @@
 const {
     getCraPaths,
-    overrideCraPathsConfig,
+    overrideCraPathsConfig
 } = require("../../cra");
 const { applyCraPathsConfigPlugins } = require('../plugins');
 

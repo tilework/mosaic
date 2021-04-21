@@ -18,14 +18,14 @@ const args = getArgs();
 if (args.config.isProvided) {
     configFilePath = path.resolve(projectRoot, args.config.value);
 } else {
-    const package = require(packageJsonPath);
+    const pkg = require(packageJsonPath);
 
-    if (package.cracoConfig) {
-        if (!isString(package.cracoConfig)) {
+    if (pkg.cracoConfig) {
+        if (!isString(pkg.cracoConfig)) {
             throw new Error("craco: 'cracoConfig' value must be a string.");
         }
 
-        configFilePath = path.resolve(projectRoot, package.cracoConfig);
+        configFilePath = path.resolve(projectRoot, pkg.cracoConfig);
     } else {
         for (const filename of configFilenames) {
             const filePath = path.join(projectRoot, filename);

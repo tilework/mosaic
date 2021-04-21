@@ -10,7 +10,7 @@ const VARIABLE_DECLARATION = 'VariableDeclaration';
 const shouldGetExported = [
     CLASS_DECLARATION,
     FUNCTION_DECLARATION,
-    VARIABLE_DECLARATION,
+    VARIABLE_DECLARATION
 ];
 
 const shouldBeExported = (node) => {
@@ -36,9 +36,9 @@ module.exports = {
                 'This should be done in order for everything to be properly overridable by FallbackPlugin'
             ].join('\n'),
             category: 'Coding standard',
-            recommended: false,
+            recommended: false
         },
-        fixable: 'code',
+        fixable: 'code'
     },
 
     create: (context) => ({
@@ -54,10 +54,10 @@ module.exports = {
                             message: `${getName(
                                 exportable
                             )} must be exported (as non default) to allow proper extension`,
-                            fix: (fixer) => fixer.insertTextBefore(exportable, 'export '),
+                            fix: (fixer) => fixer.insertTextBefore(exportable, 'export ')
                         });
                     }
                 });
-        },
-    }),
+        }
+    })
 };

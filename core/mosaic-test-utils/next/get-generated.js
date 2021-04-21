@@ -12,7 +12,7 @@ const getPageFileByName = (name) => {
     }
 
     return false;
-}
+};
 
 /**
  * Returns object { Page, getServerSideProps } of the specified namespace
@@ -47,6 +47,6 @@ const getGenerated = (namespace) => {
     }
 
     return searchResult;
-}
+};
 
 module.exports = getGenerated;

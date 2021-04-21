@@ -1,3 +1,5 @@
+// This is stock CRACO, let it be
+// eslint-disable-next-line import/no-extraneous-dependencies
 const babelJest = require("babel-jest");
 
 const { isArray } = require("../../utils");

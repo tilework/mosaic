@@ -15,6 +15,6 @@ const addAliases = (babelConfig) => {
     ]);
 
     return babelConfig;
-}
+};
 
 module.exports = addAliases;

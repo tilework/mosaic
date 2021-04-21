@@ -14,38 +14,38 @@ const hasFilesOfType = (type, rootOnly = false) => (
     rootOnly 
         ? includePaths.filter(path.isAbsolute) 
         : [process.cwd()]
-    ).some((includePath) => {
-        const getMain = () => {
-            const { main } = getPackageJson(includePath);
-            if (main) {
-                const mainPath = path.resolve(includePath, main);
+).some((includePath) => {
+    const getMain = () => {
+        const { main } = getPackageJson(includePath);
+        if (main) {
+            const mainPath = path.resolve(includePath, main);
 
-                // Handle main being file
-                if (!fs.lstatSync(mainPath).isDirectory()) {
-                    return path.dirname(mainPath);
-                }
-
-                // Main is directory -> use it
-                return mainPath;
+            // Handle main being file
+            if (!fs.lstatSync(mainPath).isDirectory()) {
+                return path.dirname(mainPath);
             }
 
-            return includePath;
+            // Main is directory -> use it
+            return mainPath;
         }
 
-        const scannable = getMain();
+        return includePath;
+    };
 
-        const foundTypescriptFiles = globby.sync(
-            [
-                `**/*.(${type}|${type}x)`, 
-                // TODO verify that this works with linked packages
-                '!**/node_modules', 
-                '!**/*.d.ts'
-            ],
-            { cwd: scannable }
-        );
+    const scannable = getMain();
 
-        return foundTypescriptFiles.length;
-    });
+    const foundTypescriptFiles = globby.sync(
+        [
+            `**/*.(${type}|${type}x)`, 
+            // TODO verify that this works with linked packages
+            '!**/node_modules', 
+            '!**/*.d.ts'
+        ],
+        { cwd: scannable }
+    );
+
+    return foundTypescriptFiles.length;
+});
 
 // Faultproof
 const readJson = (jsonPath) => {
@@ -81,7 +81,7 @@ const generatePreferenceAliases = () => {
     }, {});
 
     return preferenceAliases;
-}
+};
 
 const generateParentThemeAliases = () => {
     /**
@@ -113,7 +113,7 @@ const generateParentThemeAliases = () => {
     );
 
     return parentThemeAliases;
-}
+};
 
 const generateJsConfig = (parentThemeAliases, preferenceAliases) => ({
     compilerOptions: {
@@ -135,7 +135,7 @@ const getExistingConfigPath = () => {
     );  
 
     return existingConfigPath;
-}
+};
 
 const extendConfig = (configPath, additionalConfig) => {
     const config = readJson(configPath);
@@ -147,7 +147,7 @@ const extendConfig = (configPath, additionalConfig) => {
 
     // Generate and save new extends config
     const resultingExtendsConfig = deepmerge(extendsConfig, additionalConfig, {
-        arrayMerge: (target, source, options) => {
+        arrayMerge: (target, source) => {
             const destination = target.slice();
 
             for (const item of source) {
@@ -172,7 +172,7 @@ const extendConfig = (configPath, additionalConfig) => {
     // Ensure correct "extends" path in the base config
     config.extends = extendsRelative;
     writeJson(configPath, config);
-}
+};
 
 const ensureTypescriptFile = () => {
     if (hasFilesOfType('ts', true)) {
@@ -184,7 +184,7 @@ const ensureTypescriptFile = () => {
     fs.writeFileSync(filepath, '');
 
     return filename;
-}
+};
 
 const createFromScratch = (generatedJsConfig) => {
     const isTs = hasFilesOfType('ts');
@@ -203,7 +203,7 @@ const createFromScratch = (generatedJsConfig) => {
 
     writeJson(configPath, initialConfig);
     extendConfig(configPath, generatedJsConfig);
-}
+};
 
 const createJsConfig = () => {
     const parentThemeAliases = generateParentThemeAliases();
@@ -216,6 +216,6 @@ const createJsConfig = () => {
     } else {
         extendConfig(existingConfigPath, generatedJsConfig);
     }
-}
+};
 
 module.exports = createJsConfig;

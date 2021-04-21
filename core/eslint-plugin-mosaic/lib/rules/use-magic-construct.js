@@ -7,17 +7,17 @@ const getLeadingCommentsForNode = require('../util/get-leading-comments');
 'use strict';
 
 const hasNamespace = (node, context) => {
-	const nodeToProcess = node.parent.type === 'ExportNamedDeclaration'
-		? node.parent
-		: node;
+    const nodeToProcess = node.parent.type === 'ExportNamedDeclaration'
+        ? node.parent
+        : node;
 
     const leadingComments = getLeadingCommentsForNode(nodeToProcess, context.getSourceCode());
 
     const namespaceComment = leadingComments.find(
-		({ value }) => value.match(/@namespace/)
-	);
+        ({ value }) => value.match(/@namespace/)
+    );
 
-	return !!namespaceComment;
+    return !!namespaceComment;
 };
 
 module.exports = {
@@ -26,9 +26,9 @@ module.exports = {
             description:
                 'Use `__construct(...)` magic method instead of JS default `constructor(...)`',
             category: 'Coding standard',
-            recommended: true,
+            recommended: true
         },
-        fixable: 'code',
+        fixable: 'code'
     },
 
     create: (context) => ({
@@ -44,16 +44,16 @@ module.exports = {
                                     && node.expression
                                     && node.expression.type === 'CallExpression'
                                     && node.expression.callee
-                                    && node.expression.callee.type === 'Super'
+                                    && node.expression.callee.type === 'Super';
                             }
                         );
 
-                        const fixes = [fixer.replaceText(node.key, '__construct')]
+                        const fixes = [fixer.replaceText(node.key, '__construct')];
                         if (superNode) {
-							fixes.push(fixer.replaceText(superNode, `super.__construct(${
-								superNode.expression.arguments.map(arg => arg.name).join(', ')
-							});`))
-						}
+                            fixes.push(fixer.replaceText(superNode, `super.__construct(${
+                                superNode.expression.arguments.map(arg => arg.name).join(', ')
+                            });`));
+                        }
 
                         return fixes;
                     }
@@ -64,9 +64,9 @@ module.exports = {
             if (node.key.name === '__construct') {
                 context.report({
                     node,
-                    message: 'Binding __construct is prohibited!',
+                    message: 'Binding __construct is prohibited!'
                 });
             }
-        },
-    }),
+        }
+    })
 };

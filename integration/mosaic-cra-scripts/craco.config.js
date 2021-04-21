@@ -26,11 +26,11 @@ const getESLintConfig = () => {
             mode: ESLINT_MODES.extends,
             // Ensure we are extending the mosaic-eslint config
             configure: usersESLintConfig
-        }
+        };
     }
     
     return null;
-}
+};
 
 module.exports = () => {
     const appIndex = FallbackPlugin.getFallbackPathname(

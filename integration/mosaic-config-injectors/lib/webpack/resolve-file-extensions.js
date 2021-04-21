@@ -11,7 +11,7 @@ const resolveFileExtensions = (webpackConfig) => {
         (ext) => !webpackConfig.resolve.extensions.includes(ext)
     );
 
-    webpackConfig.resolve.extensions.push(...additionalExtensions)
+    webpackConfig.resolve.extensions.push(...additionalExtensions);
 
     return webpackConfig;
 };

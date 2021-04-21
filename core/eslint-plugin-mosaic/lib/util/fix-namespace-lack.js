@@ -40,4 +40,4 @@ module.exports = (fixer, node, context, namespace) => {
             context.getSourceCode().text[node.start - 1] === '(' ? '\n' : ''
         }/** @namespace ${namespace} */\n`
     );
-}
+};

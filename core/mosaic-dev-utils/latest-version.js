@@ -1,12 +1,14 @@
 const https = require('https');
 const spawn = require('cross-spawn');
 
+const SUCCESS = 200;
+
 const getLatestVersionFromRegistry = (packageName) => new Promise((resolve, reject) => {
     https
         .get(
             `https://registry.npmjs.org/-/package/${packageName}/dist-tags`,
             (res) => {
-                if (res.statusCode === 200) {
+                if (res.statusCode === SUCCESS) {
                     let body = '';
                     res.on('data', (data) => {
                         body += data;

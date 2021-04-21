@@ -53,7 +53,7 @@ const jestConflictingArg = (key, hasValue = false) => ({
 
 // prettier-ignore
 const jestConflictingArgs = [
-    jestConflictingArg(CONFIG_ARG, true),
+    jestConflictingArg(CONFIG_ARG, true)
 ];
 
 function removeJestConflictingCustomCliArgs() {

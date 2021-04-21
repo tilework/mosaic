@@ -1,4 +1,4 @@
-const { getParentThemeSources } = require('@tilework/mosaic-dev-utils/parent-theme');
+const { getParentThemeSources } = require('./parent-theme');
 
 const PROJECT = 'project';
 

@@ -12,7 +12,7 @@ const packageJsons = [
             packageName: packageJson.name,
             packagePath: theme,
             packageJson: packageJson
-        }
+        };
     }),
     ...extensions
 ];

@@ -12,10 +12,10 @@ const resolveStringEntry = (entry, context) => {
     }
     
     return path.resolve(context, entry);
-}
+};
 
 const resolveObjectEntry = (entryObject, context) => {
-    return Object.entries(entryObject).map(([entryName, entry]) => {
+    return Object.entries(entryObject).map(([_entryName, entry]) => {
         if (typeof(entry) === 'string') {
             return resolveStringEntry(entry, context);
         }
@@ -28,7 +28,7 @@ const resolveObjectEntry = (entryObject, context) => {
 
         throw new UnableToResolveEntryException();
     }, []);
-}
+};
 
 const getEntryTest = (webpackConfig, entryMatcher) => {
     if (entryMatcher) {
@@ -50,7 +50,7 @@ const getEntryTest = (webpackConfig, entryMatcher) => {
     }
 
     return entry;
-}
+};
 
 // Inject the actual extensions' imports
 const addImportInjectorLoader = (webpackConfig, entryMatcher) => {

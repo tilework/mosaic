@@ -48,7 +48,7 @@ function getConditionAppliesToFile(condition, filepath) {
     }
 
     return false;
-};
+}
 
 function getRuleAppliesToFile(rule, filepath, context = process.cwd()) {
     const {
@@ -70,4 +70,4 @@ function getRuleAppliesToFile(rule, filepath, context = process.cwd()) {
 module.exports = {
     getRuleAppliesToFile,
     getConditionAppliesToFile
-}
+};

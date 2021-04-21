@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module '@tilework/mosaic-config-injectors' {
     export interface WebpackInjectorConfig {
         // Inject definitions into ProvidePlugin
@@ -14,6 +15,6 @@ declare module '@tilework/mosaic-config-injectors' {
         webpack: any
     }
 
-    export function injectBabelConfig(babelConfig: object): object;
-    export function injectWebpackConfig(webpackConfig: object, options: WebpackInjectorConfig): object;
+    export function injectBabelConfig(babelConfig: any): any;
+    export function injectWebpackConfig(webpackConfig: any, options: WebpackInjectorConfig): any;
 }
