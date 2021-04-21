@@ -20,12 +20,16 @@ const getAllExtensions = (modulePath) => {
 
     visitedDeps.push(modulePath);
 
-    const {
-        dependencies = {},
-        mosaic: {
-            extensions = {}
-        } = {}
-    } = getPackageJson(modulePath);
+    const packageJson = getPackageJson(modulePath);
+    const { dependencies = {} } = packageJson;
+
+    let extensions = {};
+
+    if (packageJson.mosaic) {
+        extensions = packageJson.mosaic.extensions || {}
+    } else if (packageJson.scandipwa) { // fallback to legacy field
+        extensions = packageJson.scandipwa.extensions || {}
+    }
 
     return Object.keys(dependencies).reduce(
         (acc, dependency) => acc.concat(getAllExtensions(dependency)),

@@ -18,11 +18,14 @@ const packageJsons = [
 ];
 
 const mainPackageJson = getPackageJson(process.cwd());
-const { 
-    mosaic: { 
-        tests: testablePackages = {} 
-    } = {} 
-} = mainPackageJson;
+
+let testablePackages = {};
+
+if (mainPackageJson.mosaic) {
+    testablePackages = mainPackageJson.mosaic.tests
+} else if (mainPackageJson.scandipwa) { // fallback to legacy field
+    testablePackages = mainPackageJson.scandipwa.test
+}
 
 const testablePackagePaths = packageJsons
     .filter(({ packageName }) => testablePackages[packageName])

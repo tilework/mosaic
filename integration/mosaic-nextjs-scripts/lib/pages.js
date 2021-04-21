@@ -28,7 +28,14 @@ const getDefinedPages = async (rootDir) => {
     ].reduce(
         // we only allow pages inside of the src folder!
         (acc, pathname) => {
-            const { mosaic: { nextPages = {} } = {} } = getPackageJson(pathname);
+            const packageJson = getPackageJson(pathname);
+            let nextPages = {};
+
+            if (packageJson.mosaic) {
+                nextPages = packageJson.mosaic.nextPages || {};
+            } else if (packageJson.scandipwa) { // fallback to legacy field
+                nextPages = packageJson.scandipwa.nextPages || {};
+            }
 
             // eslint-disable-next-line fp/no-let
             for (let i = 0; i < Object.entries(nextPages).length; i++) {
