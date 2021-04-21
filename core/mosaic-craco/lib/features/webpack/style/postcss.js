@@ -11,7 +11,11 @@ const POSTCSS_MODES = {
 const CRA_PLUGINS = presetEnv => {
     // prettier-ignore
     return [
+        // this is stock CRACO, let this be
+
+        // eslint-disable-next-line import/no-extraneous-dependencies
         require("postcss-flexbugs-fixes"),
+        // eslint-disable-next-line import/no-extraneous-dependencies
         require("postcss-preset-env")(presetEnv),
         require(require.resolve("postcss-normalize", { paths: [projectRoot] }))
     ];
@@ -44,6 +48,7 @@ function extendsPostcss(match, { plugins, env }) {
 
         if (env) {
             const mergedPreset = deepMergeWithArray({}, CRA_PRESET_ENV, env);
+            // eslint-disable-next-line new-cap
             postcssPlugins = CRA_PLUGINS(mergedPreset);
 
             log("Merged PostCSS env preset.");

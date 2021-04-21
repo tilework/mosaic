@@ -7,6 +7,6 @@ module.exports = {
         '@tilework/mosaic-use-magic-construct': 'error',
 
         // Force @namespace comments in the code
-        '@tilework/mosaic-use-namespace': 'error',
+        '@tilework/mosaic-use-namespace': 'error'
     }
 };

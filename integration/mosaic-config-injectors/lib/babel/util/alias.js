@@ -16,7 +16,7 @@ const aliasPostfixMap = {
     Type: `.${path.sep}${path.join('src', 'type')}`,
 
     // Default alias
-    ['']: `.${path.sep}src`,
+    ['']: `.${path.sep}src`
 };
 
 const sourcePrefixMap = {

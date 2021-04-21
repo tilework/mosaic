@@ -58,21 +58,21 @@ const resolve = require('resolve');
 function resolveJestDefaultEnvironment(name) {
     const jestDir = path.dirname(
         resolve.sync('jest', {
-            basedir: __dirname,
+            basedir: __dirname
         })
     );
     const jestCLIDir = path.dirname(
         resolve.sync('jest-cli', {
-            basedir: jestDir,
+            basedir: jestDir
         })
     );
     const jestConfigDir = path.dirname(
         resolve.sync('jest-config', {
-            basedir: jestCLIDir,
+            basedir: jestCLIDir
         })
     );
     return resolve.sync(name, {
-        basedir: jestConfigDir,
+        basedir: jestConfigDir
     });
 }
 let cleanArgv = [];

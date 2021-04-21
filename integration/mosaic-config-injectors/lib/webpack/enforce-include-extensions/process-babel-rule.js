@@ -23,7 +23,7 @@ const processBabelRule = (rule, webpackConfig) => {
             }
             
             return getConditionAppliesToFile(initialMiddlewareDecoratorExclude, filepath);
-        }
+        };
     }
 
     // Ensure all the extensions are included into the transpilation
@@ -41,6 +41,6 @@ const processBabelRule = (rule, webpackConfig) => {
     } else {
         rule.include = [rule.include, ...includeMatchers];
     }
-}
+};
 
 module.exports = processBabelRule;

@@ -30,4 +30,4 @@ function createCraPathsConfig(callerCracoConfig, callerContext, options) {
 
 module.exports = {
     createCraPathsConfig
-}
+};

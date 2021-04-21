@@ -4,6 +4,8 @@ const shouldUseYarn = require('./should-use-yarn');
 const execCommandAsync = require('./exec-command');
 const { getPackageJson } = require('./package-json');
 
+const SLICEABLE = 'file:'.length;
+
 module.exports = async (cwd = process.cwd()) => {
     const { dependencies } = getPackageJson(cwd);
 
@@ -20,7 +22,7 @@ module.exports = async (cwd = process.cwd()) => {
         }
 
         // to get path from file:/path trim first 5 symbols
-        const packagePath = path.join(cwd, version.slice(5));
+        const packagePath = path.join(cwd, version.slice(SLICEABLE));
 
         // call async IIFE to get the promise
         const linkPromise = (async () => {

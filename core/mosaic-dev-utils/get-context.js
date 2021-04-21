@@ -5,6 +5,8 @@ const EXTENSION_TYPE = 'extension';
 const THEME_TYPE = 'theme';
 const MAGENTO_TYPE = 'magento';
 
+const MAX_DEPTH = 6;
+
 /**
  * Bubble up from the given directory to find a Mosaic module
  * The module's type should match the expected type(s)
@@ -14,7 +16,7 @@ const MAGENTO_TYPE = 'magento';
  * @param {number?} depth
  */
 const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
-    if (depth > 6) {
+    if (depth > MAX_DEPTH) {
         return {};
     }
 

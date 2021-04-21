@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-disabled-tests */
 process.env.NODE_ENV = process.env.NODE_ENV || "test";
 
 const { findArgsFromCli } = require("../lib/args");

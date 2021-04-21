@@ -4,8 +4,8 @@ module.exports = {
             description:
                 'Always provide both mapStateToProps and mapDispatchToProps even if they are empty for plugins',
             category: 'Extensibility',
-            recommended: true,
-        },
+            recommended: true
+        }
     },
 
     create: (context) => ({
@@ -27,8 +27,8 @@ module.exports = {
 
             context.report({
                 node,
-                message: 'Provide both mapStateToProps and mapDispatchToProps even if they are empty',
+                message: 'Provide both mapStateToProps and mapDispatchToProps even if they are empty'
             });
-        },
-    }),
+        }
+    })
 };

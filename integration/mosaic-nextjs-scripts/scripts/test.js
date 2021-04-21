@@ -25,7 +25,7 @@ const initEnv = () => {
     process.env.BABEL_ENV = 'test';
     process.env.NODE_ENV = 'test';
     process.env.PUBLIC_URL = '';
-}
+};
 
 const handleGhostPages = async () => {
     const { dir } = getDirFromArgs(process.argv);
@@ -33,13 +33,13 @@ const handleGhostPages = async () => {
     // Create pages from extensions and themes
     const pages = await getDefinedPages(dir);
     await createMockPages(pages, path.resolve(__dirname, '..', 'src'));
-}
+};
 
 const preventUnhandleRejections = () => {
     process.on('unhandledRejection', err => {
         throw err;
     });    
-}
+};
 
 const isInGitRepository = () => {
     try {
@@ -48,7 +48,7 @@ const isInGitRepository = () => {
     } catch (e) {
         return false;
     }
-}
+};
 
 const isInMercurialRepository = () => {
     try {
@@ -57,7 +57,7 @@ const isInMercurialRepository = () => {
     } catch (e) {
         return false;
     }
-}
+};
 
 const generateConfiguration = () => {
     const reactScriptsConfig = createJestConfig(
@@ -69,7 +69,7 @@ const generateConfiguration = () => {
     const finalConfig = middlewareJestConfig(reactScriptsConfig, ENV_TYPES.next);
 
     return JSON.stringify(finalConfig);
-}
+};
 
 // This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
 // We're trying to resolve the environment ourselves because Jest does it incorrectly.
@@ -77,21 +77,21 @@ const generateConfiguration = () => {
 function resolveJestDefaultEnvironment(name) {
     const jestDir = path.dirname(
         resolve.sync('jest', {
-            basedir: __dirname,
+            basedir: __dirname
         })
     );
     const jestCLIDir = path.dirname(
         resolve.sync('jest-cli', {
-            basedir: jestDir,
+            basedir: jestDir
         })
     );
     const jestConfigDir = path.dirname(
         resolve.sync('jest-config', {
-            basedir: jestCLIDir,
+            basedir: jestCLIDir
         })
     );
     return resolve.sync(name, {
-        basedir: jestConfigDir,
+        basedir: jestConfigDir
     });
 }
 
@@ -111,7 +111,7 @@ const getCleanArguments = (argv) => {
     } while (argv.length > 0);
 
     return cleanArgv;
-}
+};
 
 const getResolvedEnv = () => {
     let resolvedEnv;
@@ -129,7 +129,7 @@ const getResolvedEnv = () => {
     }
 
     return resolvedEnv || env;
-}
+};
 
 const compileArguments = () => {
     let argv = process.argv.slice(2);
@@ -150,7 +150,7 @@ const compileArguments = () => {
     argv.push('--env', getResolvedEnv());
 
     return argv;
-}
+};
 
 const runTests = async () => {
     initEnv();
@@ -160,6 +160,6 @@ const runTests = async () => {
     const argv = compileArguments();
 
     jest.run(argv);
-}
+};
 
 module.exports = runTests;

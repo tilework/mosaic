@@ -8,5 +8,5 @@ export default function getPluginsForClass(namespaces) {
     return (
         pluginStorage.plugins[outerNamespace] 
         && pluginStorage.plugins[outerNamespace].class
-    ) || []
+    ) || [];
 }

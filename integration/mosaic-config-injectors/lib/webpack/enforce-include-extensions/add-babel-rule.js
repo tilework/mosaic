@@ -6,9 +6,9 @@ const addBabelRule = (webpackConfig) => {
         use: {
             loader: require.resolve('babel-loader'),
             options: injectBabelConfig({})
-        },
+        }
         // TODO include
-    }
+    };
 
     if (!webpackConfig.module) {
         webpackConfig.module = {};
@@ -20,6 +20,6 @@ const addBabelRule = (webpackConfig) => {
 
     webpackConfig.module.rules.push(generatedBabelRule);
     return webpackConfig;
-}
+};
 
 module.exports = addBabelRule;

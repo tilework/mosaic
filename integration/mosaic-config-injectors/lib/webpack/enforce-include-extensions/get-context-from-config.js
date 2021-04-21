@@ -8,6 +8,6 @@ const getContextFromConfig = (webpackConfig, suppressException) => {
     }
 
     return context;
-}
+};
 
 module.exports = getContextFromConfig;

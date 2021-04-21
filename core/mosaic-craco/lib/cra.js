@@ -55,7 +55,6 @@ function getReactScriptVersion(cracoConfig) {
 /************  Paths  *******************/
 
 let _resolvedCraPaths = null;
-let _originAppSrcName = 'src';
 
 function getCraPathsFilePath(cracoConfig) {
     return resolveConfigFilePath(cracoConfig, "paths.js");
@@ -64,7 +63,6 @@ function getCraPathsFilePath(cracoConfig) {
 function getCraPaths(cracoConfig) {
     if (!_resolvedCraPaths) {
         _resolvedCraPaths = require(getCraPathsFilePath(cracoConfig));
-        _originAppSrcName = getAppSrcName(_resolvedCraPaths.appSrc);
     }
 
     return _resolvedCraPaths;

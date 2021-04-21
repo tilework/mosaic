@@ -19,7 +19,7 @@ const getDeclarationForNode = (declarableName, context) => {
                 (node.type === 'VariableDeclaration' && node.declarations[0].id.name === declarableName)
             ].filter(Boolean).length) {
                 if (node.parent.type === 'ExportNamedDeclaration') {
-                    returnNode = node.parent
+                    returnNode = node.parent;
                 } else {
                     returnNode = node;
                 }

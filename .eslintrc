@@ -1,0 +1,133 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "globals": {
+    "jest": true
+  },
+  "plugins": [
+    // "simple-import-sort",
+    "import",
+    "jest",
+    "babel",
+    "fp"
+  ],
+  "ignorePatterns": [
+    "**/node_modules/**/*", 
+    "**/build/**/*",  
+    "**/dist/**/*"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "rules": {
+        // Resolve problems with false-positive unused-vars
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars-experimental": "error",
+        // Disable "React" was used... issue see more in:https://stackoverflow.com/questions/63818415/react-was-used-before-it-was-defined
+        "@typescript-eslint/no-use-before-define": "off",
+        // Allow empty functions, i.e. in defaultProps
+        "@typescript-eslint/no-empty-function": "off"
+      }
+    }
+  ],
+  "rules": {
+    // disable import extension (.js, index.js)
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "error",
+    "sort-imports": "off",
+    "import/order": "off",
+    "import/no-cycle": [
+      "error",
+      {
+        "maxDepth": 4
+      }
+    ],
+    "no-var": "error",
+    "no-restricted-globals": ["error", "isFinite", "isNaN"],
+    // "max-len": [
+    //   2,
+    //   {
+    //     "ignoreComments": true,
+    //     "ignoreUrls": true,
+    //     "code": 120
+    //   }
+    // ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "curly": [2, "all"],
+    "brace-style": [
+      2,
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "babel/semi": 1,
+    "new-cap": [
+      "error",
+      {
+        "newIsCap": true
+      }
+    ],
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [1, 0, 2, -1]
+      }
+    ],
+    "indent": ["error", 4],
+    "comma-dangle": ["error", "never"],
+    // "padding-line-between-statements": [
+    //   "error",
+    //   {
+    //     "blankLine": "always",
+    //     "prev": ["const", "let", "var"],
+    //     "next": "*"
+    //   },
+    //   {
+    //     "blankLine": "any",
+    //     "prev": ["const", "let", "var"],
+    //     "next": ["const", "let", "var"]
+    //   },
+    //   {
+    //     "blankLine": "always",
+    //     "prev": [
+    //       "block",
+    //       "block-like",
+    //       "multiline-block-like",
+    //       "multiline-expression",
+    //       "multiline-const",
+    //       "multiline-let",
+    //       "multiline-var"
+    //     ],
+    //     "next": "return"
+    //   },
+    //   {
+    //     "blankLine": "any",
+    //     "prev": ["singleline-const", "singleline-let", "singleline-var"],
+    //     "next": "*"
+    //   }
+    // ],
+    // "lines-between-class-members": ["error", "always"],
+    "no-extra-semi": "error"
+  }
+}

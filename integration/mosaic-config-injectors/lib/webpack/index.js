@@ -36,7 +36,7 @@ const injectWebpackConfigObject = (
     }
 
     return webpackConfig;
-}
+};
 
 /**
  * Inject webpack configuration with necessary things for the e11y package
@@ -60,12 +60,12 @@ const injectWebpackConfig = (webpackConfig, providedOptions) => {
         throw new TypeError(
             'Array configurations are not supported! '+
             'You may apply this injector manually to each config item you consider necessary to inject.'
-        )
+        );
     }
 
     // Handle regular configs
     if (typeof webpackConfig === 'object') {
-        return injectWebpackConfigObject(webpackConfig, providedOptions)
+        return injectWebpackConfigObject(webpackConfig, providedOptions);
     } 
 
     throw new TypeError(`Unexpected type of webpack configuration: ${typeof webpackConfig}!`);
