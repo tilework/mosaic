@@ -1,17 +1,10 @@
 const path = require('path');
 const logger = require('./logger');
+const { getMosaicConfig } = require('./mosaic-config');
 
 const isTheme = (pathname, quiet = false) => {
     try {
-        const packageJson = require(path.join(pathname, 'package.json'));
-
-        let type;
-
-        if (packageJson.mosaic) {
-            type = packageJson.mosaic.type
-        } else if (packageJson.scandipwa) { // fallback to legacy field
-            type = packageJson.scandipwa.type
-        }
+        const { type } = getMosaicConfig(path.join(pathname, 'package.json'));
 
         const isTheme = type === 'theme';
 

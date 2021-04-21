@@ -1,17 +1,12 @@
 const { getPackageJson } = require('./package-json');
+const { getMosaicConfig } = require('./mosaic-config')
 const logger = require('./logger');
 const getPackagePath = require('./package-path');
 
 const getParentTheme = (pathname) => {
-    const packageJson = getPackageJson(pathname);
+    const { parentTheme } = getMosaicConfig(pathname);
 
-    if (packageJson.mosaic) {
-        return packageJson.mosaic.parentTheme
-    } else if (packageJson.scandipwa) {
-        return packageJson.scandipwa.parentTheme
-    }
-
-    return null
+    return parentTheme;
 };
 
 const getParentThemePaths = (pathname = process.cwd(), rootTheme = pathname) => {

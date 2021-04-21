@@ -1,4 +1,5 @@
 const { getPackageJson } = require('./package-json');
+const { getMosaicConfig } = require('./mosaic-config')
 const getPackagePath = require('./package-path');
 const shouldUseYarn = require('./should-use-yarn');
 const logger = require('./logger');
@@ -22,14 +23,7 @@ const getAllExtensions = (modulePath) => {
 
     const packageJson = getPackageJson(modulePath);
     const { dependencies = {} } = packageJson;
-
-    let extensions = {};
-
-    if (packageJson.mosaic) {
-        extensions = packageJson.mosaic.extensions || {}
-    } else if (packageJson.scandipwa) { // fallback to legacy field
-        extensions = packageJson.scandipwa.extensions || {}
-    }
+    const { extensions = {} } = getMosaicConfig(modulePath)
 
     return Object.keys(dependencies).reduce(
         (acc, dependency) => acc.concat(getAllExtensions(dependency)),

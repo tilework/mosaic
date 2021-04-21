@@ -1,4 +1,5 @@
 const path = require('path');
+const { getMosaicConfig } = require('./mosaic-config');
 
 const EXTENSION_TYPE = 'extension';
 const THEME_TYPE = 'theme';
@@ -18,15 +19,7 @@ const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
     }
 
     try {
-        const packageJson = require(path.join(pathname, 'package.json'));
-
-        let type;
-
-        if (packageJson.mosaic) {
-            type = packageJson.mosaic.type;
-        } else if (packageJson.scandipwa) { // fallback to legacy field
-            type = packageJson.scandipwa.type;
-        }
+        const { type } = getMosaicConfig(path.join(pathname, 'package.json'));
 
         // Handle type matching
         if (expectedType && (!Array.isArray(expectedType) || expectedType.length)) {

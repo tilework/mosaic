@@ -9,6 +9,7 @@ const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
 
 const { aliasMap, aliasPostfixMap } = require('./util/alias');
 const includePaths = require('../common/include-paths');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 
 const hasFilesOfType = (type, rootOnly = false) => (
     rootOnly
@@ -62,13 +63,7 @@ const generatePreferenceAliases = () => {
         const { packageJson, packagePath } = extension;
 
         // Take provide field, check if pathname is not available in provisioned names
-        let preference = ''
-
-        if (packageJson.mosaic) {
-            preference = packageJson.mosaic.preference || '';
-        } else if (packageJson.scandipwa) { // fallback to legacy field
-            preference = packageJson.scandipwa.preference || '';
-        }
+        const { preference = '' } = getMosaicConfig(packageJson)
 
         if (!preference) {
             return acc;

@@ -1,6 +1,6 @@
 const prepareSources = require('./sources');
 const { getExtensionsForCwd } = require('@tilework/mosaic-dev-utils/extensions-core');
-
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config')
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const path = require('path');
 
@@ -52,16 +52,10 @@ const getExtensionProvisionedPath = (pathname, cwd) => {
             main
         } = packageJson;
 
-        let provide = []
-        let preference = ''
-
-        if (packageJson.mosaic) {
-            provide = packageJson.mosaic.provide || []
-            preference = packageJson.mosaic.preference || ''
-        } else if (packageJson.scandipwa) { // fallback to legacy field
-            provide = packageJson.scandipwa.provide || []
-            preference = packageJson.scandipwa.preference || ''
-        }
+        const {
+            provide = [],
+            preference = ''
+        } = getMosaicConfig(packageJson)
 
         if (preference) {
             const moduleIndex = pathname.indexOf(preference);

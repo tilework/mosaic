@@ -1,7 +1,7 @@
 /* eslint-disable no-continue */
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
-const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const createFilesystem = require('@tilework/mosaic-dev-utils/create-filesystem');
 const path = require('path');
@@ -28,14 +28,7 @@ const getDefinedPages = async (rootDir) => {
     ].reduce(
         // we only allow pages inside of the src folder!
         (acc, pathname) => {
-            const packageJson = getPackageJson(pathname);
-            let nextPages = {};
-
-            if (packageJson.mosaic) {
-                nextPages = packageJson.mosaic.nextPages || {};
-            } else if (packageJson.scandipwa) { // fallback to legacy field
-                nextPages = packageJson.scandipwa.nextPages || {};
-            }
+            const { nextPages = {} } = getMosaicConfig(pathname);
 
             // eslint-disable-next-line fp/no-let
             for (let i = 0; i < Object.entries(nextPages).length; i++) {
