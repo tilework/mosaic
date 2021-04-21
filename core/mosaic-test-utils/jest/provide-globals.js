@@ -1,3 +1,3 @@
-const Mosaic = require('@tilework/mosaic').default;
+const Mosaic = require('@tilework/mosaic');
 
 global.Mosaic = Mosaic;
