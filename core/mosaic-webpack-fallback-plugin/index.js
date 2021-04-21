@@ -7,6 +7,7 @@ const {
     prepareExtensions,
     getExtensionProvisionedPath
 } = require('./lib/extensions');
+const { prepareSourcesDirectories } = require('./lib/source-directories');
 
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
@@ -32,7 +33,8 @@ class FallbackPlugin {
 
         this.options = {
             sources: prepareSources(sources),
-            extensions: prepareExtensions(processRoot)
+            extensions: prepareExtensions(processRoot),
+            sourceDirectories: prepareSourcesDirectories(processRoot)
         };
     }
 
@@ -192,7 +194,7 @@ class FallbackPlugin {
      * @param {String} pathname
      */
     getBelongingExtension(pathname) {
-        const { extensions } = this.options;
+        const { extensions, sourceDirectories } = this.options;
 
         // Skip null paths
         if (!pathname) {
@@ -206,13 +208,11 @@ class FallbackPlugin {
 
         for (let i = 0; i < extensions.entries.length; i++) {
             const [packageName, sourcePath] = extensions.entries[i];
-            const sourcePathSrc = path.join(sourcePath, 'src');
-            const sourcePathPublic = path.join(sourcePath, 'public');
+            const isSourcePathFromValidPath = sourceDirectories.some(
+                folder => pathname.includes(path.join(sourcePath, folder))
+            );
 
-            if (
-                pathname.includes(sourcePathSrc)
-                || pathname.includes(sourcePathPublic)
-            ) {
+            if (isSourcePathFromValidPath) {
                 return packageName;
             }
         }
@@ -226,7 +226,7 @@ class FallbackPlugin {
      * @param {*} pathname
      */
     getIsFallbackNeeded(pathname) {
-        const { sources, extensions } = this.options;
+        const { sources, extensions, sourceDirectories } = this.options;
 
         // Skip null paths
         if (!pathname) {
@@ -247,13 +247,11 @@ class FallbackPlugin {
         // sources or extension folders (/src or /pub)
         for (let i = 0; i < paths.length; i++) {
             const sourcePath = paths[i];
-            const sourcePathSrc = path.join(sourcePath, 'src');
-            const sourcePathPublic = path.join(sourcePath, 'public');
+            const isSourcePathFromValidPath = sourceDirectories.some(
+                folder => pathname.includes(path.join(sourcePath, folder))
+            );
 
-            if (
-                pathname.includes(sourcePathSrc)
-                || pathname.includes(sourcePathPublic)
-            ) {
+            if (isSourcePathFromValidPath) {
                 return true;
             }
         }
