@@ -24,6 +24,7 @@ const provideProperBabelTransform = (jestConfig, envType) => {
 
 const provideGlobals = (jestConfig) => {
     jestConfig.setupFiles.push(require.resolve('./provide-globals'));
+    jestConfig.setupFiles.push(require.resolve('./cleanup'));
 };
 
 const includeExternals = (jestConfig) => {
