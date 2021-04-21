@@ -17,13 +17,18 @@ const {
     // Take provide field, check if pathname is not available in provisioned names
     const {
         name,
-        mosaic: {
-            build: {
-                before = '',
-                cracoPlugins = []
-            } = {}
-        } = {}
     } = packageJson;
+
+    let before = '';
+    let cracoPlugins = []
+
+    if (packageJson.mosaic && packageJson.mosaic.build) {
+        before = packageJson.mosaic.build.before || '';
+        cracoPlugins = packageJson.mosaic.build.cracoPlugins || [];
+    } else if (packageJson.scandipwa && packageJson.scandipwa.build) { // fallback to legacy field
+        before = packageJson.scandipwa.build.before || '';
+        cracoPlugins = packageJson.scandipwa.build.cracoPlugins || []
+    }
 
     if (before) {
         const pathname = path.join(packagePath, before);

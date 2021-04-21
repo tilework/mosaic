@@ -18,7 +18,15 @@ const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
     }
 
     try {
-        const { mosaic: { type } } = require(path.join(pathname, 'package.json'));
+        const packageJson = require(path.join(pathname, 'package.json'));
+
+        let type;
+
+        if (packageJson.mosaic) {
+            type = packageJson.mosaic.type;
+        } else if (packageJson.scandipwa) { // fallback to legacy field
+            type = packageJson.scandipwa.type;
+        }
 
         // Handle type matching
         if (expectedType && (!Array.isArray(expectedType) || expectedType.length)) {

@@ -4,7 +4,15 @@ const logger = require('./logger');
 const isTheme = (pathname, quiet = false) => {
     try {
         const packageJson = require(path.join(pathname, 'package.json'));
-        const { mosaic: { type } = {} } = packageJson;
+
+        let type;
+
+        if (packageJson.mosaic) {
+            type = packageJson.mosaic.type
+        } else if (packageJson.scandipwa) { // fallback to legacy field
+            type = packageJson.scandipwa.type
+        }
+
         const isTheme = type === 'theme';
 
         if (quiet || isTheme) {

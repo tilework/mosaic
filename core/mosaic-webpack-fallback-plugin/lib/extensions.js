@@ -49,12 +49,19 @@ const getExtensionProvisionedPath = (pathname, cwd) => {
         // Take provide field, check if pathname is not available in provisioned names
         const {
             name,
-            mosaic: {
-                provide = [],
-                preference = ''
-            } = {},
             main
         } = packageJson;
+
+        let provide = []
+        let preference = ''
+
+        if (packageJson.mosaic) {
+            provide = packageJson.mosaic.provide || []
+            preference = packageJson.mosaic.preference || ''
+        } else if (packageJson.scandipwa) { // fallback to legacy field
+            provide = packageJson.scandipwa.provide || []
+            preference = packageJson.scandipwa.preference || ''
+        }
 
         if (preference) {
             const moduleIndex = pathname.indexOf(preference);

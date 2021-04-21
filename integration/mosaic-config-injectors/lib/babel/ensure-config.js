@@ -11,8 +11,8 @@ const { aliasMap, aliasPostfixMap } = require('./util/alias');
 const includePaths = require('../common/include-paths');
 
 const hasFilesOfType = (type, rootOnly = false) => (
-    rootOnly 
-        ? includePaths.filter(path.isAbsolute) 
+    rootOnly
+        ? includePaths.filter(path.isAbsolute)
         : [process.cwd()]
     ).some((includePath) => {
         const getMain = () => {
@@ -36,9 +36,9 @@ const hasFilesOfType = (type, rootOnly = false) => (
 
         const foundTypescriptFiles = globby.sync(
             [
-                `**/*.(${type}|${type}x)`, 
+                `**/*.(${type}|${type}x)`,
                 // TODO verify that this works with linked packages
-                '!**/node_modules', 
+                '!**/node_modules',
                 '!**/*.d.ts'
             ],
             { cwd: scannable }
@@ -60,20 +60,22 @@ const readJson = (jsonPath) => {
 const generatePreferenceAliases = () => {
     const preferenceAliases = extensions.reduce((acc, extension) => {
         const { packageJson, packagePath } = extension;
-    
+
         // Take provide field, check if pathname is not available in provisioned names
-        const {
-            mosaic: {
-                preference = ''
-            } = {}
-        } = packageJson;
-    
+        let preference = ''
+
+        if (packageJson.mosaic) {
+            preference = packageJson.mosaic.preference || '';
+        } else if (packageJson.scandipwa) { // fallback to legacy field
+            preference = packageJson.scandipwa.preference || '';
+        }
+
         if (!preference) {
             return acc;
         }
-    
+
         const posixPackagePath = packagePath.split(path.sep).join(path.posix.sep);
-    
+
         return {
             ...acc,
             [`${preference}/*`]: [path.relative(process.cwd(), posixPackagePath)]
@@ -99,11 +101,11 @@ const generateParentThemeAliases = () => {
                         // it is required to be relative, otherwise it does not work
                         `${path.relative(process.cwd(), posixPathname)}/*`
                     );
-    
+
                     acc.parentThemeAliases[`${ alias }/*`] = Array.from(acc.aliasStack[i]);
                 }
             );
-    
+
             return acc;
         },
         {
@@ -132,7 +134,7 @@ const getExistingConfigPath = () => {
 
     const existingConfigPath = [jsConfigPath, tsConfigPath].find(
         (configPath) => fs.existsSync(configPath)
-    );  
+    );
 
     return existingConfigPath;
 }
@@ -210,7 +212,7 @@ const createJsConfig = () => {
     const preferenceAliases = generatePreferenceAliases();
     const generatedJsConfig = generateJsConfig(parentThemeAliases, preferenceAliases);
     const existingConfigPath = getExistingConfigPath();
-    
+
     if (!existingConfigPath) {
         createFromScratch(generatedJsConfig);
     } else {
