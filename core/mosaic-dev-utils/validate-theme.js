@@ -1,10 +1,11 @@
 const path = require('path');
 const logger = require('./logger');
+const { getMosaicConfig } = require('./mosaic-config');
 
 const isTheme = (pathname, quiet = false) => {
     try {
-        const packageJson = require(path.join(pathname, 'package.json'));
-        const { mosaic: { type } = {} } = packageJson;
+        const { type } = getMosaicConfig(path.join(pathname, 'package.json'));
+
         const isTheme = type === 'theme';
 
         if (quiet || isTheme) {

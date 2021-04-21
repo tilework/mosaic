@@ -1,13 +1,10 @@
 const { getPackageJson } = require('./package-json');
+const { getMosaicConfig } = require('./mosaic-config')
 const logger = require('./logger');
 const getPackagePath = require('./package-path');
 
 const getParentTheme = (pathname) => {
-    const {
-        mosaic: {
-            parentTheme
-        } = {}
-    } = getPackageJson(pathname);
+    const { parentTheme } = getMosaicConfig(pathname);
 
     return parentTheme;
 };
@@ -31,12 +28,22 @@ const getParentThemeSources = () => {
     const parentThemeList = getParentThemePaths();
 
     return parentThemeList.reduce((acc, pathname) => {
+        const packageJson = getPackageJson(pathname);
         const {
             name,
-            mosaic: {
-                themeAlias
-            } = {}
-        } = getPackageJson(pathname);
+        } = packageJson;
+
+        let themeAlias;
+
+        if (packageJson.mosaic) {
+            themeAlias = packageJson.mosaic.themeAlias
+        } else if (packageJson.scandipwa) { // fallback to legacy field
+            themeAlias = packageJson.scandipwa.themeAlias
+        }
+
+        const fieldName = !packageJson.mosaic
+            ? 'scandipwa'
+            : 'mosaic'
 
         if (!themeAlias) {
             // Prevent themes without a name
@@ -44,7 +51,7 @@ const getParentThemeSources = () => {
 
             logger.error(
                 `The parent theme registered in package ${ logger.style.misc(name) } is invalid.`,
-                `The required field ${ logger.style.code('mosaic.themeAlias') } is missing in ${ logger.style.file('package.json') }`
+                `The required field ${ logger.style.code(`${ fieldName }.themeAlias`) } is missing in ${ logger.style.file('package.json') }`
             );
 
             process.exit(1);
@@ -59,7 +66,7 @@ const getParentThemeSources = () => {
 
             logger.error(
                 `The parent theme registered in package ${ logger.style.misc(name) } is invalid.`,
-                `The required field ${ logger.style.code('mosaic.themeName') } contains invalid value.`,
+                `The required field ${ logger.style.code(`${ fieldName }.themeName`) } contains invalid value.`,
                 `The theme with the name ${ logger.style.misc(themeAlias) } already exist.`,
                 `It was previously declared in the ${ logger.style.misc(sameNamePackage) } package.`
             );

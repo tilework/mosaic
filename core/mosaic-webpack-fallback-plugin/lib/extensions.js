@@ -1,6 +1,6 @@
 const prepareSources = require('./sources');
 const { getExtensionsForCwd } = require('@tilework/mosaic-dev-utils/extensions-core');
-
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config')
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const path = require('path');
 
@@ -49,12 +49,13 @@ const getExtensionProvisionedPath = (pathname, cwd) => {
         // Take provide field, check if pathname is not available in provisioned names
         const {
             name,
-            mosaic: {
-                provide = [],
-                preference = ''
-            } = {},
             main
         } = packageJson;
+
+        const {
+            provide = [],
+            preference = ''
+        } = getMosaicConfig(packageJson)
 
         if (preference) {
             const moduleIndex = pathname.indexOf(preference);

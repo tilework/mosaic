@@ -1,4 +1,5 @@
 const path = require('path');
+const { getMosaicConfig } = require('./mosaic-config');
 
 const EXTENSION_TYPE = 'extension';
 const THEME_TYPE = 'theme';
@@ -20,7 +21,7 @@ const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
     }
 
     try {
-        const { mosaic: { type } } = require(path.join(pathname, 'package.json'));
+        const { type } = getMosaicConfig(path.join(pathname, 'package.json'));
 
         // Handle type matching
         if (expectedType && (!Array.isArray(expectedType) || expectedType.length)) {

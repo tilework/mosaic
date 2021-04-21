@@ -1,4 +1,5 @@
 const { getPackageJson } = require('./package-json');
+const { getMosaicConfig } = require('./mosaic-config')
 const getPackagePath = require('./package-path');
 const shouldUseYarn = require('./should-use-yarn');
 const logger = require('./logger');
@@ -20,12 +21,9 @@ const getAllExtensions = (modulePath) => {
 
     visitedDeps.push(modulePath);
 
-    const {
-        dependencies = {},
-        mosaic: {
-            extensions = {}
-        } = {}
-    } = getPackageJson(modulePath);
+    const packageJson = getPackageJson(modulePath);
+    const { dependencies = {} } = packageJson;
+    const { extensions = {} } = getMosaicConfig(modulePath)
 
     return Object.keys(dependencies).reduce(
         (acc, dependency) => acc.concat(getAllExtensions(dependency)),
