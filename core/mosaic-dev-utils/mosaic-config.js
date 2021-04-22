@@ -17,10 +17,10 @@ const getMosaicConfig = (pathname, context = process.cwd()) => {
 
     if (packageJson.mosaic) {
         mosaicConfig = packageJson.mosaic;
-    }
-
-    if (packageJson.scandipwa) { // fallback to legacy field
+    } else if (packageJson.scandipwa) { // fallback to legacy field
         mosaicConfig = packageJson.scandipwa;
+    } else { // mosaic config not found
+        return {};
     }
 
 
