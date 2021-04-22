@@ -3,7 +3,12 @@
     "version": "0.0.0",
     "license": "MIT",
     "mosaic": {
-        "type": "extension"
+        "type": "extension",
+        "build": {
+            "plugins": [
+                "./build-config/plugin.js"
+            ]
+        }
     },
     "eslintConfig": {
         "extends": "@tilework/mosaic"
