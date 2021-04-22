@@ -111,8 +111,11 @@ class FallbackPlugin {
      * @memberof FallbackPlugin
      */
     getRelativePathname(pathname) {
-        const isSrc = new RegExp(escapeRegex(`${path.sep}src${path.sep}`)).test(pathname);
-        const prefix = isSrc ? 'src' : 'public';
+        const { sourceDirectories } = this.options;
+        const prefix = sourceDirectories
+            .map(directory => path.parse(directory).name)
+            .find(directory => new RegExp(escapeRegex(`${path.sep}${directory}${path.sep}`)).test(pathname))
+            || 'public';
 
         // take the last occurrence of the prefix and get the path after it
         const relativePathname = pathname.split(`${prefix}${path.sep}`).slice(-1).join(`${prefix}${path.sep}`);
