@@ -1,6 +1,7 @@
 const addPlugins = require('./add-plugins');
 const addAliases = require('./add-aliases');
 const ensureConfig = require('./ensure-config');
+const { applyPlugins } = require('../common/apply-plugins');
 
 const injectBabelConfig = (babelConfig) => {
     addPlugins(babelConfig);
@@ -11,7 +12,9 @@ const injectBabelConfig = (babelConfig) => {
     // Hence, we keep it here.
     ensureConfig();
 
-    return babelConfig;
+    const finalConfig = applyPlugins(babelConfig, 'babel');
+
+    return finalConfig;
 };
 
 module.exports = injectBabelConfig;

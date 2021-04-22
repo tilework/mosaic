@@ -62,7 +62,7 @@ const generatePreferenceAliases = () => {
         const { packageJson, packagePath } = extension;
 
         // Take provide field, check if pathname is not available in provisioned names
-        const { preference = '' } = getMosaicConfig(packageJson)
+        const { preference = '' } = getMosaicConfig(packageJson);
 
         if (!preference) {
             return acc;
