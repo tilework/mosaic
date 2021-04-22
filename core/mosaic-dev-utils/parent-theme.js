@@ -1,5 +1,5 @@
 const { getPackageJson } = require('./package-json');
-const { getMosaicConfig } = require('./mosaic-config')
+const { getMosaicConfig } = require('./mosaic-config');
 const logger = require('./logger');
 const getPackagePath = require('./package-path');
 
@@ -30,20 +30,20 @@ const getParentThemeSources = () => {
     return parentThemeList.reduce((acc, pathname) => {
         const packageJson = getPackageJson(pathname);
         const {
-            name,
+            name
         } = packageJson;
 
         let themeAlias;
 
         if (packageJson.mosaic) {
-            themeAlias = packageJson.mosaic.themeAlias
+            themeAlias = packageJson.mosaic.themeAlias;
         } else if (packageJson.scandipwa) { // fallback to legacy field
-            themeAlias = packageJson.scandipwa.themeAlias
+            themeAlias = packageJson.scandipwa.themeAlias;
         }
 
         const fieldName = !packageJson.mosaic
             ? 'scandipwa'
-            : 'mosaic'
+            : 'mosaic';
 
         if (!themeAlias) {
             // Prevent themes without a name
