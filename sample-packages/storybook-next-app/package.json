@@ -15,7 +15,7 @@
     "extensions": {
       "@tilework/mosaic-sample-page": true
     },
-    "sourceDirectories!": [
+    "sourceDirectories": [
       "./.storybook"
     ]
   },
