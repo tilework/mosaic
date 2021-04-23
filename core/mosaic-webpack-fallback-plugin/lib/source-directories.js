@@ -6,12 +6,12 @@ const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
  * @param {string} cwd
  * @returns {string[]}
  */
-const prepareSourcesDirectories = (cwd = process.cwd()) => {
+const prepareSourceDirectories = (cwd = process.cwd()) => {
     const { sourceDirectories: projectSourceDirectories = [] } = getMosaicConfig(cwd);
 
     return ['src', 'pub'].concat(projectSourceDirectories);
 };
 
 module.exports = {
-    prepareSourcesDirectories
+    prepareSourceDirectories
 };

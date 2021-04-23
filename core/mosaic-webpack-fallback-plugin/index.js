@@ -7,7 +7,7 @@ const {
     prepareExtensions,
     getExtensionProvisionedPath
 } = require('./lib/extensions');
-const { prepareSourcesDirectories } = require('./lib/source-directories');
+const { prepareSourceDirectories } = require('./lib/source-directories');
 
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
@@ -34,7 +34,7 @@ class FallbackPlugin {
         this.options = {
             sources: prepareSources(sources),
             extensions: prepareExtensions(processRoot),
-            sourceDirectories: prepareSourcesDirectories(processRoot)
+            sourceDirectories: prepareSourceDirectories(processRoot)
         };
     }
 
