@@ -15,13 +15,12 @@
     "extensions": {
       "@tilework/mosaic-sample-page": true
     },
-    "sourceDirectories!": [
+    "sourceDirectories": [
       "./.storybook"
     ]
   },
   "dependencies": {
     "@tilework/mosaic-nextjs-scripts": "0.0.3",
-    "@tilework/mosaic-sample-page": "file:packages/sample-page",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
