@@ -11,6 +11,9 @@ const { prepareSourceDirectories } = require('./lib/source-directories');
 
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
+
+const mosaicConfig = getMosaicConfig(process.cwd());
 
 class FallbackPlugin {
     /**
@@ -31,10 +34,19 @@ class FallbackPlugin {
             throw new Error('Fallback plugin expects sources object as an option.');
         }
 
+        const preparedSources = prepareSources(sources);
+        const extensions = prepareExtensions(processRoot);
+
+        const paths = [
+            ...preparedSources.values,
+            ...extensions.values
+        ].filter(Boolean);
+        const sourceDirectories = paths.flatMap(dir => prepareSourceDirectories(dir));
+
         this.options = {
-            sources: prepareSources(sources),
-            extensions: prepareExtensions(processRoot),
-            sourceDirectories: prepareSourceDirectories(processRoot)
+            sources: preparedSources,
+            extensions,
+            sourceDirectories
         };
     }
 
@@ -197,7 +209,7 @@ class FallbackPlugin {
      * @param {String} pathname
      */
     getBelongingExtension(pathname) {
-        const { extensions, sourceDirectories } = this.options;
+        const { extensions } = this.options;
 
         // Skip null paths
         if (!pathname) {
@@ -211,8 +223,8 @@ class FallbackPlugin {
 
         for (let i = 0; i < extensions.entries.length; i++) {
             const [packageName, sourcePath] = extensions.entries[i];
-            const isSourcePathFromValidPath = sourceDirectories.some(
-                folder => pathname.includes(path.join(sourcePath, folder))
+            const isSourcePathFromValidPath = mosaicConfig.sourceDirectories.some(
+                dir => pathname.includes(path.join(sourcePath, dir))
             );
 
             if (isSourcePathFromValidPath) {
@@ -229,7 +241,7 @@ class FallbackPlugin {
      * @param {*} pathname
      */
     getIsFallbackNeeded(pathname) {
-        const { sources, extensions, sourceDirectories } = this.options;
+        const { sourceDirectories } = this.options;
 
         // Skip null paths
         if (!pathname) {
@@ -241,25 +253,14 @@ class FallbackPlugin {
             return true;
         }
 
-        const paths = [
-            ...sources.values,
-            ...extensions.values
-        ];
 
         // Check if request is coming from Mosaic
         // sources or extension folders (/src or /pub)
-        for (let i = 0; i < paths.length; i++) {
-            const sourcePath = paths[i];
-            const isSourcePathFromValidPath = sourceDirectories.some(
-                folder => pathname.includes(path.join(sourcePath, folder))
-            );
+        const isSourcePathFromValidPath = sourceDirectories.some(
+            dir => pathname.startsWith(dir)
+        );
 
-            if (isSourcePathFromValidPath) {
-                return true;
-            }
-        }
-
-        return false;
+        return isSourcePathFromValidPath;
     }
 
     /**
