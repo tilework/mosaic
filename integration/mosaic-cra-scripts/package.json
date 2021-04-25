@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-cra-scripts",
     "description": "CRA wrapper for Mosaic.",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "bin": {
         "cra-scripts": "./bin/cra-scripts.js"
     },
@@ -19,11 +19,11 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@tilework/mosaic-config-injectors": "0.0.3",
+        "@tilework/mosaic-config-injectors": "0.0.4",
         "@tilework/mosaic-craco": "0.0.3",
-        "@tilework/mosaic-dev-utils": "0.0.3",
-        "@tilework/mosaic-test-utils": "0.0.3",
-        "@tilework/mosaic-webpack-fallback-plugin": "0.0.3",
+        "@tilework/mosaic-dev-utils": "0.0.4",
+        "@tilework/mosaic-test-utils": "0.0.4",
+        "@tilework/mosaic-webpack-fallback-plugin": "0.0.4",
         "babel-jest": "26.6.3",
         "babel-plugin-module-resolver": "^4.0.0",
         "babel-plugin-transform-rebem-jsx": "^0.3.3",
