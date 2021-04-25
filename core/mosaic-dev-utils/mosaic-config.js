@@ -1,25 +1,31 @@
+const { deepmerge } = require('./deepmerge');
 const { getPackageJson } = require('./package-json');
 
-/**
- * Get mosaic config from package.json file
- * @param {string | object} pathname path to a directory with package.json or package.json object
- * @param {string} context
- * @returns {MosaicConfig}
- */
+const defaultConfig = {
+    sourceDirectories: [
+        'src',
+        'pub'
+    ]
+};
+
 const getMosaicConfig = (pathname, context = process.cwd()) => {
     const packageJson = typeof pathname === 'string'
         ? getPackageJson(pathname, context)
         : pathname;
 
+    let mosaicConfig = {};
+
     if (packageJson.mosaic) {
-        return packageJson.mosaic;
-    }
-    
-    if (packageJson.scandipwa) { // fallback to legacy field
-        return packageJson.scandipwa;
+        mosaicConfig = packageJson.mosaic;
+    } else if (packageJson.scandipwa) { // fallback to legacy field
+        mosaicConfig = packageJson.scandipwa;
+    } else { // mosaic config not found
+        return {};
     }
 
-    return {};
+
+    return deepmerge(defaultConfig, mosaicConfig);
+
 };
 
 module.exports = {
