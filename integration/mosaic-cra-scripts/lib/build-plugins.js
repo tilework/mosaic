@@ -25,7 +25,7 @@ const {
                 before = '',
                 cracoPlugins = []
             } = {}
-        }
+        } = {}
     } = packageJson;
 
     if (before) {
