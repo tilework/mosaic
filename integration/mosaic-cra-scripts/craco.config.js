@@ -58,7 +58,8 @@ module.exports = () => {
                         {
                             // for some reason only classic works
                             // the "automatic" does not work
-                            runtime: 'classic'
+                            runtime: 'classic',
+                            absoluteRuntime: false
                         }
                     ]
                 ];
