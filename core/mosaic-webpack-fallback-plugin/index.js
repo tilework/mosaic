@@ -116,6 +116,26 @@ class FallbackPlugin {
     }
 
     /**
+     * Get prefix for requested pathname from source directories, otherwise fallback to 'public'
+     * @param {string} pathname
+     * @returns {string}
+     */
+    getPrefixForPathname(pathname) {
+        const { sourceDirectories } = this.options;
+
+        // check if prefix available in one of source directories for requested pathname
+        const prefixFromSources = sourceDirectories
+            .map(directory => path.parse(directory).name)
+            .find(directory => new RegExp(escapeRegex(`${path.sep}${directory}${path.sep}`)).test(pathname));
+
+        if (prefixFromSources) {
+            return prefixFromSources;
+        }
+
+        return 'public';
+    }
+
+    /**
      * Get relative pathname of file given (relative to any source root)
      *
      * @param {string} pathname - absolute pathname
@@ -123,11 +143,8 @@ class FallbackPlugin {
      * @memberof FallbackPlugin
      */
     getRelativePathname(pathname) {
-        const { sourceDirectories } = this.options;
-        const prefix = sourceDirectories
-            .map(directory => path.parse(directory).name)
-            .find(directory => new RegExp(escapeRegex(`${path.sep}${directory}${path.sep}`)).test(pathname))
-            || 'public';
+        // prefix for relative pathname
+        const prefix = this.getPrefixForPathname(pathname);
 
         // take the last occurrence of the prefix and get the path after it
         const relativePathname = pathname.split(`${prefix}${path.sep}`).slice(-1).join(`${prefix}${path.sep}`);
