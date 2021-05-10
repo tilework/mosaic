@@ -53,7 +53,7 @@ module.exports = () => {
             // * Inject the prepared config
             ConfigInjectors.injectWebpackConfig(config, {
                 webpack,
-                entryMatcher: /[\\/]src[\\/]pages[\\/][^_]/
+                entryMatcher: /[\\/]src[\\/]pages[\\/][_].+\.[jt]sx?/
             });
 
             // Important: return the modified config
