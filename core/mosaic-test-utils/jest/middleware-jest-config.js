@@ -14,17 +14,24 @@ const provideProperBabelTransform = (jestConfig, envType) => {
     const jsTransformKey = Object.keys(jestConfig.transform).find(
         (key) => new RegExp(key).test('sample.js')
     );
+    const nodeModulesIgnoreIndex = jestConfig.transformIgnorePatterns.findIndex(
+        (key) => key.includes('node_modules')
+    );
 
     if (!jsTransformKey) {
         throw new Error('Internal error: unable to locate JS transform');
     }
 
     jestConfig.transform[jsTransformKey] = require.resolve(`./${envType}-babel-transform`);
+
+    if (nodeModulesIgnoreIndex !== -1) {
+        jestConfig.transformIgnorePatterns[nodeModulesIgnoreIndex] = '[/\\\\]node_modules[/\\\\](?!@tilework[/\\\\]mosaic-test-utils).+\\.(js|jsx|mjs|cjs|ts|tsx)$';
+    }
 };
 
 const provideGlobals = (jestConfig) => {
     jestConfig.setupFiles.push(require.resolve('./provide-globals'));
-    jestConfig.setupFiles.push(require.resolve('./cleanup'));
+    jestConfig.setupFilesAfterEnv.push(require.resolve('./cleanup'));
 };
 
 const includeExternals = (jestConfig) => {
