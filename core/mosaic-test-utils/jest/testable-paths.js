@@ -18,7 +18,7 @@ const packageJsons = [
     ...extensions
 ];
 
-const { tests: testablePackages } = getMosaicConfig(process.cwd());
+const { tests: testablePackages = [] } = getMosaicConfig(process.cwd());
 
 const testablePackagePaths = packageJsons
     .filter(({ packageName }) => testablePackages[packageName])
