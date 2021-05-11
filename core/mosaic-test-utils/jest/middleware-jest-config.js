@@ -14,15 +14,16 @@ const provideProperBabelTransform = (jestConfig, envType) => {
     const jsTransformKey = Object.keys(jestConfig.transform).find(
         (key) => new RegExp(key).test('sample.js')
     );
-    const nodeModulesIgnoreIndex = jestConfig.transformIgnorePatterns.findIndex(
-        (key) => key.includes('node_modules')
-    );
 
     if (!jsTransformKey) {
         throw new Error('Internal error: unable to locate JS transform');
     }
 
     jestConfig.transform[jsTransformKey] = require.resolve(`./${envType}-babel-transform`);
+
+    const nodeModulesIgnoreIndex = jestConfig.transformIgnorePatterns.findIndex(
+        (key) => key.includes('node_modules')
+    );
 
     if (nodeModulesIgnoreIndex !== -1) {
         jestConfig.transformIgnorePatterns[nodeModulesIgnoreIndex] = '[/\\\\]node_modules[/\\\\](?!@tilework[/\\\\]mosaic-test-utils).+\\.(js|jsx|mjs|cjs|ts|tsx)$';
