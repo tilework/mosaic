@@ -1,6 +1,6 @@
 {
   "name": "@tilework/mosaic-test-utils",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Testing utils for Mosaic",
   "author": "Jegors Batovs <yegor@scandipwa.com>",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "@tilework/mosaic": "0.0.3",
     "@tilework/mosaic-config-injectors": "0.0.5",
     "@tilework/mosaic-dev-utils": "0.0.4",
-    "@tilework/mosaic-nextjs-scripts": "0.0.6",
+    "@tilework/mosaic-nextjs-scripts": "0.0.7",
     "babel-jest": "26.6.3",
     "babel-preset-react-app": "10.0.0",
     "react": "17.0.1"
