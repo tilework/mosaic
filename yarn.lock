@@ -14051,7 +14051,7 @@ parent-module@^1.0.0:
     callsites "^3.0.0"
 
 "parent-ts-react-app@file:sample-packages/parent-ts-react-app":
-  version "0.1.2"
+  version "0.1.3"
   dependencies:
     "@testing-library/jest-dom" "^5.11.4"
     "@testing-library/react" "^11.1.0"
@@ -14060,7 +14060,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
-    parent-extension "file:../../Library/Caches/Yarn/v6/npm-parent-ts-react-app-0.1.2-86e913e9-40e3-4219-942d-522c465fb422-1620654080955/node_modules/parent-ts-react-app/packages/parent-extension"
+    parent-extension "file:../../Library/Caches/Yarn/v5/npm-parent-ts-react-app-0.1.3-eb5d38bb-f541-4f76-b0aa-d6447e3cdc2f-1621247272199/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
