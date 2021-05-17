@@ -49,11 +49,10 @@ module.exports = () => {
                 }
             });
             // ===================================
-
             // * Inject the prepared config
             ConfigInjectors.injectWebpackConfig(config, {
                 webpack,
-                entryMatcher: /[\\/]src[\\/]pages[\\/][_].+\.[jt]sx?/
+                entryMatcher: /[\\/]src[\\/]pages[\\/].+\.[jt]sx?/
             });
 
             // Important: return the modified config
