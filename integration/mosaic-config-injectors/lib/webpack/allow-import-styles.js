@@ -22,6 +22,15 @@ const allowImportStyles = (webpackConfig) => {
         // TODO only include themes and extensions, but not their node_modules
         delete rule.issuer;
     });
+
+    const globalCssStyleRule = styleRule.oneOf.find(
+        ({ test }) => test.source === '(?<!\\.module)\\.css$'
+    );
+
+    if (globalCssStyleRule) {
+        delete globalCssStyleRule.include;
+        delete globalCssStyleRule.issuer;
+    }
 };
 
 module.exports = allowImportStyles;
