@@ -9,6 +9,7 @@ const createMockPages = require('./pages/mock-pages');
 const copyPages = require('./pages/copy-pages');
 const getDirFromArgs = require('./args/get-dir-from-args');
 const copyPublic = require('./local/copy-public');
+const { copyConfig } = require('./local/config');
 
 
 module.exports = async (script, restArgs) => {
@@ -25,6 +26,7 @@ module.exports = async (script, restArgs) => {
     await createMockPages(pages, realDir);
     await copyPages(dir, realDir);
     copyPublic(dir, realDir);
+    copyConfig(dir, realDir);
 
     // Copy .env files
 

@@ -1,6 +1,6 @@
-const ConfigInjectors = require('@tilework/mosaic-config-injectors');
+const injectBabelConfig = require('../babel');
 
-module.exports = ConfigInjectors.injectBabelConfig({
+module.exports = injectBabelConfig({
     presets: [
         [
             'next/babel',
