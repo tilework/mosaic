@@ -1480,7 +1480,7 @@
     "@babel/plugin-transform-react-jsx-source" "^7.12.1"
     "@babel/plugin-transform-react-pure-annotations" "^7.12.1"
 
-"@babel/preset-react@^7.12.10", "@babel/preset-react@^7.12.5":
+"@babel/preset-react@^7.12.10", "@babel/preset-react@^7.12.5", "@babel/preset-react@^7.13.13":
   version "7.13.13"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.13.13.tgz#fa6895a96c50763fe693f9148568458d5a839761"
   integrity sha512-gx+tDLIE06sRjKJkVtpZ/t3mzCDOnPG+ggHZG9lffUbX8+wC739x20YQc9V35Do6ZAxaUc/HhVHIiOzz5MvDmA==
@@ -3954,9 +3954,6 @@
   integrity sha512-IR0iWbFkgd56Bu5ZI/ej8yQwrkCv8Qydx6RzwbKz9faXazR/+5tvYKsZQgyXJiwgpcva127YO6JcWy7YlCfofQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
-
-"@tilework/mosaic-sample-page@file:sample-packages/next-app/packages/sample-page":
-  version "0.0.1"
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -14145,7 +14142,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
-    parent-extension "file:../../Library/Caches/Yarn/v5/npm-parent-ts-react-app-0.1.2-cb7c700d-3283-4174-9068-fc40e8545a1d-1620048899274/node_modules/parent-ts-react-app/packages/parent-extension"
+    parent-extension "file:../../Library/Caches/Yarn/v5/npm-parent-ts-react-app-0.1.2-60fd8fa5-ada1-4d88-beb0-f90a52e1cd91-1621335358647/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
