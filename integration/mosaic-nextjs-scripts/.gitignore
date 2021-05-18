@@ -17,6 +17,7 @@
 !/src/pages/.gitkeep
 /build
 /src/build
+/src/public
 
 # misc
 .DS_Store

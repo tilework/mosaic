@@ -8,6 +8,7 @@ const getDefinedPages = require('./pages/defined-pages');
 const createMockPages = require('./pages/mock-pages');
 const copyPages = require('./pages/copy-pages');
 const getDirFromArgs = require('./args/get-dir-from-args');
+const copyPublic = require('./local/copy-public');
 
 
 module.exports = async (script, restArgs) => {
@@ -23,6 +24,7 @@ module.exports = async (script, restArgs) => {
     const pages = await getDefinedPages(dir);
     await createMockPages(pages, realDir);
     await copyPages(dir, realDir);
+    copyPublic(dir, realDir);
 
     // Copy .env files
 
