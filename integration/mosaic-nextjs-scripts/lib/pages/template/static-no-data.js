@@ -1,5 +1,5 @@
 /* eslint-disable */
-import renderEmptyPage from '@tilework/mosaic-nextjs-scripts/lib/empty-page';
+import renderEmptyPage from '@tilework/mosaic-nextjs-scripts/lib/pages/empty-page';
 
 /**
  * ! This file is a "placeholder" / injection point generated,
