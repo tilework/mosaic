@@ -1,7 +1,7 @@
-/* eslint-disable no-param-reassign */
+import Page from '../component/Page';
 
 export default {
     'Pages/sample/Page': {
-        function: () => <> 'It works!' </>
+        function: () => <Page />
     }
 };
