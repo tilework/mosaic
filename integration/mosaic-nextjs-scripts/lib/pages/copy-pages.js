@@ -94,11 +94,6 @@ const copyPages = async (rootDir, projectRoot) => {
                         
                     const resolvedPath = require.resolve(importable, { paths: [resolvePath] });
 
-
-                    console.log({
-                        RESULT: copiedPages[resolvedPath] || resolvedPath
-                    });
-
                     return copiedPages[resolvedPath] || resolvedPath;
                 }
             );
