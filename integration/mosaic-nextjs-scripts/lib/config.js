@@ -17,11 +17,16 @@ const configMap = {
 
 const copyConfig = (themeRoot, destRoot, { src, dest }) => {
     const configSrcPath = path.resolve(themeRoot, src);
+    const configDestPath = path.resolve(destRoot, dest);
+
     if (!fs.existsSync(configSrcPath)) {
+        if (fs.existsSync(configDestPath)) {
+            fs.rmSync(configDestPath);
+        }
+
         return;
     }
 
-    const configDestPath = path.resolve(destRoot, dest);
     
     fs.copyFileSync(configSrcPath, configDestPath);
 };
