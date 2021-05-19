@@ -18,7 +18,7 @@
 /build
 /src/build
 /src/public
-/src/next.base.config.js
+/src/*.base.config.js
 
 # misc
 .DS_Store
