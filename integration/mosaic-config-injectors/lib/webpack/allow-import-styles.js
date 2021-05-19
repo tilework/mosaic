@@ -24,7 +24,7 @@ const allowImportStyles = (webpackConfig) => {
     });
 
     const globalCssStyleRule = styleRule.oneOf.find(
-        ({ test }) => test.source === '(?<!\\.module)\\.css$'
+        ({ test }) => test instanceof RegExp &&  test.source === '(?<!\\.module)\\.css$'
     );
 
     if (globalCssStyleRule) {
