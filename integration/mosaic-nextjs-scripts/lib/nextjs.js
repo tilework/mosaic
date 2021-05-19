@@ -9,7 +9,7 @@ const createMockPages = require('./pages/mock-pages');
 const copyPages = require('./pages/copy-pages');
 const getDirFromArgs = require('./args/get-dir-from-args');
 const copyPublic = require('./public');
-const { copyConfig, configMap } = require('./config');
+const configManager = require('./config');
 
 
 module.exports = async (script, restArgs) => {
@@ -25,9 +25,13 @@ module.exports = async (script, restArgs) => {
     const pages = await getDefinedPages(dir);
     await createMockPages(pages, realDir);
     await copyPages(dir, realDir);
+
+    // Handle the `public` directory
     copyPublic(dir, realDir);
-    copyConfig(dir, realDir, configMap.next);
-    copyConfig(dir, realDir, configMap.babel);
+
+    // Handle the configurations (remove old, copy new)
+    configManager.handleConfig(dir, realDir, configManager.configMap.next);
+    configManager.handleConfig(dir, realDir, configManager.configMap.babel);
 
     // Copy .env files
 
