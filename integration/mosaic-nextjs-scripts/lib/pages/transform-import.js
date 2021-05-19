@@ -6,6 +6,8 @@ function transformImports(code, transformer) {
 
     // Extract all import locations
     babel.transformSync(code, {
+        babelrc: false,
+        configFile: false,
         presets: ['@babel/preset-react'],
         plugins: [{
             visitor: {
