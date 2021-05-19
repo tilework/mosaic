@@ -8,7 +8,7 @@ const getDefinedPages = require('./pages/defined-pages');
 const createMockPages = require('./pages/mock-pages');
 const copyPages = require('./pages/copy-pages');
 const getDirFromArgs = require('./args/get-dir-from-args');
-const copyPublic = require('./local/copy-public');
+const copyPublic = require('./public');
 const { copyConfig, configMap } = require('./config');
 
 
