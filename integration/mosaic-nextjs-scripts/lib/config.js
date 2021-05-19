@@ -24,7 +24,6 @@ const configManager = {
                 '.babelrc.mjs',
                 '.babelrc'
             ],
-            copiedConfigPath: null,
             defaultConfig: {
                 presets: [
                     ['next/babel']
@@ -36,7 +35,6 @@ const configManager = {
             filenames: [
                 'next.config.js'
             ],
-            copiedConfigPath: null,
             defaultConfig: {},
             inject: injectNextConfig
         }
@@ -59,7 +57,7 @@ const configManager = {
         } = filenames.reduce(
             (acc, srcConfigFilename) => {
                 // "early break"
-                if (acc.filename) {
+                if (Object.keys(acc).length) {
                     return acc;
                 }
 
@@ -84,11 +82,17 @@ const configManager = {
         const destConfigPath = path.resolve(destRoot, destConfigFilename);
         
         fs.copyFileSync(srcConfigPath, destConfigPath);
-        configMapItem.copiedConfigPath = destConfigPath;
     },
 
 
     readConfig: function (filepath) {
+        if (!path.isAbsolute(filepath)) {
+            throw new Error(
+                'Expected an absolute path in the readConfig function!\n' +
+                `Received: ${filepath}\n`
+            );
+        }
+        
         if (/\.[cm]?js$/.test(filepath)) {
             return require(filepath);
         }
@@ -102,18 +106,38 @@ const configManager = {
         );
     },
 
-    produceConfig: function (configMapItem) {
+    produceConfig: function (configMapItem, configDir) {
         const { 
             defaultConfig,
-            copiedConfigPath,
-            inject
+            inject,
+            filenames
         } = configMapItem;
+
+        const copiedConfigPath = filenames.reduce(
+            (acc, filename) => {
+                if (acc) {
+                    return acc;
+                }
+
+                const configPath = path.resolve(
+                    configDir, 
+                    this.generateBaseConfigName(filename)
+                );
+
+                if (fs.existsSync(configPath)) {
+                    return configPath;
+                }
+            },
+            null
+        );
 
         const baseConfig = copiedConfigPath 
             ? this.readConfig(copiedConfigPath)
             : defaultConfig;
 
-        return inject(baseConfig);
+        inject(baseConfig);
+
+        return baseConfig;
     },
 
     clearConfig: function (destRoot, filenames) {

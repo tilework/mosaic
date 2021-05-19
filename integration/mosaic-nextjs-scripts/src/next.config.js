@@ -1,5 +1,8 @@
 const configManager = require('../lib/config');
 
-module.exports = configManager.produceConfig(
-    configManager.configMap.next
+const config = configManager.produceConfig(
+    configManager.configMap.next,
+    __dirname
 );
+
+module.exports = config;
