@@ -6,7 +6,7 @@ const BABEL_CONFIG_DEST_NAME = 'babel.base.config.js';
 
 const configMap = {
     babel: {
-        src: '_babel.config.js',
+        src: 'babel.config.js',
         dest: BABEL_CONFIG_DEST_NAME
     },
     next: {
