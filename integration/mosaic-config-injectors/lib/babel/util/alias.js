@@ -13,7 +13,10 @@ const aliasPostfixMap = {
     Store: `.${path.sep}${path.join('src', 'store')}`,
     Util: `.${path.sep}${path.join('src', 'util')}`,
     Query: `.${path.sep}${path.join('src', 'query')}`,
-    Type: `.${path.sep}${path.join('src', 'type')}`
+    Type: `.${path.sep}${path.join('src', 'type')}`,
+
+    // Default alias
+    ['']: `.${path.sep}src`
 };
 
 const sourcePrefixMap = {
@@ -34,6 +37,12 @@ for (const source in sourcePrefixMap) {
 
     for (const postfix in aliasPostfixMap) {
         const aliasKey = prefix + postfix;
+
+        // Prevent '' alias - it is breaking absolute imports
+        if (!aliasKey) {
+            continue;
+        }
+
         const aliasPath = path.join(sources[source], aliasPostfixMap[postfix]);
         aliasMap[source][aliasKey] = aliasPath;
     }
@@ -43,7 +52,8 @@ for (const source in sourcePrefixMap) {
  * These aliases are used by Babel
  */
 const alias = Object.entries(aliasMap).reduce(
-    (acc, [, values]) => ({ ...acc, ...values }), {}
+    (acc, [, values]) => ({ ...acc, ...values }), 
+    {}
 );
 
 module.exports = { alias, aliasMap, aliasPostfixMap };
