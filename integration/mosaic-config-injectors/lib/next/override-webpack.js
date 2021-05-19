@@ -29,22 +29,6 @@ const overrideWebpack = (config, { webpack }) => {
         });
     }
 
-    const babelConfigFile = path.join(__dirname, 'babel.config.js');
-
-    // Use custom babel config file
-    config.module.rules.forEach((rule) => {
-        if (rule.use) {
-            if (Array.isArray(rule.use)) {
-                const babelLoader = rule.use.find((use) => typeof use === 'object' && use.loader === 'next-babel-loader');
-
-                if (babelLoader && babelLoader.options) {
-                    babelLoader.options.configFile = babelConfigFile;
-                }
-            } else if (rule.use.loader === 'next-babel-loader') {
-                rule.use.options.configFile = babelConfigFile;
-            }
-        }
-    });
     // ===================================
     // * Inject the prepared config
     injectWebpackConfig(config, {
