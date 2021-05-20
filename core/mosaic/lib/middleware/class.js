@@ -1,15 +1,25 @@
-import getNamespacesFromMiddlewarable from '../namespace/get-namespaces-from-middlewarable';
 import getPluginsForClass from '../plugins/get-plugins-for-class';
 import getWrapperFromPlugin from '../plugins/get-wrapper-from-plugin';
 
-export default function generateMiddlewaredClass(proxy, plugins) {
-    const __namespaces__ = getNamespacesFromMiddlewarable(proxy);
-    const namespacePluginsClass = getPluginsForClass(__namespaces__, plugins);
+export default function generateMiddlewaredClass(Class, namespaces) {
+    const namespacePluginsClass = getPluginsForClass(namespaces);
 
     // Wrap class in its `class` plugins to provide `class` API
     const wrappedClass = namespacePluginsClass.reduce(
-        (acc, plugin) => getWrapperFromPlugin(plugin, proxy.name)(acc),
-        proxy
+        (acc, plugin) => {
+            const wrapper = getWrapperFromPlugin(plugin, Class.name);
+            const wrappedClass = wrapper(acc);
+
+            if (Object.prototype.isPrototypeOf.call(acc, wrappedClass)) {
+                throw new Error(
+                    'Subclassing via `class` API is not allowed.\n' + 
+                    'Consider using other approach for this, e.g. plugins for members.'
+                );
+            }
+
+            return wrappedClass;
+        },
+        Class
     );
 
     return wrappedClass;

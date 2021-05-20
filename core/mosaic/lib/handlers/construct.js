@@ -1,10 +1,23 @@
+import generateMiddlewaredClass from '../middleware/class';
 import getPluginsFromConfig from '../plugins/get-plugins';
 import getWrapperFromPlugin from '../plugins/get-wrapper-from-plugin';
 
 export default function generateConstructHandler(namespaces) {
     return (TargetClass, args, newTarget) => {
+        // Apply wrapper plugins
+        const WrappedClass = generateMiddlewaredClass(
+            // Preserve the original prototypes: prevent React's confusion
+            class extends TargetClass {
+                constructor() {
+                    return Reflect.construct(TargetClass, args, newTarget);
+                }
+            },
+            namespaces
+        );
+
         // Get an instance
-        const instance = Reflect.construct(TargetClass, args, newTarget);
+        // const instance = Reflect.construct(WrappedClass, args);
+        const instance = Reflect.construct(WrappedClass, args);
 
         // Get all member-property plugins
         const namespacesPluginsConstruct = getPluginsFromConfig(namespaces, 'member-property');
