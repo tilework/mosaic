@@ -17,4 +17,5 @@ declare module '@tilework/mosaic-config-injectors' {
 
     export function injectBabelConfig(babelConfig: any): any;
     export function injectWebpackConfig(webpackConfig: any, options: WebpackInjectorConfig): any;
+    export function injectNextConfig(nextConfig: any, args: any[]): any;
 }

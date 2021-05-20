@@ -1,11 +1,11 @@
 {
     "name": "@tilework/mosaic-sample-page",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "mosaic": {
         "type": "extension",
         "nextPages": {
             "sample": "server"
         }
     }
-  }
+}
   

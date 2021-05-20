@@ -13,10 +13,7 @@ const aliasPostfixMap = {
     Store: `.${path.sep}${path.join('src', 'store')}`,
     Util: `.${path.sep}${path.join('src', 'util')}`,
     Query: `.${path.sep}${path.join('src', 'query')}`,
-    Type: `.${path.sep}${path.join('src', 'type')}`,
-
-    // Default alias
-    ['']: `.${path.sep}src`
+    Type: `.${path.sep}${path.join('src', 'type')}`
 };
 
 const sourcePrefixMap = {

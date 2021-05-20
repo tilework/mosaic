@@ -1,14 +1,8 @@
-const ConfigInjectors = require('@tilework/mosaic-config-injectors');
+const configManager = require('../lib/config');
 
-module.exports = ConfigInjectors.injectBabelConfig({
-    presets: [
-        [
-            'next/babel',
-            {
-                'preset-react': {
-                    runtime: 'classic'
-                }
-            }
-        ]
-    ]
-});
+const config = configManager.produceConfig(
+    configManager.configMap.babel,
+    __dirname
+);
+
+module.exports = config;

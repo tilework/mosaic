@@ -1,13 +1,13 @@
 {
   "name": "react-app",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@tilework/mosaic": "0.0.3",
-    "@tilework/mosaic-cra-scripts": "0.0.4",
+    "@tilework/mosaic-cra-scripts": "0.0.6",
     "child-extension": "file:packages/child-extension",
     "parent-ts-react-app": "file:../parent-ts-react-app",
     "react": "^17.0.1",

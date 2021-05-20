@@ -20,11 +20,19 @@ const provideProperBabelTransform = (jestConfig, envType) => {
     }
 
     jestConfig.transform[jsTransformKey] = require.resolve(`./${envType}-babel-transform`);
+
+    const nodeModulesIgnoreIndex = jestConfig.transformIgnorePatterns.findIndex(
+        (key) => key.includes('node_modules')
+    );
+
+    if (nodeModulesIgnoreIndex !== -1) {
+        jestConfig.transformIgnorePatterns[nodeModulesIgnoreIndex] = '[/\\\\]node_modules[/\\\\](?!@tilework[/\\\\]mosaic-test-utils).+\\.(js|jsx|mjs|cjs|ts|tsx)$';
+    }
 };
 
 const provideGlobals = (jestConfig) => {
     jestConfig.setupFiles.push(require.resolve('./provide-globals'));
-    jestConfig.setupFiles.push(require.resolve('./cleanup'));
+    jestConfig.setupFilesAfterEnv.push(require.resolve('./cleanup'));
 };
 
 const includeExternals = (jestConfig) => {

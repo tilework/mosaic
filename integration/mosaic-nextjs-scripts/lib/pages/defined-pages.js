@@ -3,10 +3,6 @@ const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 const logger = require('@tilework/mosaic-dev-utils/logger');
-const createFilesystem = require('@tilework/mosaic-dev-utils/create-filesystem');
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob');
 
 const getDefinedPages = async (rootDir) => {
     const themePaths = getParentThemePaths(rootDir);
@@ -30,7 +26,6 @@ const getDefinedPages = async (rootDir) => {
         (acc, pathname) => {
             const { nextPages = {} } = getMosaicConfig(pathname);
 
-            // eslint-disable-next-line fp/no-let
             for (let i = 0; i < Object.entries(nextPages).length; i++) {
                 const [page, type] = Object.entries(nextPages)[i];
 
@@ -74,47 +69,4 @@ const getDefinedPages = async (rootDir) => {
     return pages;
 };
 
-const createMockPages = (pages, projectRoot) => createFilesystem(
-    path.join(projectRoot, 'pages'),
-    path.join(__dirname, 'template'),
-    (
-        filesystem,
-        templatePath,
-        destinationPath
-    ) => {
-        // clear pages directory
-        glob.sync('pages/**/*.js', {
-            cwd: projectRoot,
-            absolute: true
-        }).forEach(
-            (file) => fs.unlinkSync(file)
-        );
-
-        // regenerate it using the template
-        Object.entries(pages).forEach(([page, type]) => {
-            const namespaces = {
-                namespace: `Pages/${page}/Page`,
-                static_namespace: `Pages/${page}/getStaticProps`,
-                server_namespace: `Pages/${page}/getServerSideProps`
-            };
-
-            filesystem.copyTpl(
-                templatePath(`${type}.js`),
-                destinationPath(`${page}.js`),
-                {
-                    emptyPageArgs: JSON.stringify({
-                        type,
-                        page,
-                        namespaces
-                    }),
-                    ...namespaces
-                }
-            );
-        });
-    }
-);
-
-module.exports = {
-    getDefinedPages,
-    createMockPages
-};
+module.exports = getDefinedPages;

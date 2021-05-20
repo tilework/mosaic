@@ -4,6 +4,7 @@ const supportLegacy = require('./support-legacy');
 const enforceIncludeExtensions = require('./enforce-include-extensions');
 const resolveFileExtensions = require('./resolve-file-extensions');
 const injectWebpackFallbackPlugin = require('./inject-fallback-plugin');
+const allowImportStyles = require('./allow-import-styles');
 const { applyPlugins } = require('../common/apply-plugins');
 
 /** @type {import('@tilework/mosaic-config-injectors').WebpackInjectorConfig} */
@@ -27,6 +28,7 @@ const injectWebpackConfigObject = (
     enforceIncludeExtensions(webpackConfig);
     resolveFileExtensions(webpackConfig);
     injectWebpackFallbackPlugin(webpackConfig);
+    allowImportStyles(webpackConfig);
 
     if (isProvideGlobals) {
         provideGlobals(webpackConfig, webpack);

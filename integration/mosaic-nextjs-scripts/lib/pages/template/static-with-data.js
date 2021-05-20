@@ -1,5 +1,5 @@
 /* eslint-disable */
-import renderEmptyPage from '@tilework/mosaic-nextjs-scripts/lib/empty-page';
+import renderEmptyPage from '@tilework/mosaic-nextjs-scripts/lib/pages/empty-page';
 
 /**
  * ! This file is a "placeholder" / injection point generated,
@@ -15,11 +15,8 @@ const Page = () => (
         : renderEmptyPage(JSON.parse('<%- emptyPageArgs %>'))
 );
 
-/** @namespace Pages/getCommonServerSideProps */
-const getCommonServerSideProps = () => ({ props: {} });
+/** @namespace <%= static_namespace %> */
+const getStaticProps = () => ({ props: {} });
 
-/** @namespace <%= server_namespace %> */
-const getServerSideProps = () => getCommonServerSideProps();
-
-export { getServerSideProps };
+export { getStaticProps };
 export default Page;

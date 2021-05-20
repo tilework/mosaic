@@ -4,8 +4,12 @@ const kill = require('tree-kill');
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const debounce = require('debounce');
 const chokidar = require('chokidar');
-const { getDefinedPages, createMockPages } = require('./pages');
+const getDefinedPages = require('./pages/defined-pages');
+const createMockPages = require('./pages/mock-pages');
+const copyPages = require('./pages/copy-pages');
 const getDirFromArgs = require('./args/get-dir-from-args');
+const copyPublic = require('./public');
+const configManager = require('./config');
 
 
 module.exports = async (script, restArgs) => {
@@ -20,6 +24,14 @@ module.exports = async (script, restArgs) => {
     // Create pages from extensions and themes
     const pages = await getDefinedPages(dir);
     await createMockPages(pages, realDir);
+    await copyPages(dir, realDir);
+
+    // Handle the `public` directory
+    copyPublic(dir, realDir);
+
+    // Handle the configurations (remove old, copy new)
+    configManager.handleConfig(dir, realDir, configManager.configMap.next);
+    configManager.handleConfig(dir, realDir, configManager.configMap.babel);
 
     // Copy .env files
 
