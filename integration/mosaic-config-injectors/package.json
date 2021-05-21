@@ -18,7 +18,7 @@
     "deepmerge": "^4.2.2",
     "globby": "^11.0.2"
   },
-  "gitHead": "ef9c400f7d5bd03165cb66e0e11eb1a4f30e384d",
+  "gitHead": "a09260e29683a5a0a159a6c3fd5a10165e496156",
   "peerDependencies": {
     "@babel/core": "^7.14.0"
   }
