@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic",
     "description": "Core mosaic plugin system package",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "main": "dist/mosaic.js",
     "files": [
         "dist/**/*"
