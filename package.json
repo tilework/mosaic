@@ -7,7 +7,8 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes",
-    "lint": "eslint core/ integration/"
+    "lint": "eslint core/ integration/",
+    "npm:publish": "lerna publish --exact --no-private"
   },
   "repository": {
     "type": "git",
