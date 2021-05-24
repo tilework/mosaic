@@ -291,8 +291,10 @@ module.exports = (options) => {
                 // Generate the middlewarable class as an expression, 
                 // To be able to operate with it as with a variable, not as with a declaration
                 // ClassExpression != ClassDeclaration
+                // This class deliberately does not have a name in the moment of declaration
+                // Having a name there will cause calls to the class from within itself not respect middleware
                 const classExpression = types.classExpression(
-                    id.node,
+                    null,
                     superClass.node,
                     body.node,
                     decorators.node
@@ -312,7 +314,7 @@ module.exports = (options) => {
                 classExpression.typeParameters = typeParameters.node;
 
                 // Generate the final middleware expression
-                // Mosaic.middleware(class SomeClass {}, 'namespace')
+                // Mosaic.middleware(class {}, 'namespace')
                 const wrappedInMiddeware = types.callExpression(
                     types.memberExpression(
                         types.identifier('Mosaic'),
