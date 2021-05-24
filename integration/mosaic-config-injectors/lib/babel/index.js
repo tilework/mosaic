@@ -3,7 +3,16 @@ const addAliases = require('./add-aliases');
 const ensureConfig = require('./ensure-config');
 const { applyPlugins } = require('../common/apply-plugins');
 
-const injectBabelConfig = (babelConfig) => {
+/** @type {import('@tilework/mosaic-config-injectors').BabelInjectorConfig} */
+const defaultOptions = {
+    shouldApplyPlugins: true
+};
+
+const injectBabelConfig = (babelConfig, options = {}) => {
+    const {
+        shouldApplyPlugins
+    } = Object.assign(defaultOptions, options);
+
     addPlugins(babelConfig);
     addAliases(babelConfig);
 
@@ -12,9 +21,13 @@ const injectBabelConfig = (babelConfig) => {
     // Hence, we keep it here.
     ensureConfig();
 
-    const finalConfig = applyPlugins(babelConfig, 'babel');
+    if (shouldApplyPlugins) {
+        const finalConfig = applyPlugins(babelConfig, 'babel');
 
-    return finalConfig;
-};
+        return finalConfig;
+    }
+
+    return babelConfig;
+}
 
 module.exports = injectBabelConfig;

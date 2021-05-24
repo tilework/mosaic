@@ -6,6 +6,9 @@ declare module '@tilework/mosaic-config-injectors' {
     
         // Support util/extensions
         supportLegacy: boolean,
+
+        // Handle plugins during the injection
+        shouldApplyPlugins: boolean,
     
         // They may be several entry points for plugins
         // These files will be injected with Mosaic.setPlugins
@@ -15,7 +18,12 @@ declare module '@tilework/mosaic-config-injectors' {
         webpack: any
     }
 
-    export function injectBabelConfig(babelConfig: any): any;
+    export interface BabelInjectorConfig {
+        // Handle plugins during the injection
+        shouldApplyPlugins: boolean
+    }
+
     export function injectWebpackConfig(webpackConfig: any, options: WebpackInjectorConfig): any;
+    export function injectBabelConfig(babelConfig: any, options: BabelInjectorConfig): any;
     export function injectNextConfig(nextConfig: any, args: any[]): any;
 }

@@ -10,7 +10,8 @@ const { applyPlugins } = require('../common/apply-plugins');
 /** @type {import('@tilework/mosaic-config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
     provideGlobals: true,
-    supportLegacy: false
+    supportLegacy: false,
+    shouldApplyPlugins: true
 };
 
 const injectWebpackConfigObject = (
@@ -21,7 +22,8 @@ const injectWebpackConfigObject = (
         supportLegacy: isSupportLegacy,
         provideGlobals: isProvideGlobals,
         webpack,
-        entryMatcher
+        entryMatcher,
+        shouldApplyPlugins
     } = Object.assign(defaultOptions, providedOptions);
 
     injectLoader(webpackConfig, entryMatcher);
@@ -38,9 +40,13 @@ const injectWebpackConfigObject = (
         supportLegacy(webpackConfig);
     }
 
-    const finalConfig = applyPlugins(webpackConfig, 'webpack');
+    if (shouldApplyPlugins) {
+        const finalConfig = applyPlugins(webpackConfig, 'webpack');
 
-    return webpackConfig = finalConfig;
+        return finalConfig
+    }
+
+    return webpackConfig;
 };
 
 /**
