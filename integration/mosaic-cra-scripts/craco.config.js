@@ -84,6 +84,7 @@ module.exports = () => {
             plugins: [
                 new webpack.ProvidePlugin({
                     React: 'react',
+                    // TODO spwa
                     PureComponent: ['react', 'PureComponent']
                 }),
 
