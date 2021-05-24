@@ -17,12 +17,17 @@ const getBuildConfigPlugins = memoize((cwd = process.cwd()) => getExtensionsForC
             return acc;
         }
 
-        const { build } = mosaicConfig;
-        if (!build) {
+        const { 
+            build: {
+                plugins = []
+            } = {}
+        } = mosaicConfig;
+
+        if (!plugins.length) {
             return acc;
         }
 
-        const plugins = build.plugins.map((relative) => {
+        const buildConfigurationPlugins = plugins.map((relative) => {
             const expectedPath = path.resolve(packagePath, relative);
 
             try {
@@ -41,7 +46,7 @@ const getBuildConfigPlugins = memoize((cwd = process.cwd()) => getExtensionsForC
 
         acc.push({ 
             packageName,
-            plugins
+            plugins: buildConfigurationPlugins
         });
 
         return acc;
