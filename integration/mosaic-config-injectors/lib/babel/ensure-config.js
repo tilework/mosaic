@@ -133,9 +133,9 @@ const getExistingConfigPath = () => {
     return existingConfigPath;
 };
 
-const extendConfig = (configPath, additionalConfig) => {
-    const config = readJson(configPath);
-    const { extends: extendsRelative = './extendconfig.json' } = config;
+const extendConfig = (existingConfigPath, additionalConfig) => {
+    const existingConfig = readJson(existingConfigPath);
+    const { extends: extendsRelative = './mosaic.jsconfig.json' } = existingConfig;
 
     // Read the existing config. Get {} if it does not exist.
     const extendsAbsolute = path.resolve(process.cwd(), extendsRelative);
@@ -166,8 +166,8 @@ const extendConfig = (configPath, additionalConfig) => {
     writeJson(extendsAbsolute, resultingExtendsConfig);
 
     // Ensure correct "extends" path in the base config
-    config.extends = extendsRelative;
-    writeJson(configPath, config);
+    existingConfig.extends = extendsRelative;
+    writeJson(existingConfigPath, existingConfig);
 };
 
 const ensureTypescriptFile = () => {
