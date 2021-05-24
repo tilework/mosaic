@@ -1,6 +1,7 @@
 const path = require('path');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
 const logger = require('@tilework/mosaic-dev-utils/logger');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 
 // Generate aliases for preference first
 const {
@@ -15,18 +16,13 @@ const {
     const { packageJson, packagePath } = extension;
 
     // Take provide field, check if pathname is not available in provisioned names
+    const { name } = packageJson;
     const {
-        name
-    } = packageJson;
-
-    const {
-        scandipwa: {
-            build: {
-                before = '',
-                cracoPlugins = []
-            } = {}
+        build: {
+            before = '',
+            cracoPlugins = []
         } = {}
-    } = packageJson;
+    } = getMosaicConfig(packageJson);
 
     if (before) {
         const pathname = path.join(packagePath, before);
