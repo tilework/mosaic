@@ -3,27 +3,38 @@ const logger = require('@tilework/mosaic-dev-utils/logger');
 
 const getPluginKey = (type) => {
     if (type === 'webpack') {
-        return 'overrideWebpackConfig';
+        return {
+            overrideKey: 'overrideWebpackConfig',
+            configName: 'webpackConfig'
+        };
     }
 
     if (type === 'babel') {
-        return 'overrideBabelConfig';
+        return {
+            overrideKey: 'overrideBabelConfig',
+            configName: 'babelConfig'
+        };;
     }
 
     throw new Error('Unexpected plugin type!');
 };
 
 const applyPlugins = (initialConfig, pluginType) => {
+    const { 
+        overrideKey,
+        configName
+    } = getPluginKey(pluginType);
+    const buildConfigPlugins = getBuildConfigPlugins();
+    
     let config = initialConfig;
-    const pluginKey = getPluginKey(pluginType);
 
-    for (const { packageName, plugins } of getBuildConfigPlugins()) {
-        for (const { plugin: { [pluginKey]: plugin } } of plugins) {
+    for (const { packageName, plugins } of buildConfigPlugins) {
+        for (const { plugin: { [overrideKey]: plugin } = {} } of plugins) {
             if (!plugin) {
                 continue;
             }
 
-            config = plugin(initialConfig);
+            config = plugin({ [configName]: config });
 
             if (!config) {
                 logger.error(
