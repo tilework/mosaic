@@ -25,7 +25,6 @@ const getMosaicConfig = (pathname, context = process.cwd()) => {
 
 
     return deepmerge(defaultConfig, mosaicConfig);
-
 };
 
 module.exports = {
