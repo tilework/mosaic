@@ -1,20 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
+const fs = require('fs');
 const webpack = require('webpack');
+const sassResourcesLoader = require('craco-sass-resources-loader');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const FallbackPlugin = require('@tilework/mosaic-webpack-fallback-plugin');
 const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
 
-const injectBabelConfig = require('@tilework/mosaic-config-injectors/lib/babel');
-const injectWebpackConfig = require('@tilework/mosaic-config-injectors/lib/webpack');
+const { injectBabelConfig, injectWebpackConfig } = require('@tilework/mosaic-config-injectors');
 
 const {
     ESLINT_MODES,
     whenDev
 } = require('@tilework/mosaic-craco');
 
+const when = require('./lib/when');
 const { cracoPlugins } = require('./lib/build-plugins');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -33,6 +35,7 @@ const getESLintConfig = () => {
 };
 
 module.exports = () => {
+    const abstractStyle = FallbackPlugin.getFallbackPathname('src/style/abstract/_abstract.scss');
     const appIndex = FallbackPlugin.getFallbackPathname(
         'src/index.js',
         undefined, 
@@ -63,17 +66,38 @@ module.exports = () => {
                     ]
                 ];
 
-                return injectBabelConfig(babelLoaderOptions);
+                // TODO figure out why called twice
+                if (!babelLoaderOptions.plugins) {
+                    babelLoaderOptions.plugins = [];
+                }
+
+                // TODO spwa
+                // Allow BEM props
+                babelLoaderOptions.plugins.unshift('transform-rebem-jsx');
+
+                return injectBabelConfig(babelLoaderOptions, {
+                    shouldApplyPlugins: false
+                });
             }
         },
         webpack: {
             plugins: [
                 new webpack.ProvidePlugin({
-                    React: 'react'
+                    React: 'react',
+                    PureComponent: ['react', 'PureComponent']
                 }),
 
                 // Show progress bar when building
-                new ProgressBarPlugin()
+                new ProgressBarPlugin(),
+
+                // TODO spwa
+                // Provide BEM specific variables
+                new webpack.DefinePlugin({
+                    'process.env': {
+                        REBEM_MOD_DELIM: JSON.stringify('_'),
+                        REBEM_ELEM_DELIM: JSON.stringify('-')
+                    }
+                }),
             ],
             configure: (webpackConfig) => {
                 // Remove module scope plugin, it breaks FallbackPlugin and ProvidePlugin
@@ -85,6 +109,12 @@ module.exports = () => {
                 // Allow importing .style, .ts and .tsx files without specifying the extension
                 webpackConfig.resolve.extensions.push(...['.scss', '.ts', '.tsx']);
 
+                webpackConfig.plugins.forEach((plugin) => {
+                    if (plugin.constructor.name === 'MiniCssExtractPlugin') {
+                        plugin.options.ignoreOrder = true;
+                    }
+                })
+
                 // Allow having empty entry point
                 if (isDev) {
                     webpackConfig.entry[1] = appIndex;
@@ -95,7 +125,10 @@ module.exports = () => {
                 // Disable LICENSE comments extraction in production
                 webpackConfig.optimization.minimizer[0].options.extractComments = whenDev(() => true, false);
 
-                return injectWebpackConfig(webpackConfig, { webpack });
+                return injectWebpackConfig(webpackConfig, { 
+                    webpack,
+                    shouldApplyPlugins: false
+                });
             }
         },
         devServer: (devServerConfig, { proxy }) => {
@@ -109,6 +142,23 @@ module.exports = () => {
 
             return devServerConfig;
         },
-        plugins: cracoPlugins
+        plugins: [
+            // TODO spwa
+            ...when(
+                // if there is no abstract style, do not inject it
+                fs.existsSync(abstractStyle),
+                [
+                    {
+                        // Allow using SCSS mix-ins in any file
+                        plugin: sassResourcesLoader,
+                        options: {
+                            resources: abstractStyle
+                        }
+                    }
+                ],
+                []
+            ),
+            ...cracoPlugins
+        ]
     };
 };
