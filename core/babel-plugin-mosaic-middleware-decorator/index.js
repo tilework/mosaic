@@ -294,7 +294,7 @@ module.exports = (options) => {
                 // This class deliberately does not have a name in the moment of declaration
                 // Having a name there will cause calls to the class from within itself not respect middleware
                 const classExpression = types.classExpression(
-                    null,
+                    types.identifier(`${id.node.name}_`),
                     superClass.node,
                     body.node,
                     decorators.node
