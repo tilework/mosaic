@@ -1,6 +1,7 @@
 {
     "name": "@tilework/mosaic-sample-page",
     "version": "0.0.1",
+    "private": "true",
     "mosaic": {
         "type": "extension",
         "nextPages": {
