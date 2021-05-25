@@ -1,3 +1,6 @@
+const path = require('path');
+const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
+
 const injectLoader = require('./inject-loader');
 const provideGlobals = require('./provide-globals');
 const supportLegacy = require('./support-legacy');
@@ -6,6 +9,7 @@ const resolveFileExtensions = require('./resolve-file-extensions');
 const injectWebpackFallbackPlugin = require('./inject-fallback-plugin');
 const allowImportStyles = require('./allow-import-styles');
 const { applyPlugins } = require('../common/apply-plugins');
+const writeJson = require('@tilework/mosaic-dev-utils/write-json');
 
 /** @type {import('@tilework/mosaic-config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
@@ -49,6 +53,24 @@ const injectWebpackConfigObject = (
     return webpackConfig;
 };
 
+const ensureMainMosaicConfig = () => {
+    const mainPackageJson = getPackageJson(process.cwd());
+
+    if (
+        Object.prototype.hasOwnProperty.call(mainPackageJson, 'mosaic')
+        || Object.prototype.hasOwnProperty.call(mainPackageJson, 'scandipwa')
+    ) {
+        return;
+    }
+
+    // Ensure 'mosaic' field in the main package.json
+    mainPackageJson.mosaic = {};
+    writeJson(
+        path.join(process.cwd(), 'package.json'),
+        mainPackageJson
+    )
+};
+
 /**
  * Inject webpack configuration with necessary things for the e11y package
  *
@@ -56,6 +78,8 @@ const injectWebpackConfigObject = (
  * @param {import('@tilework/mosaic-config-injectors').WebpackInjectorConfig} providedOptions
  */
 const injectWebpackConfig = (webpackConfig, providedOptions) => {
+    ensureMainMosaicConfig();
+
     // Handle function configs
     if (typeof webpackConfig === 'function') {
         return (env, argv) => injectWebpackConfigObject(webpackConfig(env, argv), providedOptions);

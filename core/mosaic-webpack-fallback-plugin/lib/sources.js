@@ -2,8 +2,6 @@ const path = require('path');
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 
-const { sourceDirectories } = getMosaicConfig(process.cwd());
-
 /**
  * Sources available for Mosaic Fallback mechanism
  * @typedef {Object} Sources
@@ -23,6 +21,8 @@ const prepareSources = (sources) => {
     if (sources.isPrepared) {
         return sources;
     }
+
+    const { sourceDirectories } = getMosaicConfig(process.cwd());
 
     Object.defineProperties(sources, {
         firstEntry: {
