@@ -1,6 +1,9 @@
 const path = require('path');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
+
+const { sourceDirectories = [] } = getMosaicConfig(process.cwd());
 
 const allowedPaths = [
     ...getParentThemePaths(),
@@ -17,8 +20,7 @@ const allowedPaths = [
     ...extensions.map(({ packagePath }) => packagePath)
 ].reduce((acc, pathname) => [
     ...acc,
-    path.join(pathname, 'src'),
-    path.join(pathname, 'public')
+    ...sourceDirectories.map(directory => path.join(pathname, directory))
 ], []);
 
 const namespaceExtractor = /@namespace +(?<namespace>[^ ]+)/;
@@ -122,7 +124,6 @@ const addSuperToConstructor = (path, types) => {
     const superCall = types.expressionStatement(
         types.callExpression(types.super(), [])
     );
-    
 
     try {
         constructor.get('body').unshiftContainer('body', superCall);
@@ -288,7 +289,7 @@ module.exports = (options) => {
 
                 const { node: { name } } = path.get('id');
 
-                // Generate the middlewarable class as an expression, 
+                // Generate the middlewarable class as an expression,
                 // To be able to operate with it as with a variable, not as with a declaration
                 // ClassExpression != ClassDeclaration
                 // This class deliberately does not have a name in the moment of declaration
