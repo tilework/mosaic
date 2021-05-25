@@ -1,5 +1,7 @@
 const path = require('path');
 const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
+const writeJson = require('@tilework/mosaic-dev-utils/write-json');
+const logger = require('@tilework/mosaic-dev-utils/logger');
 
 const injectLoader = require('./inject-loader');
 const provideGlobals = require('./provide-globals');
@@ -9,7 +11,6 @@ const resolveFileExtensions = require('./resolve-file-extensions');
 const injectWebpackFallbackPlugin = require('./inject-fallback-plugin');
 const allowImportStyles = require('./allow-import-styles');
 const { applyPlugins } = require('../common/apply-plugins');
-const writeJson = require('@tilework/mosaic-dev-utils/write-json');
 
 /** @type {import('@tilework/mosaic-config-injectors').WebpackInjectorConfig} */
 const defaultOptions = {
@@ -55,6 +56,15 @@ const injectWebpackConfigObject = (
 
 const ensureMainMosaicConfig = () => {
     const mainPackageJson = getPackageJson(process.cwd());
+
+    if (!mainPackageJson) {
+        logger.log(
+            `Looked for a package.json at: ${process.cwd()}/`,
+            `Unable to find one, error may occur. Make sure to have a package.json with a mosaic field in your CWD.`
+        );
+
+        process.exit(1);
+    }
 
     if (
         Object.prototype.hasOwnProperty.call(mainPackageJson, 'mosaic')
