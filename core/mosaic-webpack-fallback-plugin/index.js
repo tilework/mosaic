@@ -7,9 +7,13 @@ const {
     prepareExtensions,
     getExtensionProvisionedPath
 } = require('./lib/extensions');
+const { prepareSourceDirectories } = require('./lib/source-directories');
 
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
+
+const mosaicConfig = getMosaicConfig(process.cwd());
 
 class FallbackPlugin {
     /**
@@ -30,9 +34,19 @@ class FallbackPlugin {
             throw new Error('Fallback plugin expects sources object as an option.');
         }
 
+        const preparedSources = prepareSources(sources);
+        const extensions = prepareExtensions(processRoot);
+
+        const paths = [
+            ...preparedSources.values,
+            ...extensions.values
+        ].filter(Boolean);
+        const sourceDirectories = paths.flatMap(dir => prepareSourceDirectories(dir));
+
         this.options = {
-            sources: prepareSources(sources),
-            extensions: prepareExtensions(processRoot)
+            sources: preparedSources,
+            extensions,
+            sourceDirectories
         };
     }
 
@@ -102,6 +116,26 @@ class FallbackPlugin {
     }
 
     /**
+     * Get prefix for requested pathname from source directories, otherwise fallback to 'public'
+     * @param {string} pathname
+     * @returns {string}
+     */
+    getPrefixForPathname(pathname) {
+        const { sourceDirectories } = this.options;
+
+        // check if prefix available in one of source directories for requested pathname
+        const prefixFromSources = sourceDirectories
+            .map(directory => path.parse(directory).name)
+            .find(directory => new RegExp(escapeRegex(`${path.sep}${directory}${path.sep}`)).test(pathname));
+
+        if (prefixFromSources) {
+            return prefixFromSources;
+        }
+
+        return 'public';
+    }
+
+    /**
      * Get relative pathname of file given (relative to any source root)
      *
      * @param {string} pathname - absolute pathname
@@ -109,8 +143,8 @@ class FallbackPlugin {
      * @memberof FallbackPlugin
      */
     getRelativePathname(pathname) {
-        const isSrc = new RegExp(escapeRegex(`${path.sep}src${path.sep}`)).test(pathname);
-        const prefix = isSrc ? 'src' : 'public';
+        // prefix for relative pathname
+        const prefix = this.getPrefixForPathname(pathname);
 
         // take the last occurrence of the prefix and get the path after it
         const relativePathname = pathname.split(`${prefix}${path.sep}`).slice(-1).join(`${prefix}${path.sep}`);
@@ -206,13 +240,11 @@ class FallbackPlugin {
 
         for (let i = 0; i < extensions.entries.length; i++) {
             const [packageName, sourcePath] = extensions.entries[i];
-            const sourcePathSrc = path.join(sourcePath, 'src');
-            const sourcePathPublic = path.join(sourcePath, 'public');
+            const isSourcePathFromValidPath = mosaicConfig.sourceDirectories.some(
+                dir => pathname.includes(path.join(sourcePath, dir))
+            );
 
-            if (
-                pathname.includes(sourcePathSrc)
-                || pathname.includes(sourcePathPublic)
-            ) {
+            if (isSourcePathFromValidPath) {
                 return packageName;
             }
         }
@@ -226,7 +258,7 @@ class FallbackPlugin {
      * @param {*} pathname
      */
     getIsFallbackNeeded(pathname) {
-        const { sources, extensions } = this.options;
+        const { sourceDirectories } = this.options;
 
         // Skip null paths
         if (!pathname) {
@@ -238,27 +270,14 @@ class FallbackPlugin {
             return true;
         }
 
-        const paths = [
-            ...sources.values,
-            ...extensions.values
-        ];
 
         // Check if request is coming from Mosaic
         // sources or extension folders (/src or /pub)
-        for (let i = 0; i < paths.length; i++) {
-            const sourcePath = paths[i];
-            const sourcePathSrc = path.join(sourcePath, 'src');
-            const sourcePathPublic = path.join(sourcePath, 'public');
+        const isSourcePathFromValidPath = sourceDirectories.some(
+            dir => pathname.startsWith(dir)
+        );
 
-            if (
-                pathname.includes(sourcePathSrc)
-                || pathname.includes(sourcePathPublic)
-            ) {
-                return true;
-            }
-        }
-
-        return false;
+        return isSourcePathFromValidPath;
     }
 
     /**

@@ -1,5 +1,8 @@
 const path = require('path');
 const escapeRegex = require('@tilework/mosaic-dev-utils/escape-regex');
+const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
+
+const { sourceDirectories } = getMosaicConfig(process.cwd());
 
 /**
  * Sources available for Mosaic Fallback mechanism
@@ -44,10 +47,11 @@ const prepareSources = (sources) => {
         },
         getRegexOf: {
             enumerable: false,
-            value: (source) => new RegExp([
-                escapeRegex(path.join(sources[source], 'src')),
-                escapeRegex(path.join(sources[source], 'public'))
-            ].join('|'))
+            value: (source) => new RegExp(
+                sourceDirectories
+                    .map(directory => escapeRegex(path.join(sources[source], directory)))
+                    .join('|')
+            )
         },
         isPrepared: {
             enumerable: false,
