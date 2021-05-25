@@ -3963,6 +3963,23 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@tilework/mosaic-config-injectors@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@tilework/mosaic-config-injectors/-/mosaic-config-injectors-0.0.5.tgz#52669cd8152b872a2010c2484e1e84612098ec39"
+  integrity sha512-2y57amtVsOKY7xP/qg9Tp1n88IysGhaWeLP0n5r0GCS7qob3a3CtLCsu7WJqtSQQYoWW6TLVxPYA8qs+WMV8QA==
+  dependencies:
+    "@babel/plugin-transform-arrow-functions" "7.13.0"
+    "@babel/plugin-transform-async-to-generator" "7.13.0"
+    "@tilework/babel-plugin-mosaic-middleware-decorator" "0.0.4"
+    "@tilework/mosaic-craco" "0.0.3"
+    "@tilework/mosaic-dev-utils" "0.0.4"
+    "@tilework/mosaic-webpack-fallback-plugin" "0.0.4"
+    "@tilework/mosaic-webpack-import-loader" "0.0.4"
+    babel-loader "8.1.0"
+    babel-plugin-module-resolver "^4.1.0"
+    deepmerge "^4.2.2"
+    globby "^11.0.2"
+
 "@tilework/mosaic-nextjs-scripts@0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@tilework/mosaic-nextjs-scripts/-/mosaic-nextjs-scripts-0.0.6.tgz#3f52bb80f383af72c4e6f144a24b92217762a403"
@@ -3995,6 +4012,11 @@
     babel-jest "26.6.3"
     babel-preset-react-app "10.0.0"
     react "17.0.1"
+
+"@tilework/mosaic@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@tilework/mosaic/-/mosaic-0.0.3.tgz#2452ff71abbfc627d70ea31ba03dfe58944b388b"
+  integrity sha512-bMUOH6O4Lmbb3dsxScnQ0uXV6hLMC81uay/IGrBWTaK8ZEMn46Mkb9ZUp9Cba3nW2BLGEDSWvImDGgTyn0s0zg==
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -14183,7 +14205,7 @@ parent-module@^1.0.0:
     callsites "^3.0.0"
 
 "parent-ts-react-app@file:sample-packages/parent-ts-react-app":
-  version "0.1.3"
+  version "0.2.0"
   dependencies:
     "@testing-library/jest-dom" "^5.11.4"
     "@testing-library/react" "^11.1.0"
@@ -14192,7 +14214,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
-    parent-extension "file:../../Library/Caches/Yarn/v5/npm-parent-ts-react-app-0.1.3-45cf559a-23a0-4977-a3c0-0c2d2a89dcec-1621342050058/node_modules/parent-ts-react-app/packages/parent-extension"
+    parent-extension "file:../../../Library/Caches/Yarn/v4/npm-parent-ts-react-app-0.2.0-f7f69556-5f6b-4801-9403-1d14f171a4d9-1621944588065/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
