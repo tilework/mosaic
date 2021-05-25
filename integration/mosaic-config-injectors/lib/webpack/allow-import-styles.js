@@ -2,13 +2,17 @@
  * This allows importing css, sass and scss modules from node_modules
  */
 const allowImportStyles = (webpackConfig) => {
-    const { module: { rules } } = webpackConfig;
+    const { module: { rules = [] } = {} } = webpackConfig;
 
     const styleRule = rules.find(
         ({ oneOf }) => oneOf && oneOf.some(
             ({ test }) => /(css|s[ac]ss)(?!\w)/.test(test.source)
         )
     );
+
+    if (!styleRule) {
+        return;
+    }
 
     const moduleRules = styleRule.oneOf.filter(
         ({ test }) => (
