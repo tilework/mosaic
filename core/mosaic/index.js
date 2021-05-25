@@ -73,16 +73,17 @@ class Mosaic {
     middleware(Middlewarable, namespace) {
         try {
             addNamespaceToMiddlewarable(Middlewarable, namespace);
+            const namespaces = getNamespacesFromMiddlewarable(Middlewarable);
 
             const handler = {
                 // Get handler for members - intercepts `get` calls, meant for class static members
-                get: generateGetHandler('class', getNamespacesFromMiddlewarable(Middlewarable)),
+                get: generateGetHandler('class', namespaces),
 
                 // Apply handler for functions - intercepts function calls
-                apply: generateApplyHandler(getNamespacesFromMiddlewarable(Middlewarable)),
+                apply: generateApplyHandler(namespaces),
 
                 // Construct handler for classes - intercepts `new` operator calls, changes properties
-                construct: generateConstructHandler(getNamespacesFromMiddlewarable(Middlewarable))
+                construct: generateConstructHandler(namespaces)
             };
 
             const proxy = new Proxy(Middlewarable, handler);
