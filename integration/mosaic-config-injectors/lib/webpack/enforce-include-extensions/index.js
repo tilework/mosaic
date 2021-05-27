@@ -11,8 +11,8 @@ const processBabelRule = require('./process-babel-rule');
 const enforceIncludeExtensions = (webpackConfig) => {
     // Ensure entry is respected only if it is obvious
     const babelRules = getBabelRules(
-        webpackConfig.module.rules, 
-        typeof webpackConfig.entry === 'string' ? webpackConfig.entry : undefined
+        webpackConfig.module.rules
+        // typeof webpackConfig.entry === 'string' ? webpackConfig.entry : undefined
     );
 
     if (babelRules.length) {
