@@ -1,7 +1,9 @@
-const path = require('path');
-const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
-const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
-const extensions = require('@tilework/mosaic-dev-utils/extensions');
+const path = require("path");
+const {
+    getParentThemePaths,
+} = require("@tilework/mosaic-dev-utils/parent-theme");
+const { getMosaicConfig } = require("@tilework/mosaic-dev-utils/mosaic-config");
+const extensions = require("@tilework/mosaic-dev-utils/extensions");
 
 const { sourceDirectories = [] } = getMosaicConfig(process.cwd());
 
@@ -9,43 +11,52 @@ const allowedPaths = [
     ...getParentThemePaths(),
     process.cwd(),
     ...extensions.map(({ packageName }) => {
-        const isWin = process && (process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE));
+        const isWin =
+            process &&
+            (process.platform === "win32" ||
+                /^(msys|cygwin)$/.test(process.env.OSTYPE));
 
         if (!isWin) {
             return packageName;
         }
 
-        return packageName.replace('/', '\\');
+        return packageName.replace("/", "\\");
     }),
-    ...extensions.map(({ packagePath }) => packagePath)
-].reduce((acc, pathname) => [
-    ...acc,
-    ...sourceDirectories.map(directory => path.join(pathname, directory))
-], []);
+    ...extensions.map(({ packagePath }) => packagePath),
+].reduce(
+    (acc, pathname) => [
+        ...acc,
+        ...sourceDirectories.map((directory) => path.join(pathname, directory)),
+    ],
+    []
+);
 
 const namespaceExtractor = /@namespace +(?<namespace>[^ ]+)/;
 
-const extractNamespaceFromComments = (comments = []) => comments.reduce(
-    (acquired, testable) => {
+const extractNamespaceFromComments = (comments = []) =>
+    comments.reduce((acquired, testable) => {
         if (acquired) {
             return acquired;
         }
-        const { groups: { namespace } = {} } = testable.value.match(namespaceExtractor) || {};
+        const { groups: { namespace } = {} } =
+            testable.value.match(namespaceExtractor) || {};
         return namespace;
-    },
-    ''
-);
+    }, "");
 
 const isParentExportDefaultDeclaration = (path) => {
-    const { parent: { type } } = path;
+    const {
+        parent: { type },
+    } = path;
 
-    return type === 'ExportDefaultDeclaration';
+    return type === "ExportDefaultDeclaration";
 };
 
 const isParentExportNamedDeclaration = (path) => {
-    const { parent: { type } } = path;
+    const {
+        parent: { type },
+    } = path;
 
-    return type === 'ExportNamedDeclaration';
+    return type === "ExportNamedDeclaration";
 };
 
 /**
@@ -56,7 +67,10 @@ const getLeadingCommentsPath = (path) => {
     if (path.node.leadingComments) {
         return path;
     }
-    if (isParentExportNamedDeclaration(path) || isParentExportDefaultDeclaration(path)) {
+    if (
+        isParentExportNamedDeclaration(path) ||
+        isParentExportDefaultDeclaration(path)
+    ) {
         return path.parentPath;
     }
 
@@ -64,7 +78,9 @@ const getLeadingCommentsPath = (path) => {
 };
 
 const getLeadingComments = (path) => {
-    const { node: { leadingComments } } = getLeadingCommentsPath(path);
+    const {
+        node: { leadingComments },
+    } = getLeadingCommentsPath(path);
 
     return leadingComments;
 };
@@ -87,7 +103,7 @@ const removeNamespaceFromPath = (path, namespace) => {
 
     leadingCommentsPath.node.leadingComments.forEach((comment) => {
         comment.value = comment.value.replace(
-            new RegExp(`@namespace +${namespace}`), 
+            new RegExp(`@namespace +${namespace}`),
             `#namespace ${namespace}`
         );
     });
@@ -99,17 +115,17 @@ const removeNamespaceFromPath = (path, namespace) => {
  */
 const addSuperToConstructor = (path, types) => {
     const constructor = path
-        .get('body')
-        .get('body')
+        .get("body")
+        .get("body")
         .find((member) => {
             // Search for a constructor
-            const isConstructor = member.get('key').node.name === 'constructor';
+            const isConstructor = member.get("key").node.name === "constructor";
             if (!isConstructor) {
                 return false;
             }
 
             // Handle TS overloads: ensure that the retrieved thing indeed is a method
-            const isMethod = member.get('type').node === 'ClassMethod';
+            const isMethod = member.get("type").node === "ClassMethod";
             if (!isMethod) {
                 return false;
             }
@@ -126,12 +142,11 @@ const addSuperToConstructor = (path, types) => {
     );
 
     try {
-        constructor.get('body').unshiftContainer('body', superCall);
+        constructor.get("body").unshiftContainer("body", superCall);
     } catch {
         console.log(constructor);
         process.exit(0);
     }
-
 };
 
 /**
@@ -155,7 +170,7 @@ module.exports = (options) => {
     const { types } = options;
 
     return {
-        name: 'middleware-decorators',
+        name: "middleware-decorators",
         visitor: {
             // Transform leading comments of anonymous arrow functions
             ArrowFunctionExpression: (path, state) => {
@@ -174,8 +189,8 @@ module.exports = (options) => {
                 path.replaceWith(
                     types.callExpression(
                         types.memberExpression(
-                            types.identifier('Mosaic'),
-                            types.identifier('middleware')
+                            types.identifier("Mosaic"),
+                            types.identifier("middleware")
                         ),
                         [path.node, types.stringLiteral(namespace)]
                     )
@@ -194,14 +209,14 @@ module.exports = (options) => {
 
                 removeNamespaceFromPath(path, namespace);
 
-                const declarator = path.get('declarations')[0];
-                const init = declarator.get('init');
+                const declarator = path.get("declarations")[0];
+                const init = declarator.get("init");
 
                 init.replaceWith(
                     types.callExpression(
                         types.memberExpression(
-                            types.identifier('Mosaic'),
-                            types.identifier('middleware')
+                            types.identifier("Mosaic"),
+                            types.identifier("middleware")
                         ),
                         [init.node, types.stringLiteral(namespace)]
                     )
@@ -220,7 +235,13 @@ module.exports = (options) => {
 
                 removeNamespaceFromPath(path, namespace);
 
-                const { node: { id: { name }, params, body } } = path;
+                const {
+                    node: {
+                        id: { name },
+                        params,
+                        body,
+                    },
+                } = path;
 
                 const functionExpression = types.functionExpression(
                     types.identifier(name),
@@ -230,8 +251,8 @@ module.exports = (options) => {
 
                 const middlewaredFunctionExpression = types.callExpression(
                     types.memberExpression(
-                        types.identifier('Mosaic'),
-                        types.identifier('middleware')
+                        types.identifier("Mosaic"),
+                        types.identifier("middleware")
                     ),
                     [functionExpression, types.stringLiteral(namespace)]
                 );
@@ -241,8 +262,25 @@ module.exports = (options) => {
                     middlewaredFunctionExpression
                 );
 
-                const declaration = types.variableDeclaration('let', [declarator]);
-                path.replaceWith(declaration);
+                const declaration = types.variableDeclaration("let", [declarator]);
+
+                const isDefaultExport = isParentExportDefaultDeclaration(path);
+
+                // Handle regular case
+                if (!isDefaultExport) {
+                    path.replaceWith(declaration);
+                    return;
+                }
+
+                // Handle default export
+                const { parentPath } = path;
+
+                const exportDefaultDeclaration = types.exportDefaultDeclaration(
+                    types.identifier(name)
+                );
+
+                parentPath.insertAfter(exportDefaultDeclaration);
+                parentPath.replaceWith(declaration);
             },
 
             // TODO make this work with class expressions ?
@@ -260,22 +298,22 @@ module.exports = (options) => {
                 removeNamespaceFromPath(path, namespace);
 
                 // Extract all the contents of a class
-                const superClass = path.get('superClass');
-                const id = path.get('id');
-                const body = path.get('body');
-                const decorators = path.get('decorators');
-                const initialImplements = path.get('implements');
-                const mixins = path.get('mixins');
-                const superTypeParameters = path.get('superTypeParameters');
-                const typeParameters = path.get('typeParameters');
+                const superClass = path.get("superClass");
+                const id = path.get("id");
+                const body = path.get("body");
+                const decorators = path.get("decorators");
+                const initialImplements = path.get("implements");
+                const mixins = path.get("mixins");
+                const superTypeParameters = path.get("superTypeParameters");
+                const typeParameters = path.get("typeParameters");
 
                 // Mosaic.Extensible(SuperClass || undefined)
                 const superExpression = types.callExpression(
                     types.memberExpression(
-                        types.identifier('Mosaic'),
-                        types.identifier('Extensible')
+                        types.identifier("Mosaic"),
+                        types.identifier("Extensible")
                     ),
-                    [(superClass && superClass.node) || types.identifier('')]
+                    [(superClass && superClass.node) || types.identifier("")]
                 );
 
                 // If the middlewarable class did not have a base class before
@@ -287,7 +325,9 @@ module.exports = (options) => {
                 // Set the new base class
                 superClass.replaceWith(superExpression);
 
-                const { node: { name } } = path.get('id');
+                const {
+                    node: { name },
+                } = path.get("id");
 
                 // Generate the middlewarable class as an expression,
                 // To be able to operate with it as with a variable, not as with a declaration
@@ -303,11 +343,11 @@ module.exports = (options) => {
 
                 // Return all the stuff that's been on the initial class
                 if (Array.isArray(initialImplements)) {
-                    classExpression.implements = initialImplements.map(x => x.node);
+                    classExpression.implements = initialImplements.map((x) => x.node);
                 }
 
                 if (Array.isArray(decorators)) {
-                    classExpression.decorators = decorators.map(x => x.node);
+                    classExpression.decorators = decorators.map((x) => x.node);
                 }
 
                 classExpression.mixins = mixins.node;
@@ -318,13 +358,10 @@ module.exports = (options) => {
                 // Mosaic.middleware(class {}, 'namespace')
                 const wrappedInMiddeware = types.callExpression(
                     types.memberExpression(
-                        types.identifier('Mosaic'),
-                        types.identifier('middleware')
+                        types.identifier("Mosaic"),
+                        types.identifier("middleware")
                     ),
-                    [
-                        classExpression,
-                        types.stringLiteral(namespace.trim())
-                    ]
+                    [classExpression, types.stringLiteral(namespace.trim())]
                 );
 
                 // SomeClass = Mosaic...<generated above thing>
@@ -334,7 +371,7 @@ module.exports = (options) => {
                 );
 
                 // const SomeClass = ...
-                const newDeclaration = types.variableDeclaration('const', [declarator]);
+                const newDeclaration = types.variableDeclaration("const", [declarator]);
 
                 // If the class was export default'ed initially
                 // We need to remove the initial exdf, because `export default const x = ...` is not valid
@@ -351,7 +388,7 @@ module.exports = (options) => {
                     // With a new declaration
                     path.replaceWith(newDeclaration);
                 }
-            }
-        }
+            },
+        },
     };
 };
