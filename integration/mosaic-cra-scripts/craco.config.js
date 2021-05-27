@@ -78,7 +78,9 @@ module.exports = () => {
                 return injectBabelConfig(babelLoaderOptions, {
                     shouldApplyPlugins: false
                 });
-            }
+            },
+            plugins: [],
+            presets: []
         },
         webpack: {
             plugins: [
