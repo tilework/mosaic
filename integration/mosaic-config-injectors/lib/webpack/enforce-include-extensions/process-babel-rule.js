@@ -16,8 +16,8 @@ const processBabelRule = (rule, webpackConfig) => {
     if (initialMiddlewareDecoratorExclude) {
         rule.exclude = (filepath) => {
             // Allow  @namespace in the package, exluding ITS node_modules.
-            if (includePaths.find(
-                (one) => filepath.startsWith(one) && !filepath.startsWith(path.join(one, 'node_modules'))
+            if (includePaths.some(
+                (includePath) => filepath.startsWith(includePath) && !filepath.startsWith(path.join(includePath, 'node_modules'))
             )) {
                 return false;
             }
