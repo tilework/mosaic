@@ -3,7 +3,7 @@ const fs = require('fs');
 const glob = require('glob');
 
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
 
 const transformImports = require('./transform-import');

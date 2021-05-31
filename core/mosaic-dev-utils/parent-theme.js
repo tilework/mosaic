@@ -1,7 +1,7 @@
-const { getPackageJson } = require('./package-json');
+const logger = require('@scandipwa/common-dev-utils/logger');
+const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
+const getPackagePath = require('@scandipwa/common-dev-utils/package-path');
 const { getMosaicConfig } = require('./mosaic-config');
-const logger = require('./logger');
-const getPackagePath = require('./package-path');
 
 const getParentTheme = (pathname) => {
     const { parentTheme } = getMosaicConfig(pathname);

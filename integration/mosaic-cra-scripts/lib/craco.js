@@ -3,7 +3,7 @@ const path = require('path');
 const debounce = require('debounce');
 const chokidar = require('chokidar');
 const kill = require('tree-kill');
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 const { before } = require('./build-plugins');
 
 const args = process.argv.slice(2);

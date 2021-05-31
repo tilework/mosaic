@@ -36,7 +36,7 @@ const createJestConfig = require('react-scripts/scripts/utils/createJestConfig')
 const path = require('path');
 const paths = require('react-scripts/config/paths');
 const { middlewareJestConfig, ENV_TYPES } = require('@tilework/mosaic-test-utils/jest/middleware-jest-config');
-const getPackagePath = require('@tilework/mosaic-dev-utils/package-path');
+const getPackagePath = require('@scandipwa/common-dev-utils/package-path');
 const reactScriptsAbsolute = getPackagePath('react-scripts');
 
 argv.push(

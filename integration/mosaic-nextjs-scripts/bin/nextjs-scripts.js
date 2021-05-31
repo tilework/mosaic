@@ -6,7 +6,7 @@
 const runNextJS = (...args) => require('../lib/nextjs')(...args);
 const runTests = () => require('../scripts/test')();
 
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 const linkExtensions = require('@tilework/mosaic-dev-utils/link-extensions');
 
 const args = process.argv.slice(2);

@@ -1,8 +1,8 @@
-const { getPackageJson } = require('./package-json');
+const logger = require('@scandipwa/common-dev-utils/logger');
+const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
+const getPackagePath = require('@scandipwa/common-dev-utils/package-path');
+const shouldUseYarn = require('@scandipwa/common-dev-utils/should-use-yarn');
 const { getMosaicConfig } = require('./mosaic-config');
-const getPackagePath = require('./package-path');
-const shouldUseYarn = require('./should-use-yarn');
-const logger = require('./logger');
 const memoize = require('memoizee');
 
 let visitedDeps = [];

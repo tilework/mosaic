@@ -1,6 +1,6 @@
 const path = require('path');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
 
 // Generate aliases for preference first

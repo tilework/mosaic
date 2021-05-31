@@ -1,5 +1,5 @@
+const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
 const { deepmerge } = require('./deepmerge');
-const { getPackageJson } = require('./package-json');
 
 const defaultConfig = {
     sourceDirectories: [

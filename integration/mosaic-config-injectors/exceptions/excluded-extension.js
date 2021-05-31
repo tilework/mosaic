@@ -1,4 +1,4 @@
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 
 class ExcludedExtensionException extends Error {
     constructor(excludedExtensionFile) {

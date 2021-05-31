@@ -1,5 +1,5 @@
 const { getBuildConfigPlugins } = require('@tilework/mosaic-dev-utils/build-config-plugins');
-const logger = require('@tilework/mosaic-dev-utils/logger');
+const logger = require('@scandipwa/common-dev-utils/logger');
 
 const getPluginKey = (type) => {
     if (type === 'webpack') {
