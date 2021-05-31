@@ -21,7 +21,9 @@ const walkDirectoryUp = (pathname, expectedType = false, depth = 0) => {
     }
 
     try {
-        const { type } = getMosaicConfig(path.join(pathname, 'package.json'));
+        const { type } = getMosaicConfig(
+            require(path.join(pathname, 'package.json'))
+        );
 
         // Handle type matching
         if (expectedType && (!Array.isArray(expectedType) || expectedType.length)) {
