@@ -1,5 +1,5 @@
 const path = require('path');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@tilework/mosaic-dev-utils/logger');
 const { getMosaicConfig } = require('./mosaic-config');
 
 const isTheme = (pathname, quiet = false) => {

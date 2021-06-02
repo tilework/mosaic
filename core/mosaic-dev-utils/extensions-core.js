@@ -1,7 +1,7 @@
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
-const getPackagePath = require('@scandipwa/scandipwa-dev-utils/package-path');
-const shouldUseYarn = require('@scandipwa/scandipwa-dev-utils/should-use-yarn');
+const logger = require('@tilework/mosaic-dev-utils/logger');
+const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
+const getPackagePath = require('@tilework/mosaic-dev-utils/package-path');
+const shouldUseYarn = require('@tilework/mosaic-dev-utils/should-use-yarn');
 const { getMosaicConfig } = require('./mosaic-config');
 const memoize = require('memoizee');
 

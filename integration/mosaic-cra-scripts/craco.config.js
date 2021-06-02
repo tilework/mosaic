@@ -7,7 +7,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const FallbackPlugin = require('@tilework/mosaic-webpack-fallback-plugin');
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
+const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
 
 const { injectBabelConfig, injectWebpackConfig } = require('@tilework/mosaic-config-injectors');
 

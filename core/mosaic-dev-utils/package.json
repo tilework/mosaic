@@ -3,7 +3,9 @@
     "description": "Development utilities used by CSA.",
     "version": "0.1.1",
     "dependencies": {
-        "@scandipwa/scandipwa-dev-utils": "0.1.2",
+        "mem-fs": "^1.2.0",
+        "mem-fs-editor": "^7.0.1",
+        "chalk": "^4.1.0",
         "memoizee": "^0.4.15"
     },
     "license": "MIT",

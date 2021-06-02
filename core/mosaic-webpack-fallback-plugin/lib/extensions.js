@@ -1,7 +1,7 @@
 const prepareSources = require('./sources');
 const { getExtensionsForCwd } = require('@tilework/mosaic-dev-utils/extensions-core');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@tilework/mosaic-dev-utils/logger');
 const path = require('path');
 
 /**

@@ -1,4 +1,4 @@
-const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
+const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
 const { deepmerge } = require('./deepmerge');
 
 const defaultConfig = {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const linkExtensions = require('@tilework/mosaic-dev-utils/link-extensions');
-const logger = require('@scandipwa/scandipwa-dev-utils/logger');
+const logger = require('@tilework/mosaic-dev-utils/logger');
 const runCraco = (...args) => require('../lib/craco')(...args);
 const runTests = () => require('../scripts/test');
 

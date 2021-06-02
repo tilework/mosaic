@@ -15,7 +15,7 @@ const paths = require('react-scripts/config/paths');
 const { middlewareJestConfig, ENV_TYPES } = require('@tilework/mosaic-test-utils/jest/middleware-jest-config');
 const resolve = require('resolve');
 const getDirFromArgs = require('../lib/args/get-dir-from-args');
-const getPackagePath = require('@scandipwa/scandipwa-dev-utils/package-path');
+const getPackagePath = require('@tilework/mosaic-dev-utils/package-path');
 const getDefinedPages = require('../lib/pages/defined-pages');
 const createMockPages = require('../lib/pages/mock-pages');
 

@@ -5,7 +5,6 @@
   "author": "Jegors Batovs <yegor@scandipwa.com>",
   "license": "MIT",
   "dependencies": {
-    "@scandipwa/scandipwa-dev-utils": "0.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.2.6",
     "@tilework/mosaic": "0.1.1",
