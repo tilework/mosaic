@@ -1,7 +1,7 @@
 const path = require('path');
-const execCommandAsync = require('@scandipwa/common-dev-utils/exec-command');
-const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
-const shouldUseYarn = require('@scandipwa/common-dev-utils/should-use-yarn');
+const execCommandAsync = require('@scandipwa/scandipwa-dev-utils/exec-command');
+const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
+const shouldUseYarn = require('@scandipwa/scandipwa-dev-utils/should-use-yarn');
 
 const SLICEABLE = 'file:'.length;
 

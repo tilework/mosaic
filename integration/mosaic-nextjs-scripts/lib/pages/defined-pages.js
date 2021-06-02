@@ -2,7 +2,7 @@
 const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
-const logger = require('@scandipwa/common-dev-utils/logger');
+const logger = require('@scandipwa/scandipwa-dev-utils/logger');
 
 const getDefinedPages = async (rootDir) => {
     const themePaths = getParentThemePaths(rootDir);

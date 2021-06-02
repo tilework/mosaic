@@ -1,5 +1,5 @@
 const babel = require('@babel/core');
-const logger = require('@scandipwa/common-dev-utils/logger');
+const logger = require('@scandipwa/scandipwa-dev-utils/logger');
 
 function transformImports(code, transformer) {
     const parts = [];

@@ -3,9 +3,9 @@ const path = require('path');
 const deepmerge = require('deepmerge');
 const globby = require('globby');
 
-const writeJson = require('@scandipwa/common-dev-utils/write-json');
+const writeJson = require('@scandipwa/scandipwa-dev-utils/write-json');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
-const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
+const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
 
 const { aliasMap, aliasPostfixMap } = require('./util/alias');
 const includePaths = require('../common/include-paths');

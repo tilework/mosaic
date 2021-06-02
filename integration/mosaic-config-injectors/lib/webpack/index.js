@@ -1,7 +1,7 @@
 const path = require('path');
-const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
-const writeJson = require('@scandipwa/common-dev-utils/write-json');
-const logger = require('@scandipwa/common-dev-utils/logger');
+const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
+const writeJson = require('@scandipwa/scandipwa-dev-utils/write-json');
+const logger = require('@scandipwa/scandipwa-dev-utils/logger');
 
 const injectLoader = require('./inject-loader');
 const provideGlobals = require('./provide-globals');

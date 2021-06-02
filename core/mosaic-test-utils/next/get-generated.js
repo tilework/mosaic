@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const getPackagePath = require('@scandipwa/common-dev-utils/package-path');
+const getPackagePath = require('@scandipwa/scandipwa-dev-utils/package-path');
 
 const nextScriptsLocation = getPackagePath('@tilework/mosaic-nextjs-scripts');
 const pagesLocation = path.resolve(nextScriptsLocation, 'src', 'pages');

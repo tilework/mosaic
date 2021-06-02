@@ -6,7 +6,7 @@
   "types": "./typings",
   "license": "MIT",
   "dependencies": {
-    "@scandipwa/common-dev-utils": "0.0.1",
+    "@scandipwa/scandipwa-dev-utils": "0.0.25",
     "@babel/plugin-transform-arrow-functions": "7.13.0",
     "@babel/plugin-transform-async-to-generator": "7.13.0",
     "@tilework/babel-plugin-mosaic-middleware-decorator": "0.0.6",

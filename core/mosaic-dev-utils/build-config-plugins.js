@@ -1,6 +1,6 @@
 const memoize = require('memoizee');
 const path = require('path');
-const logger = require('@scandipwa/common-dev-utils/logger');
+const logger = require('@scandipwa/scandipwa-dev-utils/logger');
 const { getExtensionsForCwd } = require('./extensions-core');
 const { getMosaicConfig } = require('./mosaic-config');
 

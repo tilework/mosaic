@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 
-const createFilesystem = require('@scandipwa/common-dev-utils/create-filesystem');
+const createFilesystem = require('@scandipwa/scandipwa-dev-utils/create-filesystem');
 
 const createMockPages = (pages, projectRoot) => createFilesystem(
     path.join(projectRoot, 'pages'),

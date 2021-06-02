@@ -1,6 +1,6 @@
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
-const { getPackageJson } = require('@scandipwa/common-dev-utils/package-json');
+const { getPackageJson } = require('@scandipwa/scandipwa-dev-utils/package-json');
 const { sources } = require('@tilework/mosaic-dev-utils/sources');
 
 const themes = Object.values(sources);

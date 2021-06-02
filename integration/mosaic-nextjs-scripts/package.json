@@ -15,7 +15,7 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@scandipwa/common-dev-utils": "0.0.1",
+        "@scandipwa/scandipwa-dev-utils": "0.0.25",
         "@babel/core": "^7.14.0",
         "@babel/preset-react": "^7.13.13",
         "@tilework/mosaic-config-injectors": "0.1.3",
