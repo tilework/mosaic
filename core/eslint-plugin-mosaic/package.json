@@ -1,7 +1,7 @@
 {
     "name": "@tilework/eslint-plugin-mosaic",
     "description": "ESLint plugin used by CSA.",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "keywords": [
         "eslint",
         "eslintplugin",
