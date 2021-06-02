@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/plugin-transform-arrow-functions": "7.13.0",
     "@babel/plugin-transform-async-to-generator": "7.13.0",
-    "@scandipwa/scandipwa-dev-utils": "0.1.1",
+    "@scandipwa/scandipwa-dev-utils": "0.1.2",
     "@tilework/babel-plugin-mosaic-middleware-decorator": "0.0.7",
     "@tilework/mosaic-craco": "0.0.3",
     "@tilework/mosaic-dev-utils": "0.1.0",
