@@ -5,6 +5,7 @@
 // Because it cannot resolve local modules that are not yet linked
 const runNextJS = (...args) => require('../lib/nextjs')(...args);
 const runTests = () => require('../scripts/test')();
+const runExport = () => require('../scripts/export')();
 
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const linkExtensions = require('@tilework/mosaic-dev-utils/link-extensions');
@@ -16,7 +17,8 @@ const scriptMap = {
     build: runNextJS,
     dev: runNextJS,
     link: linkExtensions.bind(null, process.cwd()),
-    test: runTests
+    test: runTests,
+    export: runExport
 };
 
 const script = args[0];

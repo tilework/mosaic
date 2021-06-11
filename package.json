@@ -25,15 +25,13 @@
     "url": "https://github.com/tilework/mosaic/issues"
   },
   "homepage": "https://github.com/tilework/mosaic#readme",
-  "dependencies": {
-    "lerna": "^3.22.1"
-  },
   "workspaces": [
     "sample-packages/*",
     "core/*",
     "integration/*"
   ],
   "devDependencies": {
+    "lerna": "^3.22.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.1.0",
