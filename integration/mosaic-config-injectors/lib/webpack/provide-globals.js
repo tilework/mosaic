@@ -15,7 +15,7 @@ const getMosaicPath = () => {
 }
 
 const additionalProvideDefinitions = {
-    Mosaic: getMosaicPath()
+    Mosaic: [getMosaicPath(), 'default']
 };
 
 /**
