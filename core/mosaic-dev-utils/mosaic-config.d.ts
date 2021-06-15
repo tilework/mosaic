@@ -4,6 +4,8 @@ export interface MosaicConfig {
     }
     sourceDirectories?: string[]
     preference?: string
+    type: string
+    themeAlias: string
 }
 
 /**
