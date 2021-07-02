@@ -12,19 +12,23 @@ yarn
 
 ## Contribution
 
-When making a contribution, feel welcome to open a pull request. Please, verbosely describe the problem you are solving and the approach used for that. Your code should be well-readable, and commented if necessary. Consistent with the existing ESLint configuration and commonly applied in this project coding approaches.
+When making a contribution, please ensure the following
 
-All of the implemented functionalty should be tested on sample packages provided in this repository.
+- verbosely describe the problem you are solving and your solution
+- your code should be well-readable, and commented if necessary
+- your code should be consistent with the existing ESLint configuration and commonly applied in this project coding approaches
+- open a pull request
+- all of the implemented functionalty is tested on all of the sample packages provided in this repository
 
 ## Project structure
 
 In order to find any specific documentation about the package, look into the package. The list below contains generic descriptions for each package, to simplify the process of getting acknowledged with the project structure.
 
-Remember to check the [official Mosaic documentation](https://docs.mosaic.js.org/) to find out more about usage specifics and supported functionality.
+Remember to check the [official Mosaic documentation](https://docs.mosaic.js.org/) to find out more about usage specifics and supported functionality. It is recommended to take your first steps there
 
 ## Integration
 
-Packages in `integration/` directory are related to integrating Mosaic with different technologies.
+Packages in `integration/` directory are related to integrating Mosaic with different technologies - e.g. Next.js, create-react-app and others.
 
 ### **`mosaic-config-injectors`** 
 
@@ -122,23 +126,9 @@ Ready-made configuration with recommended plugins. Not automatically injected in
 
 ### **`mosaic`**
 
-The Mosaic package itself, contains all the runtime logic of Mosaic.
+The Mosaic package itself, contains all the **runtime** logic of Mosaic.
 
-Features:
-- middleware - a method to attach a namespace to a piece of functionality
-- Extensible - a method to ensure proper context during the construction of the given class. Important for interception of class properties being declared with [class property syntax](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties/) during their initialisation in constructor
-- setPlugins - a method that accepts an array of modules which are `.plugin.js` files, sets the internal property and exposes it to the window object.
-
-Work principle:
-- Middleware function wraps functionality into a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). 
-- If functionality is a class - this is a class (instanceof Proxy) that returns a instance (instanceof Proxy too)
-- If the functionality is a function
-  - When it is called, the plugins are being extracted from the `lib/plugins/plugin-storage` and a new function is generated from these plugins, wrapping them around the initial function. Then this function is called on the original arguments. The same algorithm is applied to callable class members.
-- If the functionality is a class
-  - Babel plugin ensures that the class extends from `Mosaic.Extensible(...)` to ensure instance property modifications (above)
-  - When instance is created, all of the `member-property` plugins are applied to it, replacing the original properties with the ones the plugins result into.
-  - The instance is a proxy, when calling any member of the instance the plugin storage is scanned for the corresponding plugins and the plugins are applied to the callable member before executing it
-  - The class itself is a proxy, to ensure that calls to static methods are handled too
+For more information, read [this doc](https://docs.mosaic.js.org/in-depth/how-does-it-work)
 
 ### **`mosaic-craco`**
 
