@@ -4,6 +4,8 @@ const { log } = require("./logger");
 const { applyCracoConfigPlugins } = require("./features/plugins");
 const { POSTCSS_MODES } = require("./features/webpack/style/postcss");
 const { ESLINT_MODES } = require("./features/webpack/eslint");
+const { overrideCraPaths } = require("./features/cra-paths/override");
+const { getCraPaths } = require("./cra");
 
 const DEFAULT_CONFIG = {
     reactScriptsVersion: "react-scripts",
@@ -35,9 +37,17 @@ function ensureConfigSanity(cracoConfig) {
 
 function processCracoConfig(cracoConfig, context) {
     let resultingCracoConfig = deepMergeWithArray({}, DEFAULT_CONFIG, cracoConfig);
+    
     ensureConfigSanity(resultingCracoConfig);
+    applyCracoConfigPlugins(resultingCracoConfig, context);
+    processCracoPaths(resultingCracoConfig, context);
 
-    return applyCracoConfigPlugins(resultingCracoConfig, context);
+    return resultingCracoConfig;
+}
+
+function processCracoPaths(cracoConfig, context) {
+    context.paths = getCraPaths(cracoConfig);
+    overrideCraPaths(cracoConfig, context);
 }
 
 function getConfigAsObject(context) {
