@@ -8,9 +8,9 @@ const { initialize } = require("./script");
 const { craco, context } = initialize();
 
 craco.then(
-    (craco) => {
-        overrideWebpackDev(craco, context);
-        overrideDevServer(craco, context);
-        start(craco);
+    (cracoConfig) => {
+        overrideWebpackDev(cracoConfig, context);
+        overrideDevServer(cracoConfig, context);
+        start(cracoConfig);
     }
 );

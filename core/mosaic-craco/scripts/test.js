@@ -10,10 +10,10 @@ const { initialize } = require("./script");
 const { craco, context } = initialize();
 
 craco.then(
-    (craco) => {
+    (cracoConfig) => {
         validateCraVersion(cracoConfig);
 
-        overrideJest(craco, context);
-        test(craco);
+        overrideJest(cracoConfig, context);
+        test(cracoConfig);
     }
 );

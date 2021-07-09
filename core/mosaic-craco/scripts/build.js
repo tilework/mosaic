@@ -8,10 +8,10 @@ const { initialize } = require("./script");
 const { craco, context } = initialize();
 
 craco.then(
-    (craco) => {
+    (cracoConfig) => {
         validateCraVersion(cracoConfig);
 
-        overrideWebpackProd(craco, context);
-        build(craco);
+        overrideWebpackProd(cracoConfig, context);
+        build(cracoConfig);
     }
 );
