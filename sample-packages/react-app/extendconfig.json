@@ -4,56 +4,71 @@
         "jsx": "react",
         "paths": {
             "ParentStyle/*": [
-                "../parent-ts-react-app/src/style/*"
+                "../parent-ts-react-app/src/style/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/style/*"
             ],
             "ParentComponent/*": [
-                "../parent-ts-react-app/src/component/*"
+                "../parent-ts-react-app/src/component/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/component/*"
             ],
             "ParentRoute/*": [
-                "../parent-ts-react-app/src/route/*"
+                "../parent-ts-react-app/src/route/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/route/*"
             ],
             "ParentStore/*": [
-                "../parent-ts-react-app/src/store/*"
+                "../parent-ts-react-app/src/store/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/store/*"
             ],
             "ParentUtil/*": [
-                "../parent-ts-react-app/src/util/*"
+                "../parent-ts-react-app/src/util/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/util/*"
             ],
             "ParentQuery/*": [
-                "../parent-ts-react-app/src/query/*"
+                "../parent-ts-react-app/src/query/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/query/*"
             ],
             "ParentType/*": [
-                "../parent-ts-react-app/src/type/*"
+                "../parent-ts-react-app/src/type/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/type/*"
             ],
             "Parent/*": [
-                "../parent-ts-react-app/src/*"
+                "../parent-ts-react-app/src/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/*"
             ],
             "Style/*": [
                 "../parent-ts-react-app/src/style/*",
-                "src/style/*"
+                "src/style/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/style/*"
             ],
             "Component/*": [
                 "../parent-ts-react-app/src/component/*",
-                "src/component/*"
+                "src/component/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/component/*"
             ],
             "Route/*": [
                 "../parent-ts-react-app/src/route/*",
-                "src/route/*"
+                "src/route/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/route/*"
             ],
             "Store/*": [
                 "../parent-ts-react-app/src/store/*",
-                "src/store/*"
+                "src/store/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/store/*"
             ],
             "Util/*": [
                 "../parent-ts-react-app/src/util/*",
-                "src/util/*"
+                "src/util/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/util/*"
             ],
             "Query/*": [
                 "../parent-ts-react-app/src/query/*",
-                "src/query/*"
+                "src/query/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/query/*"
             ],
             "Type/*": [
                 "../parent-ts-react-app/src/type/*",
-                "src/type/*"
+                "src/type/*",
+                "../../../create-scandipwa-app/mosaic/sample-packages/parent-ts-react-app/src/type/*"
             ],
             "/*": [
                 "../parent-ts-react-app/src/*",

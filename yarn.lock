@@ -3951,90 +3951,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tilework/babel-plugin-mosaic-middleware-decorator@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@tilework/babel-plugin-mosaic-middleware-decorator/-/babel-plugin-mosaic-middleware-decorator-0.0.9.tgz#df99cfd199d434546618b6460d298b16baebc4e3"
-  integrity sha512-f1WkZBB/3cMxww6fECws4/5k1if5zlVbhU/Vv5xFro80uZ8AlFt/K/t66+y7wCuWvLx7gCOo7cY+qnF8f12xCA==
-  dependencies:
-    "@tilework/mosaic-dev-utils" "0.1.2"
-
-"@tilework/mosaic-config-injectors@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-config-injectors/-/mosaic-config-injectors-0.1.7.tgz#c54107a8d0b865c236d57048a9f3686417850eda"
-  integrity sha512-yBJbuUSnp9slNHDua2M6zl8Fq00JXTpmbogdtdmRH3zNeRCdpQXCOEmNb4QXtc3bTY3kMRpEatgVHCg8O7EEHQ==
-  dependencies:
-    "@babel/plugin-transform-arrow-functions" "7.13.0"
-    "@babel/plugin-transform-async-to-generator" "7.13.0"
-    "@tilework/babel-plugin-mosaic-middleware-decorator" "0.0.9"
-    "@tilework/mosaic-craco" "0.0.3"
-    "@tilework/mosaic-dev-utils" "0.1.2"
-    "@tilework/mosaic-webpack-fallback-plugin" "0.0.8"
-    "@tilework/mosaic-webpack-import-loader" "0.0.8"
-    babel-loader "8.1.0"
-    babel-plugin-module-resolver "^4.1.0"
-    deepmerge "^4.2.2"
-    globby "^11.0.2"
-
-"@tilework/mosaic-dev-utils@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-dev-utils/-/mosaic-dev-utils-0.1.2.tgz#2a2878a1c6d1c910c113a3230b2fca20220d9766"
-  integrity sha512-pH74M+LJMmFtNMYkGWe3VfNygstax4Ryb+KpGrrtBlNCPkzELJPQKMARfBHX0SSyNK2m7r0tungoWfrDtbCnoQ==
-  dependencies:
-    chalk "^4.1.0"
-    mem-fs "^1.2.0"
-    mem-fs-editor "^7.0.1"
-    memoizee "^0.4.15"
-
-"@tilework/mosaic-nextjs-scripts@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-nextjs-scripts/-/mosaic-nextjs-scripts-0.1.7.tgz#f2e31626fbff1ba0a324f0db481192fb2b20f3bb"
-  integrity sha512-ugR0eHEYFAyOIOqicDXOaQsrfbbPRWNpAkE3tSjXMfdGKpSZnwyAYuSAkKWP+VyGVe/MeHxb/atc6E1ek0A+gA==
-  dependencies:
-    "@babel/core" "^7.14.0"
-    "@babel/preset-react" "^7.13.13"
-    "@tilework/mosaic-config-injectors" "0.1.7"
-    "@tilework/mosaic-dev-utils" "0.1.2"
-    "@tilework/mosaic-test-utils" "0.0.15"
-    chokidar "^3.5.1"
-    cross-spawn "^7.0.0"
-    debounce "^1.2.0"
-    fs-extra "^10.0.0"
-    glob "^7.1.6"
-    jest "^26.6.3"
-    next "10.0.5"
-    react-scripts "^4.0.3"
-    resolve "^1.20.0"
-    tree-kill "^1.2.2"
-
-"@tilework/mosaic-test-utils@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-test-utils/-/mosaic-test-utils-0.0.15.tgz#fee053d9dc1f8b610e0847de28bc0015a1ac0113"
-  integrity sha512-LMiaodYT/bguX5e39nEb4wrqJs6tfdYbm0WWHroAoP1N90DPdjpbFW79GDYjtPBKdzcXQ/XTY6k78grzdQoNqg==
-  dependencies:
-    "@testing-library/jest-dom" "^5.11.4"
-    "@testing-library/react" "^11.2.6"
-    "@tilework/mosaic" "0.1.2"
-    "@tilework/mosaic-config-injectors" "0.1.7"
-    "@tilework/mosaic-dev-utils" "0.1.2"
-    "@tilework/mosaic-nextjs-scripts" "0.1.7"
-    babel-jest "26.6.3"
-    babel-preset-react-app "10.0.0"
-    react "17.0.1"
-
-"@tilework/mosaic-webpack-fallback-plugin@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-webpack-fallback-plugin/-/mosaic-webpack-fallback-plugin-0.0.8.tgz#6a3d215e818bd787240cfa738c26da13c054afb7"
-  integrity sha512-D6X/MynceW2mc1Leks7DdaxJk8MuujxTq9vLJTAD2k5ZrecsdOxwXo7DBIAEoUJuIc8bDZo6bELShZC/cpwhpg==
-  dependencies:
-    "@tilework/mosaic-dev-utils" "0.1.2"
-
-"@tilework/mosaic-webpack-import-loader@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@tilework/mosaic-webpack-import-loader/-/mosaic-webpack-import-loader-0.0.8.tgz#4cacfa3f3b0b5b2218a7b78978880cc08b3095a0"
-  integrity sha512-JN+Vqd6eryBhT6Z9Nk4MZpyF+wugVDo0rAdWi5YfyLTP6OihPK7+7zmtweInDtQ2O50gmfa774Ejt9dL4W81ZA==
-  dependencies:
-    "@tilework/mosaic-dev-utils" "0.1.2"
-
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -14224,7 +14140,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
-    parent-extension "file:../../Library/Caches/Yarn/v4/npm-parent-ts-react-app-0.2.0-7913c2a0-e943-4902-944b-6c83aa853caa-1625126814106/node_modules/parent-ts-react-app/packages/parent-extension"
+    parent-extension "file:../../Library/Caches/Yarn/v4/npm-parent-ts-react-app-0.2.0-f6930b41-4ef2-479f-950c-e8e52601fe6c-1626261981277/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
