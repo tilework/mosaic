@@ -13,7 +13,7 @@
   },
   "mosaic": {
     "extensions": {
-      "@tilework/mosaic-sample-page": true
+      "@tilework/mosaic-sample-page": false
     },
     "sourceDirectories": [
       "./.storybook"
