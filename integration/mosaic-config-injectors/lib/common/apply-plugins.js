@@ -13,7 +13,7 @@ const getPluginKey = (type) => {
         return {
             overrideKey: 'overrideBabelConfig',
             configName: 'babelConfig'
-        };;
+        };
     }
 
     throw new Error('Unexpected plugin type!');
@@ -26,7 +26,7 @@ const applyPlugins = (initialConfig, pluginType) => {
     } = getPluginKey(pluginType);
     const buildConfigPlugins = getBuildConfigPlugins();
     
-    let config = initialConfig;
+    let config = { [configName]: initialConfig };
 
     for (const { packageName, plugins } of buildConfigPlugins) {
         for (const { plugin: { [overrideKey]: plugin } = {} } of plugins) {
@@ -34,7 +34,7 @@ const applyPlugins = (initialConfig, pluginType) => {
                 continue;
             }
 
-            config = plugin({ [configName]: config });
+            config = plugin(config);
 
             if (!config) {
                 logger.error(
@@ -47,7 +47,7 @@ const applyPlugins = (initialConfig, pluginType) => {
         }
     }
 
-    return config;
+    return config[configName];
 };
 
 module.exports = {

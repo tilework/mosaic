@@ -34,6 +34,4 @@ module.exports = babelJest.createTransformer(injectBabelConfig({
     ],
     babelrc: false,
     configFile: false
-}, {
-    shouldApplyPlugins: false
 }));
