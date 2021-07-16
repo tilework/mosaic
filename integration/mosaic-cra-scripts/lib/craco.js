@@ -3,8 +3,11 @@ const path = require('path');
 const debounce = require('debounce');
 const chokidar = require('chokidar');
 const kill = require('tree-kill');
+const paths = require('react-scripts/config/paths');
 const logger = require('@tilework/mosaic-dev-utils/logger');
 const { before } = require('./build-plugins');
+const googleAnalytics = require('@tilework/mosaic-dev-utils/analytics');
+const getFolderSize = require('@tilework/mosaic-dev-utils/get-folder-size');
 
 const args = process.argv.slice(2);
 
@@ -62,6 +65,7 @@ module.exports = (script) => {
 
         child.on('error', (e) => {
             logger.log('error', e);
+            googleAnalytics.trackError(e);
             process.exit();
         });
 
@@ -69,7 +73,11 @@ module.exports = (script) => {
             if (code !== null || isProd) {
                 // if the process exits "voluntarily" stop the parent as well
                 // See more in answer here: https://stackoverflow.com/a/39169784
-                process.exit();
+                try {
+                    googleAnalytics.trackEvent('Theme build', 'Bundle size', getFolderSize(paths.appBuild), 'Bundle')
+                        .finally(() => process.exit());
+                // eslint-disable-next-line no-empty
+                } catch (e) {}
             }
         });
     };
