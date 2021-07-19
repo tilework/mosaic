@@ -10,6 +10,7 @@ const googleAnalytics = require('@tilework/mosaic-dev-utils/analytics');
 const getFolderSize = require('@tilework/mosaic-dev-utils/get-folder-size');
 
 const args = process.argv.slice(2);
+const buildJsPath = '/static/js';
 
 module.exports = (script) => {
     before.forEach((beforeRun) => beforeRun(script));
@@ -69,12 +70,14 @@ module.exports = (script) => {
             process.exit();
         });
 
-        child.on('close', (code) => {
+        child.on('close', async (code) =>  {
             if (code !== null || isProd) {
                 // if the process exits "voluntarily" stop the parent as well
                 // See more in answer here: https://stackoverflow.com/a/39169784
                 try {
-                    googleAnalytics.trackEvent('Theme build', 'Bundle size', getFolderSize(paths.appBuild), 'Bundle')
+                    const bundleSize = await getFolderSize(paths.appBuild + buildJsPath);
+
+                    googleAnalytics.trackEvent('Theme build', 'Bundle size', bundleSize, 'Bundle')
                         .finally(() => process.exit());
                 // eslint-disable-next-line no-empty
                 } catch (e) {}

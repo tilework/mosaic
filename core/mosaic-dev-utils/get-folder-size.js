@@ -18,6 +18,7 @@ const getFolderSizeFn = async (dirPath, size = 0) => {
 
     return size + fSize;
 };
-const getFolderSize = (dirPath) => getFolderSizeFn(dirPath) / 1024 / 1024;
+
+const getFolderSize = async (dirPath) => Math.round(await getFolderSizeFn(dirPath) / 1024 / 1024);
 
 module.exports = getFolderSize;
