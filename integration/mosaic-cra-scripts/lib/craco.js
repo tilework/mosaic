@@ -66,6 +66,7 @@ module.exports = (script) => {
 
         child.on('error', (e) => {
             logger.log('error', e);
+            googleAnalytics.printAboutAnalytics();
             googleAnalytics.trackError(e);
             process.exit();
         });
@@ -77,6 +78,7 @@ module.exports = (script) => {
                 try {
                     const bundleSize = await getFolderSize(paths.appBuild + buildJsPath);
 
+                    googleAnalytics.printAboutAnalytics();
                     googleAnalytics.trackEvent('Theme build', 'Bundle size', bundleSize, 'Bundle')
                         .finally(() => process.exit());
                 // eslint-disable-next-line no-empty

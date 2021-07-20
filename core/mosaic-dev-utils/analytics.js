@@ -1,16 +1,19 @@
 const fetch = require('node-fetch');
 const logger = require('./logger');
+const { getSystemConfig } = require('./get-configuration-file');
 
-const GA_TRACKING_ID = process.env.GA_TRACKING_ID || 'UA-19513501-1';
+const GA_TRACKING_ID = process.env.GA_TRACKING_ID || 'UA-127741417-8';
 const UNKNOWN = 'unknown';
 
 class Analytics {
     constructor() {
+        this.isGaDisabled = this.getIsGaDisabled();
+        this.gaTrackingId = GA_TRACKING_ID;
         this.clientIdentifier = UNKNOWN;
         this.currentUrl = UNKNOWN;
         this.lang = UNKNOWN;
 
-        this.setClientIdentifier(+(new Date()));
+        this.setClientIdentifier(Date.now());
     }
 
     setLang(lang) {
@@ -25,8 +28,18 @@ class Analytics {
         this.clientIdentifier = id;
     }
 
+    setGaTrackingId(id) {
+        this.gaTrackingId = id;
+    }
+
+    getIsGaDisabled = async () => {
+        const { analytics = false } = await getSystemConfig();
+
+        return !analytics;
+    };
+
     async _collect(data) {
-        if (process.env.GA_DISABLE) {
+        if (this.isGaDisabled) {
             // skip GA
             return;
         }
@@ -115,9 +128,12 @@ class Analytics {
     }
 
     printAboutAnalytics() {
-        logger.log('We collect analytics data to make our products more stable and reliable!');
-        logger.log('If you want to know more go here https://docs.scandipwa.com/');
-        logger.logN();
+        if (!this.gaDisabled) {
+            logger.log('We collect analytics data to make our products more stable and reliable!');
+            logger.log('If you want to know more go here https://docs.scandipwa.com/');
+            logger.logN();
+        }
     }
 }
+
 module.exports = new Analytics();
