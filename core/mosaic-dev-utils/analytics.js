@@ -46,7 +46,7 @@ class Analytics {
         const rawBody = {
             ...data,
             v: '1',
-            tid: GA_TRACKING_ID,
+            tid: this.gaTrackingId,
             cid: this.clientIdentifier
         };
 
