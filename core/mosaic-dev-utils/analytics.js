@@ -33,7 +33,7 @@ class Analytics {
     }
 
     getIsGaDisabled = async () => {
-        const { analytics = false } = await getSystemConfig();
+        const { analytics = true } = await getSystemConfig();
 
         return !analytics;
     };

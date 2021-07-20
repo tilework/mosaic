@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const os = require('os');
 const path = require('path');
 const fs = require('fs');
@@ -16,15 +15,14 @@ const getSystemConfig = async () => {
     }
 
     const userSystemConfig = await fs.promises.readFile(systemConfigPath, 'utf-8');
-    let userSystemConfigParsed;
 
     try {
-        userSystemConfigParsed = JSON.parse(userSystemConfig);
+        const userSystemConfigParsed = JSON.parse(userSystemConfig);
+
+        return userSystemConfigParsed;
     } catch (e) {
         throw new Error(`System configuration file is not a valid JSON!\n\nFile location: ${systemConfigPath}`);
     }
-
-    return userSystemConfigParsed;
 };
 
 module.exports = {
