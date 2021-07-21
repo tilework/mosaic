@@ -130,7 +130,7 @@ class Analytics {
     printAboutAnalytics() {
         if (!this.gaDisabled) {
             logger.log('We collect analytics data to make our products more stable and reliable!');
-            logger.log('If you want to know more go here https://docs.scandipwa.com/');
+            logger.log('If you want to know more go here https://docs.scandipwa.com/about/data-analytics');
             logger.logN();
         }
     }
