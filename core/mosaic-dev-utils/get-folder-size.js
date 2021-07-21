@@ -2,20 +2,20 @@ const fs = require('fs');
 const path = require('path');
 
 const getFolderSizeFn = async (dirPath) => {
-    const fileSizes = await fs.promises.readdir(dirPath, { withFileTypes: true, encoding: 'utf-8' })
-        .then((fFiles) => Promise.all(fFiles.map((file) => {
-            const filePath = path.join(dirPath, file.name);
+    const fFiles = Object.values(await fs.promises.readdir(dirPath, { withFileTypes: true, encoding: 'utf-8' }));
+    const fileSizes = await Promise.all(fFiles.map((file) => {
+        const filePath = path.join(dirPath, file.name);
 
-            if (file.isFile()) {
-                return fs.promises.stat(filePath).then((file) => file.size);
-            }
+        if (file.isFile()) {
+            return fs.promises.stat(filePath).then((file) => file.size);
+        }
 
-            if (file.isDirectory()) {
-                return getFolderSizeFn(filePath);
-            }
+        if (file.isDirectory()) {
+            return getFolderSizeFn(filePath);
+        }
 
-            return 0;
-        })));
+        return 0;
+    }));
 
     return fileSizes.reduce((acc, size) => {
         if (size.length) {
