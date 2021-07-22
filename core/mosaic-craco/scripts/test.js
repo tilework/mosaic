@@ -1,29 +1,19 @@
 /* eslint-disable jest/no-disabled-tests */
 process.env.NODE_ENV = process.env.NODE_ENV || "test";
 
-const { findArgsFromCli } = require("../lib/args");
-
-// Make sure this is called before "paths" is imported.
-findArgsFromCli();
-
-const { log } = require("../lib/logger");
-const { getCraPaths, test } = require("../lib/cra");
-const { overrideCraPaths } = require("../lib/features/cra-paths/override");
-const { overrideJest } = require("../lib/features/jest/override");
-const { loadCracoConfigAsync } = require("../lib/config");
+const { test } = require("../lib/cra");
 const { validateCraVersion } = require("../lib/validate-cra-version");
 
-log("Override started with arguments: ", process.argv);
-log("For environment: ", process.env.NODE_ENV);
+const { overrideJest } = require("../lib/features/jest/override");
+const { initialize } = require("./script");
 
-const context = {
-    env: process.env.NODE_ENV
-};
-loadCracoConfigAsync(context).then(cracoConfig => {
-    validateCraVersion(cracoConfig);
+const { craco, context } = initialize();
 
-    context.paths = getCraPaths(cracoConfig);
-    overrideCraPaths(cracoConfig, context);
-    overrideJest(cracoConfig, context);
-    test(cracoConfig);
-});
+craco.then(
+    (cracoConfig) => {
+        validateCraVersion(cracoConfig);
+
+        overrideJest(cracoConfig, context);
+        test(cracoConfig);
+    }
+);
