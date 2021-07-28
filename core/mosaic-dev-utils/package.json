@@ -6,7 +6,8 @@
         "chalk": "^4.1.0",
         "mem-fs": "^1.2.0",
         "mem-fs-editor": "^7.0.1",
-        "memoizee": "^0.4.15"
+        "memoizee": "^0.4.15",
+        "node-fetch": "^2.6.1"
     },
     "license": "MIT",
     "publishConfig": {
