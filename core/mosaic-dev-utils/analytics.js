@@ -7,7 +7,6 @@ const UNKNOWN = 'unknown';
 
 class Analytics {
     constructor() {
-        this.isGaDisabled = this.getIsGaDisabled();
         this.gaTrackingId = GA_TRACKING_ID;
         this.clientIdentifier = UNKNOWN;
         this.currentUrl = UNKNOWN;
@@ -39,7 +38,7 @@ class Analytics {
     };
 
     async _collect(data) {
-        if (this.isGaDisabled) {
+        if (await this.getIsGaDisabled()) {
             // skip GA
             return;
         }
@@ -127,8 +126,8 @@ class Analytics {
         });
     }
 
-    printAboutAnalytics() {
-        if (!this.gaDisabled) {
+    async printAboutAnalytics() {
+        if (!await this.getIsGaDisabled()) {
             logger.note(
                 'We collect analytics data to make our products more stable and reliable!',
                 'If you want to know more go here https://docs.scandipwa.com/about/data-analytics'
