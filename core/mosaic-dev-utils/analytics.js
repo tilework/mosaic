@@ -7,10 +7,13 @@ const UNKNOWN = 'unknown';
 
 class Analytics {
     constructor() {
+        this.isGaDisabled = this.getIsGaDisabled();
         this.gaTrackingId = GA_TRACKING_ID;
         this.clientIdentifier = UNKNOWN;
         this.currentUrl = UNKNOWN;
         this.lang = UNKNOWN;
+
+        console.log(this.isGaDisabled);
 
         this.setClientIdentifier(Date.now());
     }
@@ -31,14 +34,15 @@ class Analytics {
         this.gaTrackingId = id;
     }
 
-    getIsGaDisabled = async () => {
-        const { analytics = true } = await getSystemConfig();
+    getIsGaDisabled() {
+        const { analytics = true } = getSystemConfig();
 
         return !analytics;
-    };
+    }
 
     async _collect(data) {
-        if (await this.getIsGaDisabled()) {
+        console.log(this.isGaDisabled, 'ENABLED');
+        if (this.isGaDisabled) {
             // skip GA
             return;
         }
@@ -126,13 +130,11 @@ class Analytics {
         });
     }
 
-    async printAboutAnalytics() {
-        if (!await this.getIsGaDisabled()) {
-            logger.note(
-                'We collect analytics data to make our products more stable and reliable!',
-                'If you want to know more go here https://docs.scandipwa.com/about/data-analytics'
-            );
-            logger.log();
+    printAboutAnalytics() {
+        if (!this.isGaDisabled) {
+            logger.log('We collect analytics data to make our products more stable and reliable!');
+            logger.log('If you want to know more go here https://docs.scandipwa.com/about/data-analytics');
+            logger.logN();
         }
     }
 }
