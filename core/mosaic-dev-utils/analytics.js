@@ -13,8 +13,6 @@ class Analytics {
         this.currentUrl = UNKNOWN;
         this.lang = UNKNOWN;
 
-        console.log(this.isGaDisabled);
-
         this.setClientIdentifier(Date.now());
     }
 
@@ -41,7 +39,6 @@ class Analytics {
     }
 
     async _collect(data) {
-        console.log(this.isGaDisabled, 'ENABLED');
         if (this.isGaDisabled) {
             // skip GA
             return;
