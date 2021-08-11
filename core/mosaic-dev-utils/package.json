@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-dev-utils",
     "description": "Development utilities used by CSA.",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "dependencies": {
         "chalk": "^4.1.0",
         "mem-fs": "^1.2.0",
