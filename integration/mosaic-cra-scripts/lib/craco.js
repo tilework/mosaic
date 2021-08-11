@@ -79,10 +79,13 @@ module.exports = (script) => {
                     const bundleSize = await getFolderSize(paths.appBuild + buildJsPath);
 
                     googleAnalytics.printAboutAnalytics();
-                    googleAnalytics.trackEvent('Theme build', 'Bundle size', bundleSize, 'Bundle')
-                        .finally(() => process.exit());
+                    await googleAnalytics.trackEvent('Theme build', 'Bundle size', bundleSize, 'Bundle');
+                    process.exit();
+
                 // eslint-disable-next-line no-empty
-                } catch (e) {}
+                } catch (e) {
+                    process.exit();
+                }
             }
         });
     };

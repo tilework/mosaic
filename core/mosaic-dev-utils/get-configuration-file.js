@@ -7,14 +7,14 @@ const systemConfigPath = path.join(os.homedir(), '.cmarc');
 /**
  * @returns {Promise<typeof defaultSystemConfig>}
  */
-const getSystemConfig = async () => {
+const getSystemConfig = () => {
     try {
-        await fs.promises.access(systemConfigPath, fs.constants.F_OK);
+        fs.accessSync(systemConfigPath, fs.constants.F_OK);
     } catch (e) {
         return {};
     }
 
-    const userSystemConfig = await fs.promises.readFile(systemConfigPath, 'utf-8');
+    const userSystemConfig = fs.readFileSync(systemConfigPath, 'utf-8');
 
     try {
         const userSystemConfigParsed = JSON.parse(userSystemConfig);

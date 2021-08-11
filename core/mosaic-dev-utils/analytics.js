@@ -32,11 +32,11 @@ class Analytics {
         this.gaTrackingId = id;
     }
 
-    getIsGaDisabled = async () => {
-        const { analytics = true } = await getSystemConfig();
+    getIsGaDisabled() {
+        const { analytics = true } = getSystemConfig();
 
         return !analytics;
-    };
+    }
 
     async _collect(data) {
         if (this.isGaDisabled) {
@@ -128,12 +128,10 @@ class Analytics {
     }
 
     printAboutAnalytics() {
-        if (!this.gaDisabled) {
-            logger.note(
-                'We collect analytics data to make our products more stable and reliable!',
-                'If you want to know more go here https://docs.scandipwa.com/about/data-analytics'
-            );
-            logger.log();
+        if (!this.isGaDisabled) {
+            logger.log('We collect analytics data to make our products more stable and reliable!');
+            logger.log('If you want to know more go here https://docs.scandipwa.com/about/data-analytics');
+            logger.logN();
         }
     }
 }
