@@ -1,6 +1,6 @@
 const path = require("path");
 const {
-    getParentThemePaths,
+    getParentThemePaths
 } = require("@tilework/mosaic-dev-utils/parent-theme");
 const { getMosaicConfig } = require("@tilework/mosaic-dev-utils/mosaic-config");
 const extensions = require("@tilework/mosaic-dev-utils/extensions");
@@ -22,11 +22,11 @@ const allowedPaths = [
 
         return packageName.replace("/", "\\");
     }),
-    ...extensions.map(({ packagePath }) => packagePath),
+    ...extensions.map(({ packagePath }) => packagePath)
 ].reduce(
     (acc, pathname) => [
         ...acc,
-        ...sourceDirectories.map((directory) => path.join(pathname, directory)),
+        ...sourceDirectories.map((directory) => path.join(pathname, directory))
     ],
     []
 );
@@ -39,13 +39,13 @@ const extractNamespaceFromComments = (comments = []) =>
             return acquired;
         }
         const { groups: { namespace } = {} } =
-            testable.value.match(namespaceExtractor) || {};
+            testable.value.trim().match(namespaceExtractor) || {};
         return namespace;
     }, "");
 
 const isParentExportDefaultDeclaration = (path) => {
     const {
-        parent: { type },
+        parent: { type }
     } = path;
 
     return type === "ExportDefaultDeclaration";
@@ -53,7 +53,7 @@ const isParentExportDefaultDeclaration = (path) => {
 
 const isParentExportNamedDeclaration = (path) => {
     const {
-        parent: { type },
+        parent: { type }
     } = path;
 
     return type === "ExportNamedDeclaration";
@@ -79,7 +79,7 @@ const getLeadingCommentsPath = (path) => {
 
 const getLeadingComments = (path) => {
     const {
-        node: { leadingComments },
+        node: { leadingComments }
     } = getLeadingCommentsPath(path);
 
     return leadingComments;
@@ -239,8 +239,8 @@ module.exports = (options) => {
                     node: {
                         id: { name },
                         params,
-                        body,
-                    },
+                        body
+                    }
                 } = path;
 
                 const functionExpression = types.functionExpression(
@@ -326,7 +326,7 @@ module.exports = (options) => {
                 superClass.replaceWith(superExpression);
 
                 const {
-                    node: { name },
+                    node: { name }
                 } = path.get("id");
 
                 // Generate the middlewarable class as an expression,
@@ -388,7 +388,7 @@ module.exports = (options) => {
                     // With a new declaration
                     path.replaceWith(newDeclaration);
                 }
-            },
-        },
+            }
+        }
     };
 };
