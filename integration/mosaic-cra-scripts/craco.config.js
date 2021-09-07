@@ -30,7 +30,7 @@ const getESLintConfig = () => {
             configure: usersESLintConfig
         };
     }
-    
+
     return null;
 };
 
@@ -38,7 +38,7 @@ module.exports = () => {
     const abstractStyle = FallbackPlugin.getFallbackPathname('src/style/abstract/_abstract.scss');
     const appIndex = FallbackPlugin.getFallbackPathname(
         'src/index.js',
-        undefined, 
+        undefined,
         ['src/index.ts', 'src/index.jsx', 'src/index.tsx']
     );
     const appHtml = FallbackPlugin.getFallbackPathname('public/index.html');
@@ -97,10 +97,16 @@ module.exports = () => {
                 // Provide BEM specific variables
                 new webpack.DefinePlugin({
                     'process.env': {
+                        ...Object
+                            .entries(process.env)
+                            .reduce((result, [k, v]) => ({
+                                ...result,
+                                [k]: JSON.stringify(v)
+                            }), {}),
                         REBEM_MOD_DELIM: JSON.stringify('_'),
                         REBEM_ELEM_DELIM: JSON.stringify('-')
                     }
-                }),
+                })
             ],
             configure: (webpackConfig) => {
                 // Remove module scope plugin, it breaks FallbackPlugin and ProvidePlugin
@@ -116,7 +122,7 @@ module.exports = () => {
                     if (plugin.constructor.name === 'MiniCssExtractPlugin') {
                         plugin.options.ignoreOrder = true;
                     }
-                })
+                });
 
                 // Allow having empty entry point
                 if (isDev) {
@@ -128,7 +134,7 @@ module.exports = () => {
                 // Disable LICENSE comments extraction in production
                 webpackConfig.optimization.minimizer[0].options.extractComments = whenDev(() => true, false);
 
-                return injectWebpackConfig(webpackConfig, { 
+                return injectWebpackConfig(webpackConfig, {
                     webpack,
                     shouldApplyPlugins: false
                 });
