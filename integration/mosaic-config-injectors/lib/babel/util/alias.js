@@ -14,6 +14,7 @@ const aliasPostfixMap = {
     Util: `.${path.sep}${path.join('src', 'util')}`,
     Query: `.${path.sep}${path.join('src', 'query')}`,
     Type: `.${path.sep}${path.join('src', 'type')}`,
+    Pages: `.${path.sep}${path.join('src', 'pages')}`,
 
     // Default alias
     ['']: `.${path.sep}src`
@@ -52,7 +53,7 @@ for (const source in sourcePrefixMap) {
  * These aliases are used by Babel
  */
 const alias = Object.entries(aliasMap).reduce(
-    (acc, [, values]) => ({ ...acc, ...values }), 
+    (acc, [, values]) => ({ ...acc, ...values }),
     {}
 );
 
