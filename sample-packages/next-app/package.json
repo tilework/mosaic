@@ -1,6 +1,6 @@
 {
   "name": "next-app",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "private": true,
   "scripts": {
     "dev": "nextjs-scripts dev",
@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@tilework/mosaic-nextjs-scripts": "0.1.17",
+    "@tilework/mosaic-nextjs-scripts": "0.1.18",
     "@tilework/mosaic-sample-page": "0.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1"
