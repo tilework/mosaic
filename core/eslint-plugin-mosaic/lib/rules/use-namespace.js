@@ -21,6 +21,11 @@ const types = {
         'ArrowFunctionExpression'
     ].join(' > '),
 
+    ExportedFunction: [
+        'ExportNamedDeclaration',
+        'FunctionDeclaration'
+    ].join(' > '),
+
     isExportedClass: node => node.type === 'ClassDeclaration'
         && node.parent.type === 'ExportNamedDeclaration',
 
@@ -29,14 +34,20 @@ const types = {
         && node.parent.parent.type === 'VariableDeclaration'
         && node.parent.parent.parent.type === 'ExportNamedDeclaration',
 
+    isExportedFunction: node => node.type === 'FunctionDeclaration'
+        && node.parent.type === 'ExportNamedDeclaration',
+
     PromiseHandlerArrowFunction: [
         [
             "CallExpression",
             "[callee.type='MemberExpression']",
             "[callee.object.name!=/.+Dispatcher/]",
             ":matches(",
-          	"[callee.property.name='then'], ",
-          	"[callee.property.name='catch']",
+            [
+                "[callee.property.name='then']",
+                "[callee.property.name='catch']",
+                "[callee.property.name='finally']"
+            ].join(', '),
             ")"
         ].join(''),
         'ArrowFunctionExpression'
@@ -44,14 +55,14 @@ const types = {
 
     isPromiseHandlerArrowFunction: (node) => {
         const { parent } = node;
-        const promiseHandlerNames = ['then', 'catch'];
+        const promiseHandlerNames = ['then', 'catch', 'finally'];
 
         return (
             node.type === 'ArrowFunctionExpression'
-			&& parent.type === 'CallExpression'
-			&& parent.callee.type === 'MemberExpression'
-			&& !(parent.callee.object.name || "").endsWith('Dispatcher')
-			&& promiseHandlerNames.includes(parent.callee.property.name)
+            && parent.type === 'CallExpression'
+            && parent.callee.type === 'MemberExpression'
+            && !(parent.callee.object.name || "").endsWith('Dispatcher')
+            && promiseHandlerNames.includes(parent.callee.property.name)
         );
     },
 
@@ -62,11 +73,17 @@ const types = {
         if (types.isPromiseHandlerArrowFunction(node)) {
             return 'promise handler arrow function';
         }
+
         if (types.isExportedArrowFunction(node)) {
             return 'exported arrow function';
         }
+
         if (types.isExportedClass(node)) {
             return 'exported class';
+        }
+
+        if (types.isExportedFunction(node)) {
+            return 'exported function';
         }
     }
 };
@@ -75,11 +92,17 @@ const getProperParentNode = (node) => {
     if (types.isExportedClass(node)) {
         return node.parent;
     }
+
     if (types.isExportedArrowFunction(node)) {
         return node.parent.parent.parent;
     }
+
     if (types.isPromiseHandlerArrowFunction(node)) {
         return node;
+    }
+
+    if (types.isExportedFunction(node)) {
+        return node.parent;
     }
 
     return {};
@@ -96,13 +119,48 @@ const getNamespaceCommentForNode = (node, sourceCode) => {
 };
 
 const collectFunctionNamespace = (node, stack) => {
-    if (node.type === 'CallExpression') {
+    const { type } = node;
+
+    switch (type) {
+    case 'ArrowFunctionExpression':
+        const name = node.body?.callee?.name;
+
+        if (node.parent?.arguments?.indexOf(node) === 1) {
+            stack.push('catch');
+        }
+
+        if (name) {
+            stack.push(name);
+        }
+
+        break;
+    case 'CallExpression':
         if (node.callee.type === 'MemberExpression') {
-            stack.push(node.callee.property.name);
-            collectFunctionNamespace(node.callee.object, stack);
-        } else if (node.callee.type === 'Identifier') {
+            stack.push(
+                node.callee?.property?.name,
+                node.callee?.object?.name
+                    || node.callee?.object?.callee?.name
+                    || node.callee?.object?.callee?.property?.name
+            );
+        } else {
             stack.push(node.callee.name);
         }
+
+        break;
+    case 'Identifier':
+        stack.push(node.name);
+        break;
+    case 'MethodDefinition':
+        stack.push(node.key.name);
+        break;
+    case 'VariableDeclarator':
+    case 'FunctionDeclaration':
+    case 'ClassDeclaration':
+        stack.push(node.id.name);
+    }
+
+    if (node.parent) {
+        collectFunctionNamespace(node.parent, stack);
     }
 };
 
@@ -114,11 +172,11 @@ const getNodeNamespace = (node) => {
     } else if (node.type === 'ClassDeclaration') {
         stack.push(node.id.name);
     } else {
-        collectFunctionNamespace(node.parent, stack);
+        collectFunctionNamespace(node, stack);
     }
 
     // not using path.sep on purpose
-    return stack.reverse().join('/');
+    return stack.filter(Boolean).reverse().join('/');
 };
 
 const prepareFilePath = (pathname) => {
@@ -181,14 +239,14 @@ const generateNamespace = (node, context) => {
         preparePackageName(packageName),
         // Trim post-fixes if they are not present
         ...prepareFilePath(toFile)
-    ].join('/').replace(
+    ].filter(Boolean).join('/').replace(
         // Convert to pascal-case, and trim "-"
         /\b[a-z](?=[a-z]{2})/g,
         (letter) => letter.toUpperCase()
     ).split('-').join('');
 
     // Do not transform code to uppercase / lowercase it should be written alright
-    return `${pathname}/${getNodeNamespace(node)}`;
+    return [pathname, getNodeNamespace(node)].filter(Boolean).join('/');
 };
 
 const extractNamespaceFromComment = ({ value: comment = '' }) => {
@@ -215,7 +273,8 @@ module.exports = {
         [[
             types.ExportedClass,
             types.PromiseHandlerArrowFunction,
-            types.ExportedArrowFunction
+            types.ExportedArrowFunction,
+            types.ExportedFunction
         ].join(',')](node) {
             const namespaceComment = getNamespaceCommentForNode(node, context.getSourceCode()) || { value: '' };
             const namespaceCommentString = namespaceComment.value.split('@namespace').pop().trim();

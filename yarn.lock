@@ -14140,7 +14140,7 @@ parent-module@^1.0.0:
     "@types/node" "^12.0.0"
     "@types/react" "^17.0.0"
     "@types/react-dom" "^17.0.0"
-    parent-extension "file:../../Library/Caches/Yarn/v4/npm-parent-ts-react-app-0.2.0-f6930b41-4ef2-479f-950c-e8e52601fe6c-1626261981277/node_modules/parent-ts-react-app/packages/parent-extension"
+    parent-extension "file:../../../.cache/yarn/v4/npm-parent-ts-react-app-0.2.0-7016304a-1c74-4395-8956-cf1f72745d0c-1631749526470/node_modules/parent-ts-react-app/packages/parent-extension"
     react "^17.0.1"
     react-dom "^17.0.1"
     react-scripts "4.0.3"
