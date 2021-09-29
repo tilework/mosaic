@@ -26,7 +26,7 @@ const addAliases = (babelConfig) => {
     }
 
     if (babelConfig.plugins.some(hasPlugin(babelPluginModuleResolverResolvedPath))) {
-        const babelPluginModuleResolver = babelConfig.plugins.find(hasPlugin(require.resolve));
+        const babelPluginModuleResolver = babelConfig.plugins.find(hasPlugin(babelPluginModuleResolverResolvedPath));
 
         if (Array.isArray(babelPluginModuleResolver)) {
             const options = babelPluginModuleResolver[1];
