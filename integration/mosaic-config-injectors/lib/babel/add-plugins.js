@@ -12,14 +12,10 @@ const addBabelPlugins = (babelConfig) => {
         // This provides @namespace comments
         require.resolve(middlewareDecorator),
 
-        ...[arrowFunctionsTransformer, asyncGeneratorTransformer].filter((plugin) => {
+        ...[arrowFunctionsTransformer, asyncGeneratorTransformer]
+            .map((plugin) => require.resolve(plugin))
             // If already present in plugin list -> prevent duplicates
-            if (babelConfig.plugins.indexOf(plugin) >= 0) {
-                return false;
-            }
-
-            return true;
-        }).map((plugin) => require.resolve(plugin))
+            .filter((plugin) => !babelConfig.plugins.includes(plugin))
     ];
 
     // It's important that these plugins go before all of the other ones
