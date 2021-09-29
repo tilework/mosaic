@@ -1,6 +1,6 @@
 {
   "name": "@tilework/mosaic-config-injectors",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Configuration injectors for @tilework/mosaic",
   "main": "lib/index.js",
   "types": "./typings",
