@@ -143,7 +143,7 @@ const prepareFilePath = (pathname) => {
         .filter(x => !!x);
 };
 
-const preparePackageName = (packageName) => {
+const preparePackageName = (packageName = '') => {
     // This is on purpose not a path.sep (windows support)
     const [org = '', name = ''] = packageName.split('/');
 
