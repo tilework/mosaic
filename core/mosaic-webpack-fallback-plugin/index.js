@@ -171,8 +171,14 @@ class FallbackPlugin {
      * @memberof FallbackPlugin
      */
     fileExists(pathname) {
+        // we assume that last four characters is extension.
+        // but this may be not true, if we have something like `Account.type.js` and import it like `Account.type`
+        // thus we have to exclude such variants
+        const excludeList = ['type'];
+        const suffix = (pathname.match(/\.(.{1,4})$/) || [])[1];
+
         // if extension is already present - check for existence
-        if (/\..{1,4}$/.test(pathname)) {
+        if (suffix && !excludeList.includes(suffix)) {
             return fs.existsSync(pathname);
         }
 
