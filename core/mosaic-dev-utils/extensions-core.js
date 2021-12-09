@@ -54,8 +54,8 @@ const getEnabledExtensions = memoize((pathname = process.cwd()) => {
 
 const getExtensionsForCwd = memoize((cwd = process.cwd()) => getEnabledExtensions(cwd).reduce((acc, packageName) => {
     try {
-        const packagePath = getPackagePath(packageName);
-        const packageJson = getPackageJson(packagePath);
+        const packagePath = getPackagePath(packageName, cwd);
+        const packageJson = getPackageJson(packagePath, cwd);
 
         acc.push({
             packagePath,
