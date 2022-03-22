@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const extIP = require('ext-ip')();
+const extIp = require('ext-ip')();
 const logger = require('./logger');
 const generateUUID = require('./uuid');
 const { getSystemConfig } = require('./get-configuration-file');
@@ -62,7 +62,7 @@ class Analytics {
         };
 
         try {
-            const ip = await extIP.get();
+            const ip = await extIp.get();
             rawBody.uip = ip;
         } catch (e) {
             console.log(e);
