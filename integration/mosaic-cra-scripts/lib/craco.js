@@ -15,6 +15,7 @@ const buildJsPath = '/static/js';
 module.exports = (script) => {
     before.forEach((beforeRun) => beforeRun(script));
 
+    const timeStamp = Date.now();
     const isProd = script === 'build';
     const TIMEOUT_BETWEEN_KILL_TRIGGERS = 500;
 
@@ -80,6 +81,7 @@ module.exports = (script) => {
 
                     googleAnalytics.printAboutAnalytics();
                     await googleAnalytics.trackEvent('Theme build', 'Bundle size', bundleSize, 'Bundle');
+                    await googleAnalytics.trackTiming('Theme build time', Date.now() - timeStamp);
                     process.exit();
 
                 // eslint-disable-next-line no-empty
