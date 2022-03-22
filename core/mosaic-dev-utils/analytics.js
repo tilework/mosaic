@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const extIP = require('ext-ip')();
 const logger = require('./logger');
 const generateUUID = require('./uuid');
 const { getSystemConfig } = require('./get-configuration-file');
@@ -52,12 +53,21 @@ class Analytics {
             // skip GA
             return;
         }
+
         const rawBody = {
             ...data,
             v: '1',
             tid: this.gaTrackingId,
             cid: this.clientIdentifier
         };
+
+        try {
+            const ip = await extIP.get();
+            rawBody.uip = ip;
+        } catch (e) {
+            console.log(e);
+            // Do nothing
+        }
 
         if (this.lang !== UNKNOWN) {
             // get system language here
