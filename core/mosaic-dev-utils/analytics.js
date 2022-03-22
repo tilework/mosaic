@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const logger = require('./logger');
+const generateUUID = require('./uuid');
 const { getSystemConfig } = require('./get-configuration-file');
 
 const GA_TRACKING_ID = process.env.GA_TRACKING_ID || 'UA-127741417-8';
@@ -13,7 +14,15 @@ class Analytics {
         this.currentUrl = UNKNOWN;
         this.lang = UNKNOWN;
 
-        this.setClientIdentifier(Date.now());
+        try {
+            this.setClientIdentifier(
+                generateUUID()
+            );
+        } catch (e) {
+            this.setClientIdentifier(
+                Date.now()
+            );
+        }
     }
 
     setLang(lang) {
@@ -82,6 +91,7 @@ class Analytics {
                 `https://www.google-analytics.com/debug/collect?${ params }`,
                 { headers: { 'User-Agent': 'Google-Cloud-Functions' } }
             );
+
             const jsonResponse = await res.json();
 
             logger.log(rawBody, jsonResponse);
@@ -89,7 +99,7 @@ class Analytics {
 
         // eslint-disable-next-line no-empty
         } catch (e) {
-
+            console.log('Failed to report telemetry data');
         }
     }
 
