@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-node-scripts",
     "description": "Node helper scripts for Mosaic.",
-    "version": "0.0.12",
+    "version": "0.0.14",
     "bin": {
         "node-scripts": "./bin/node-scripts.js"
     },
@@ -12,7 +12,7 @@
         "node": ">=12.0.0"
     },
     "dependencies": {
-        "@tilework/mosaic-dev-utils": "0.1.6"
+        "@tilework/mosaic-dev-utils": "0.2.1"
     },
     "license": "MIT",
     "publishConfig": {
