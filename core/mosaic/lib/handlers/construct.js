@@ -29,8 +29,12 @@ function postProcessInstance(instance, constructorArguments) {
         )
     );
 
+    const isConstructorCalled = Object.getPrototypeOf(instance).constructor.prototype.__isConstructorCalled;
+
     // Handle construct logic
-    if (instance.__construct) {
+    if (instance.__construct && !isConstructorCalled) {
+        Object.getPrototypeOf(instance).constructor.prototype.__isConstructorCalled = true;
+
         // Call the "magic" __construct member function
         instance.__construct(...constructorArguments);
     }
