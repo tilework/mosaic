@@ -96,15 +96,18 @@ module.exports = () => {
                 // TODO spwa
                 // Provide BEM specific variables
                 new webpack.DefinePlugin({
-                    'process.env': {
-                        ...Object
-                            .entries(process.env)
-                            .reduce((result, [k, v]) => ({
-                                ...result,
-                                [k]: JSON.stringify(v)
-                            }), {}),
-                        REBEM_MOD_DELIM: JSON.stringify('_'),
-                        REBEM_ELEM_DELIM: JSON.stringify('-')
+                    // vvv This fixes process is not defined browser error
+                    process: {
+                        env: {
+                            ...Object
+                                .entries(process.env)
+                                .reduce((result, [k, v]) => ({
+                                    ...result,
+                                    [k]: JSON.stringify(v)
+                                }), {}),
+                            REBEM_MOD_DELIM: JSON.stringify('_'),
+                            REBEM_ELEM_DELIM: JSON.stringify('-')
+                        }
                     }
                 })
             ],
