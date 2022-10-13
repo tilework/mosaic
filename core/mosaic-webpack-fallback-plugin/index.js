@@ -195,9 +195,11 @@ class FallbackPlugin {
         // .ts, .tsx, .jsx or /index.js, /index.ts, /index.tsx => check all
         return (
             fs.existsSync(`${ pathname }.js`)
+            || fs.existsSync(`${ pathname }.jsx`)
             || fs.existsSync(`${ pathname }.ts`)
             || fs.existsSync(`${ pathname }.tsx`)
             || fs.existsSync(`${ pathname }${path.sep}index.js`)
+            || fs.existsSync(`${ pathname }${path.sep}index.jsx`)
             || fs.existsSync(`${ pathname }${path.sep}index.ts`)
             || fs.existsSync(`${ pathname }${path.sep}index.tsx`)
         );
