@@ -174,7 +174,7 @@ class FallbackPlugin {
         // we assume that last four characters is extension.
         // but this may be not true, if we have something like `Account.type.js` and import it like `Account.type`
         // thus we have to exclude such variants
-        const excludeList = ['type'];
+        const excludeList = ['type', 'form'];
         const suffix = (pathname.match(/\.(.{1,4})$/) || [])[1];
 
         // if extension is already present - check for existence
