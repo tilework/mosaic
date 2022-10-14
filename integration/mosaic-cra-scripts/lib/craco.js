@@ -8,7 +8,7 @@ const logger = require('@tilework/mosaic-dev-utils/logger');
 const { before } = require('./build-plugins');
 const googleAnalytics = require('@tilework/mosaic-dev-utils/analytics');
 const getFolderSize = require('@tilework/mosaic-dev-utils/get-folder-size');
-const { getLocalExtensionsPath } = require('@tilework/mosaic-dev-utils/extensions-core');
+const { getExtensionsPath } = require('@tilework/mosaic-dev-utils/extensions-core');
 
 const args = process.argv.slice(2);
 const buildJsPath = '/static/js';
@@ -115,7 +115,7 @@ module.exports = (script) => {
         chokidar
             .watch([
                 'src/**/*',
-                ...getLocalExtensionsPath()
+                ...getExtensionsPath(true)
             ], {
                 // should we ignore node_modules ?
                 ignored: '**/node_modules/**',

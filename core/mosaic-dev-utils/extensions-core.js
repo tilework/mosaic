@@ -81,7 +81,7 @@ const getExtensionsForCwd = memoize((cwd = process.cwd()) => getEnabledExtension
     return acc;
 }, []));
 
-const getLocalExtensionsPath = () => {
+const getExtensionsPath = (isOnlyLocal = false) => {
     const { dependencies } = getPackageJson(process.cwd());
     const dependenciesArray = Object.entries(dependencies);
 
@@ -96,10 +96,19 @@ const getLocalExtensionsPath = () => {
         if (Array.isArray(extensionFromDependencies)) {
             const [, extensionPath] = extensionFromDependencies;
 
-            // If extension path is required as local dependency then add it array
-            if (extensionPath.startsWith('file:')) {
-                acc.push(`${path.relative(process.cwd(), extensionPath.slice(5))}/src/**/*`);
+            // Push extensions that are required from local packages
+            if (!isOnlyLocal && extensionPath.startsWith('file:')) {
+                acc.push(`${path.relative(process.cwd(), extensionPath.replace('file:', ''))}/src/**/*`);
+
+                return acc;
             }
+
+            // If extension path is required as local dependency then replace
+            const resultPath = extensionPath.startsWith('file:')
+                ? extensionPath.replace('file:', '')
+                : extensionPath;
+
+            acc.push(`${path.relative(process.cwd(), resultPath)}/src/**/*`);
         }
 
         return acc;
@@ -110,5 +119,5 @@ const getLocalExtensionsPath = () => {
 
 module.exports = {
     getExtensionsForCwd,
-    getLocalExtensionsPath
+    getExtensionsPath
 };

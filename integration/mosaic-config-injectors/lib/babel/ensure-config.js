@@ -8,6 +8,7 @@ const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme
 const { hasFilesOfType } = require('@tilework/mosaic-dev-utils/files-type');
 const { aliasMap, aliasPostfixMap } = require('./util/alias');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
+const { getExtensionsPath } = require('@tilework/mosaic-dev-utils/extensions-core');
 
 // Faultproof
 const readJson = (jsonPath) => {
@@ -99,17 +100,13 @@ const getConfigInclude = (initialInclude = []) => {
     const extendedInclude = ['src/**/*'];
 
     // Go through extensions and include there relative path
-    extensions.map((extension) => {
-        if (hasFilesOfType('ts', extension.packagePath)) {
-            extendedInclude.push(`${path.relative(process.cwd(), extension.packagePath)}/**/*`);
-        }
+    getExtensionsPath().forEach((extensionPath) => {
+        extendedInclude.push(extensionPath);
     });
 
     // Go through themes and include there relative path
-    getParentThemePaths().map((parentThemePath) => {
-        if (hasFilesOfType('ts', parentThemePath)) {
-            extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/**/*`);
-        }
+    getParentThemePaths().forEach((parentThemePath) => {
+        extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/src/**/*`);
     });
 
     // Filter out include paths that already exists in existing one. Removing duplicates.
