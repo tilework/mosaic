@@ -1,6 +1,5 @@
 const { getMosaicConfig } = require('./mosaic-config');
 const { getPackageJson } = require('./package-json');
-const extensions = require('./extensions');
 const getPackagePath = require('./package-path');
 const logger = require('./logger');
 const memoize = require('memoizee');
@@ -86,7 +85,7 @@ const getLocalExtensionsPath = () => {
     const { dependencies } = getPackageJson(process.cwd());
     const dependenciesArray = Object.entries(dependencies);
 
-    const extensionsPaths = extensions.reduce((acc, extension) => {
+    const extensionsPaths = getExtensionsForCwd().reduce((acc, extension) => {
         const { packageName } = extension;
 
         // Check which extension in dependency list
