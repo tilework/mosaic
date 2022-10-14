@@ -1,9 +1,11 @@
-const logger = require('@tilework/mosaic-dev-utils/logger');
-const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
-const getPackagePath = require('@tilework/mosaic-dev-utils/package-path');
-const shouldUseYarn = require('@tilework/mosaic-dev-utils/should-use-yarn');
 const { getMosaicConfig } = require('./mosaic-config');
+const { getPackageJson } = require('./package-json');
+const extensions = require('./extensions');
+const getPackagePath = require('./package-path');
+const logger = require('./logger');
 const memoize = require('memoizee');
+const path = require('path');
+const shouldUseYarn = require('./should-use-yarn');
 
 let visitedDeps = [];
 
@@ -80,6 +82,34 @@ const getExtensionsForCwd = memoize((cwd = process.cwd()) => getEnabledExtension
     return acc;
 }, []));
 
+const getLocalExtensionsPath = () => {
+    const { dependencies } = getPackageJson(process.cwd());
+    const dependenciesArray = Object.entries(dependencies);
+
+    const extensionsPaths = extensions.reduce((acc, extension) => {
+        const { packageName } = extension;
+
+        // Check which extension in dependency list
+        const extensionFromDependencies = dependenciesArray.find(
+            ([dependencyName]) => dependencyName === packageName
+        );
+
+        if (Array.isArray(extensionFromDependencies)) {
+            const [, extensionPath] = extensionFromDependencies;
+
+            // If extension path is required as local dependency then add it array
+            if (extensionPath.startsWith('file:')) {
+                acc.push(`${path.relative(process.cwd(), extensionPath.slice(5))}/src/**/*`);
+            }
+        }
+
+        return acc;
+    }, []);
+
+    return extensionsPaths;
+};
+
 module.exports = {
-    getExtensionsForCwd
+    getExtensionsForCwd,
+    getLocalExtensionsPath
 };

@@ -8,6 +8,7 @@ const logger = require('@tilework/mosaic-dev-utils/logger');
 const { before } = require('./build-plugins');
 const googleAnalytics = require('@tilework/mosaic-dev-utils/analytics');
 const getFolderSize = require('@tilework/mosaic-dev-utils/get-folder-size');
+const { getLocalExtensionsPath } = require('@tilework/mosaic-dev-utils/extensions-core');
 
 const args = process.argv.slice(2);
 const buildJsPath = '/static/js';
@@ -72,7 +73,7 @@ module.exports = (script) => {
             process.exit();
         });
 
-        child.on('close', async (code) =>  {
+        child.on('close', async (code) => {
             if (code !== null || isProd) {
                 // if the process exits "voluntarily" stop the parent as well
                 // See more in answer here: https://stackoverflow.com/a/39169784
@@ -113,7 +114,8 @@ module.exports = (script) => {
 
         chokidar
             .watch([
-                'src/**/*'
+                'src/**/*',
+                ...getLocalExtensionsPath()
             ], {
                 // should we ignore node_modules ?
                 ignored: '**/node_modules/**',
