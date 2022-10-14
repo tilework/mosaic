@@ -86,7 +86,7 @@ const getExtensionsPath = (isOnlyLocal = false) => {
     const dependenciesArray = Object.entries(dependencies);
 
     const extensionsPaths = getExtensionsForCwd().reduce((acc, extension) => {
-        const { packageName } = extension;
+        const { packageName, packagePath } = extension;
 
         // Check which extension in dependency list
         const extensionFromDependencies = dependenciesArray.find(
@@ -106,7 +106,7 @@ const getExtensionsPath = (isOnlyLocal = false) => {
             // If extension path is required as local dependency then replace
             const resultPath = extensionPath.startsWith('file:')
                 ? extensionPath.replace('file:', '')
-                : extensionPath;
+                : packagePath;
 
             acc.push(`${path.relative(process.cwd(), resultPath)}/src/**/*`);
         }
