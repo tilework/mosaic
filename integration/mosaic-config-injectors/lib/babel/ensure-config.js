@@ -99,14 +99,14 @@ const getExistingConfigPath = () => {
 const getConfigInclude = (initialInclude = []) => {
     const extendedInclude = ['src/**/*'];
 
-    // Go through extensions and include there relative path
-    getExtensionsPath().forEach((extensionPath) => {
-        extendedInclude.push(extensionPath);
-    });
-
     // Go through themes and include there relative path
     getParentThemePaths().forEach((parentThemePath) => {
         extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/src/**/*`);
+    });
+
+    // Go through extensions and include there relative path
+    getExtensionsPath().forEach((extensionPath) => {
+        extendedInclude.push(extensionPath);
     });
 
     // Filter out include paths that already exists in existing one. Removing duplicates.

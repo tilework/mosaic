@@ -5,6 +5,7 @@ const logger = require('./logger');
 const memoize = require('memoizee');
 const path = require('path');
 const shouldUseYarn = require('./should-use-yarn');
+const fs = require('fs')
 
 let visitedDeps = [];
 
@@ -81,7 +82,8 @@ const getExtensionsForCwd = memoize((cwd = process.cwd()) => getEnabledExtension
     return acc;
 }, []));
 
-const getExtensionsPath = (isOnlyLocal = false) => {
+
+const getExtensionsPath = (isOnlyLocalPackages = false) => {
     const { dependencies } = getPackageJson(process.cwd());
     const dependenciesArray = Object.entries(dependencies);
 
@@ -94,18 +96,31 @@ const getExtensionsPath = (isOnlyLocal = false) => {
         );
 
         if (Array.isArray(extensionFromDependencies)) {
-            const [, extensionPath] = extensionFromDependencies;
+            const [, extensionPathFromDependencies] = extensionFromDependencies;
+
+            // Getting trimmed version for future check if it is extension required from local path
+            const trimmedRequiredVersion = extensionPathFromDependencies.slice(0, 4);
+            const isRequiredVersionLocal = trimmedRequiredVersion === 'file' || trimmedRequiredVersion === 'link';
+
+            // Check if extension is required as local package and remove its prefix to get relative path
+            const extensionPath = isRequiredVersionLocal
+                ? path.relative(process.cwd(), extensionPathFromDependencies.slice(5))
+                : extensionPathFromDependencies;
+
+            // Get extensions paths which has src folder inside of them
+            if (!fs.existsSync(`${extensionPath}/src`)) {
+                return acc;
+            }
 
             // Push extensions that are required from local packages
-            if (!isOnlyLocal && extensionPath.startsWith('file:')) {
-                acc.push(`${path.relative(process.cwd(), extensionPath.replace('file:', ''))}/src/**/*`);
+            if (!isOnlyLocalPackages && isRequiredVersionLocal) {
+                acc.push(`${extensionPath}/src/**/*`);
 
                 return acc;
             }
 
-            // If extension path is required as local dependency then replace
-            const resultPath = extensionPath.startsWith('file:')
-                ? extensionPath.replace('file:', '')
+            const resultPath = isRequiredVersionLocal
+                ? extensionPathFromDependencies.slice(5)
                 : packagePath;
 
             acc.push(`${path.relative(process.cwd(), resultPath)}/src/**/*`);
