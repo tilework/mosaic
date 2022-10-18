@@ -95,9 +95,10 @@ const getExtensionsPath = (isOnlyLocalPackages = false) => {
             ([dependencyName]) => dependencyName === packageName
         );
 
-        if (Array.isArray(extensionFromDependencies)) {
+        if (!Array.isArray(extensionFromDependencies)) {
             return acc;
         }
+
         const [, extensionPathFromDependencies] = extensionFromDependencies;
 
         // Getting trimmed version for future check if it is extension required from local path
