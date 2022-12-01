@@ -19,6 +19,7 @@ module.exports = (script) => {
     const timeStamp = Date.now();
     const isProd = script === 'build';
     const TIMEOUT_BETWEEN_KILL_TRIGGERS = 500;
+    const isStartBrowser = !args.includes('-n');
 
     if (args.length === 0) {
         logger.error(`Please specify command (one of: ${ logger.style.misc('start') }, ${ logger.style.misc('build') }).`);
@@ -50,7 +51,8 @@ module.exports = (script) => {
                     ...process.env,
                     // after restart do not launch new browser, and by default
                     // start new session based on env variable value
-                    BROWSER: isRestarted ? 'none' : (process.env.BROWSER || ''),
+                    // in case if argument -n was provided also don't start browser
+                    BROWSER: isRestarted || !isStartBrowser ? 'none' : (process.env.BROWSER || ''),
 
                     // TODO solve the dependency mismatches smarter
                     SKIP_PREFLIGHT_CHECK: true,
