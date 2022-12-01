@@ -15,6 +15,7 @@ const aliasPostfixMap = {
     Query: `.${path.sep}${path.join('src', 'query')}`,
     Type: `.${path.sep}${path.join('src', 'type')}`,
     Pages: `.${path.sep}${path.join('src', 'pages')}`,
+    Ui: `.${path.sep}${path.join('src', 'ui')}`,
     Src: `.${path.sep}src`,
 
     // Default alias
