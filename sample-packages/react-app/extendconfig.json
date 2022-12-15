@@ -73,6 +73,13 @@
             "/*": [
                 "../parent-ts-react-app/src/*",
                 "src/*"
+            ],
+            "ParentPages/*": [
+                "../parent-ts-react-app/src/pages/*"
+            ],
+            "Pages/*": [
+                "../parent-ts-react-app/src/pages/*",
+                "src/pages/*"
             ]
         }
     }

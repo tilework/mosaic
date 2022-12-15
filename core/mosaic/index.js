@@ -17,6 +17,12 @@ class Mosaic {
         this.generated = [];
     }
 
+    addPlugins(importArray) {
+        pluginStorage.addPlugins(importArray.map(
+            (importedModule) => importedModule.default || importedModule
+        ));
+    }
+
     setPlugins(importArray) {
         pluginStorage.setPlugins(importArray.map(
             (importedModule) => importedModule.default || importedModule
@@ -55,7 +61,7 @@ class Mosaic {
                     return new Proxy(this, { get: getHandler });
                 }
 
-                __construct() {}
+                __construct() { }
             };
 
             GeneratedClass[extensible] = true;
@@ -90,7 +96,7 @@ class Mosaic {
 
             return proxy;
         } catch (e) {
-            console.log(`Failed to apply middleware to: ${ Middlewarable } (${ namespace }).`);
+            console.log(`Failed to apply middleware to: ${Middlewarable} (${namespace}).`);
             console.log(e);
 
             return Middlewarable;
