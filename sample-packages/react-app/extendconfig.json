@@ -80,6 +80,20 @@
             "Pages/*": [
                 "../parent-ts-react-app/src/pages/*",
                 "src/pages/*"
+            ],
+            "ParentUi/*": [
+                "../parent-ts-react-app/src/ui/*"
+            ],
+            "ParentSrc/*": [
+                "../parent-ts-react-app/src/*"
+            ],
+            "Ui/*": [
+                "../parent-ts-react-app/src/ui/*",
+                "src/ui/*"
+            ],
+            "Src/*": [
+                "../parent-ts-react-app/src/*",
+                "src/*"
             ]
         }
     }

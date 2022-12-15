@@ -1,6 +1,8 @@
 {
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "../parent-ts-react-app/src/**/*",
+        "packages/child-extension/src/**/*"
     ],
     "extends": "./extendconfig.json"
 }

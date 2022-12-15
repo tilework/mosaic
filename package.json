@@ -8,7 +8,8 @@
     "postinstall": "lerna bootstrap && npm explore @tilework/mosaic -- npm run build",
     "clean": "lerna clean --yes",
     "lint": "eslint core/ integration/",
-    "npm:publish": "lerna publish --exact --no-private"
+    "npm:publish": "lerna publish --exact --no-private",
+    "npm:canary": "lerna publish --canary --exact --no-private"
   },
   "repository": {
     "type": "git",
