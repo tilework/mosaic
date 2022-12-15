@@ -1,51 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const deepmerge = require('deepmerge');
-const globby = require('globby');
 
 const writeJson = require('@tilework/mosaic-dev-utils/write-json');
 const extensions = require('@tilework/mosaic-dev-utils/extensions');
-const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
-
+const { getParentThemePaths } = require('@tilework/mosaic-dev-utils/parent-theme');
+const { hasFilesOfType } = require('@tilework/mosaic-dev-utils/files-type');
 const { aliasMap, aliasPostfixMap } = require('./util/alias');
-const includePaths = require('../common/include-paths');
 const { getMosaicConfig } = require('@tilework/mosaic-dev-utils/mosaic-config');
-
-const hasFilesOfType = (type, rootOnly = false) => (
-    rootOnly
-        ? includePaths.filter(path.isAbsolute)
-        : [process.cwd()]
-).some((includePath) => {
-    const getMain = () => {
-        const { main } = getPackageJson(includePath);
-        if (main) {
-            const mainPath = path.resolve(includePath, main);
-
-            // Handle main being file
-            if (!fs.lstatSync(mainPath).isDirectory()) {
-                return path.dirname(mainPath);
-            }
-
-            // Main is directory -> use it
-            return mainPath;
-        }
-
-        return includePath;
-    };
-
-    const scannable = getMain();
-    const foundTypescriptFiles = globby.sync(
-        [
-            `**/*.(${type}|${type}x)`, 
-            // TODO verify that this works with linked packages
-            '!**/node_modules', 
-            '!**/*.d.ts'
-        ],
-        { cwd: scannable }
-    );
-
-    return foundTypescriptFiles.length;
-});
+const { getExtensionsPath } = require('@tilework/mosaic-dev-utils/extensions-core');
 
 // Faultproof
 const readJson = (jsonPath) => {
@@ -111,7 +74,7 @@ const generateParentThemeAliases = () => {
     return parentThemeAliases;
 };
 
-const generateJsConfig = (parentThemeAliases, preferenceAliases) => ({
+const generateConfig = (parentThemeAliases, preferenceAliases) => ({
     compilerOptions: {
         baseUrl: `.${path.posix.sep}`,
         jsx: 'react',
@@ -133,13 +96,40 @@ const getExistingConfigPath = () => {
     return existingConfigPath;
 };
 
+const getConfigInclude = (initialInclude = []) => {
+    const extendedInclude = ['src/**/*'];
+
+    // Go through themes and include there relative path
+    getParentThemePaths().forEach((parentThemePath) => {
+        extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/src/**/*`);
+    });
+
+    // Go through extensions and include there relative path
+    getExtensionsPath().forEach((extensionPath) => {
+        extendedInclude.push(extensionPath);
+    });
+
+    // Filter out include paths that already exists in existing one. Removing duplicates.
+    const filteredExtendedInclude = extendedInclude.filter((path) => !initialInclude.includes(path));
+
+    return [
+        ...initialInclude,
+        ...filteredExtendedInclude
+    ];
+};
+
 const extendConfig = (existingConfigPath, additionalConfig) => {
     const existingConfig = readJson(existingConfigPath);
-    const { extends: extendsRelative = './mosaic.jsconfig.json' } = existingConfig;
+    const {
+        extends: extendsRelative = './mosaic.jsconfig.json',
+        include: initialInclude
+    } = existingConfig;
 
     // Read the existing config. Get {} if it does not exist.
     const extendsAbsolute = path.resolve(process.cwd(), extendsRelative);
     const extendsConfig = readJson(extendsAbsolute);
+    // Getting new include for config depending on existing one.
+    const additionalInclude = getConfigInclude(initialInclude);
 
     // Generate and save new extends config
     const resultingExtendsConfig = deepmerge(extendsConfig, additionalConfig, {
@@ -158,44 +148,26 @@ const extendConfig = (existingConfigPath, additionalConfig) => {
         }
     });
 
-    // Handle nothing has changed
-    if (JSON.stringify(extendsConfig) === JSON.stringify(resultingExtendsConfig)) {
-        return;
+    // Handle is extends field has changed
+    if (JSON.stringify(extendsConfig) !== JSON.stringify(resultingExtendsConfig)) {
+        writeJson(extendsAbsolute, resultingExtendsConfig);
     }
-
-    writeJson(extendsAbsolute, resultingExtendsConfig);
 
     // Ensure correct "extends" path in the base config
     existingConfig.extends = extendsRelative;
+    // Ensure include contains correct paths
+    existingConfig.include = additionalInclude;
     writeJson(existingConfigPath, existingConfig);
-};
-
-const ensureTypescriptFile = () => {
-    if (hasFilesOfType('ts', true)) {
-        return;
-    }
-
-    const filename = 'tsfile.ts';
-    const filepath = path.join(process.cwd(), filename);
-    fs.writeFileSync(filepath, '');
-
-    return filename;
 };
 
 const createFromScratch = (generatedJsConfig) => {
     const isTs = hasFilesOfType('ts');
     const configPath = path.resolve(
-        process.cwd(), 
+        process.cwd(),
         isTs ? 'tsconfig.json' : 'jsconfig.json'
     );
 
-    const initialConfig = { include: ["src/**/*"] };
-
-    // Without this TSC will fail
-    if (isTs) {
-        const dummyTsFile = ensureTypescriptFile();
-        initialConfig.include.push(dummyTsFile);
-    }
+    const initialConfig = { include: getConfigInclude() };
 
     writeJson(configPath, initialConfig);
     extendConfig(configPath, generatedJsConfig);
@@ -204,13 +176,13 @@ const createFromScratch = (generatedJsConfig) => {
 const createJsConfig = () => {
     const parentThemeAliases = generateParentThemeAliases();
     const preferenceAliases = generatePreferenceAliases();
-    const generatedJsConfig = generateJsConfig(parentThemeAliases, preferenceAliases);
+    const generatedConfig = generateConfig(parentThemeAliases, preferenceAliases);
     const existingConfigPath = getExistingConfigPath();
 
     if (!existingConfigPath) {
-        createFromScratch(generatedJsConfig);
+        createFromScratch(generatedConfig);
     } else {
-        extendConfig(existingConfigPath, generatedJsConfig);
+        extendConfig(existingConfigPath, generatedConfig);
     }
 };
 

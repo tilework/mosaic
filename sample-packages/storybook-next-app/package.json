@@ -1,6 +1,6 @@
 {
   "name": "storybook-next-app",
-  "version": "0.2.21",
+  "version": "0.2.24",
   "private": true,
   "scripts": {
     "dev": "nextjs-scripts dev",
@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "@tilework/mosaic-nextjs-scripts": "0.1.24",
+    "@tilework/mosaic-nextjs-scripts": "0.1.27",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
