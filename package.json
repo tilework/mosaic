@@ -9,7 +9,7 @@
     "clean": "lerna clean --yes",
     "lint": "eslint core/ integration/",
     "npm:publish": "lerna publish --exact --no-private",
-    "npm:canary": "lerna publish --canary --exact --no-private"
+    "npm:canary": "lerna publish --canary --exact --no-private --force-publish"
   },
   "repository": {
     "type": "git",
