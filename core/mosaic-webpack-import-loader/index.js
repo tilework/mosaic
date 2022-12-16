@@ -5,10 +5,6 @@ const { getPluginImportsForFile } = require('./util/get-plugins-to-add');
  * Mosaic must be globally provided for this
  */
 module.exports = function injectImports(source) {
-    // console.log(arguments);
-    // console.log(this.query);
-    // process.exit();
-
     const options = this.query;
 
     const pluginImports = getPluginImportsForFile(options.entrypoint, source);
