@@ -100,7 +100,12 @@ function mapNamespacesToPluginFiles(entrypoint) {
                 ]
             });
 
-            const namespaces = parsed.program.body.find((node) => node.type === 'ExportDefaultDeclaration')?.declaration?.properties?.map(({ key }) => key.value);
+            const namespaces = (parsed.program.body
+                .find((node) => node.type === 'ExportDefaultDeclaration')
+                ?.declaration
+                ?.properties
+                ?.map(({ key }) => key.value)
+            ) || [];
 
             namespaces.forEach((namespace) => {
                 if (!namespaceToPluginFileMap[namespace]) {
