@@ -100,12 +100,22 @@ function mapNamespacesToPluginFiles(entrypoint) {
                 ]
             });
 
-            const namespaces = (parsed.program.body
-                .find((node) => node.type === 'ExportDefaultDeclaration')
-                ?.declaration
-                ?.properties
-                ?.map(({ key }) => key.value)
-            ) || [];
+            const exportDeclaration = parsed.program.body
+                .find((node) => node.type === 'ExportDefaultDeclaration');
+
+            if (!exportDeclaration) {
+                return;
+            }
+
+            if (
+                !exportDeclaration.declaration
+                || !exportDeclaration.declaration.properties
+            ) {
+                return;
+            }
+
+            const namespaces = exportDeclaration.declaration.properties
+                .map(({ key }) => key.value);
 
             namespaces.forEach((namespace) => {
                 if (!namespaceToPluginFileMap[namespace]) {
@@ -115,6 +125,7 @@ function mapNamespacesToPluginFiles(entrypoint) {
                 namespaceToPluginFileMap[namespace].push(pluginPath);
             });
         } catch (e) {
+            console.log('ERROR is dynamic plugins injection.');
             console.log(e);
         }
     });
@@ -129,8 +140,15 @@ function getPluginImportsForFile(entrypoint, source) {
         return '';
     }
 
-    const sourceNamespaces = source.match(/@namespace\s+([^\s]+)/gm)
-        ?.map(match => match.replace(/@namespace\s+/, ''));
+    const rawNamespaceMatches = source.match(/@namespace\s+([^\s]+)/gm);
+
+    if (!rawNamespaceMatches) {
+        return '';
+    }
+
+    const sourceNamespaces = rawNamespaceMatches.map(
+        (match) => match.replace(/@namespace\s+/, '')
+    );
 
     if (!sourceNamespaces || !sourceNamespaces.length) {
         return '';
