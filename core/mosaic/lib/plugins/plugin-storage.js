@@ -27,21 +27,24 @@ class PluginStorage {
             }
 
             Object.entries(pConf).forEach(([handlerType, cpConf]) => {
-                if (!this.plugins[namespace][handlerType]) {
-                    this.plugins[namespace][handlerType] = cpConf;
+                // vvv handles reduced plugins case
+                if (Array.isArray(cpConf)) {
+                    if (!this.plugins[namespace][handlerType]) {
+                        this.plugins[namespace][handlerType] = [];
+                    }
+
+                    this.plugins[namespace][handlerType].push(...cpConf);
                     return;
                 }
 
-                if (Array.isArray(cpConf)) {
-                    // ^^^ handles reduced plugins case
-                    this.plugins[namespace][handlerType].push(...cpConf);
+                // vvv handles regular plugin case
+                if (!this.plugins[namespace][handlerType]) {
+                    this.plugins[namespace][handlerType] = {};
                 }
 
-                // vvv handles regular plugin case
                 Object.entries(cpConf).forEach(([memberName, ccpConf]) => {
                     if (!this.plugins[namespace][handlerType][memberName]) {
-                        this.plugins[namespace][handlerType][memberName] = ccpConf;
-                        return;
+                        this.plugins[namespace][handlerType][memberName] = [];
                     }
 
                     this.plugins[namespace][handlerType][memberName].push(...ccpConf);
