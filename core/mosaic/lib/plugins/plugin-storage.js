@@ -1,5 +1,5 @@
 import getGlobalContext from '../context/get-global-context';
-import generateConfig from './generate-config';
+import { generateConfig, mergePluginConfig } from './generate-config';
 
 class PluginStorage {
     constructor() {
@@ -20,38 +20,7 @@ class PluginStorage {
             this.plugins = {};
         }
 
-        // vvv deep merge plugins
-        Object.entries(newPlugins).forEach(([namespace, pConf]) => {
-            if (!this.plugins[namespace]) {
-                this.plugins[namespace] = {};
-            }
-
-            Object.entries(pConf).forEach(([handlerType, cpConf]) => {
-                // vvv handles reduced plugins case
-                if (Array.isArray(cpConf)) {
-                    if (!this.plugins[namespace][handlerType]) {
-                        this.plugins[namespace][handlerType] = [];
-                    }
-
-                    this.plugins[namespace][handlerType].push(...cpConf);
-                    return;
-                }
-
-                // vvv handles regular plugin case
-                if (!this.plugins[namespace][handlerType]) {
-                    this.plugins[namespace][handlerType] = {};
-                }
-
-                Object.entries(cpConf).forEach(([memberName, ccpConf]) => {
-                    if (!this.plugins[namespace][handlerType][memberName]) {
-                        this.plugins[namespace][handlerType][memberName] = [];
-                    }
-
-                    this.plugins[namespace][handlerType][memberName].push(...ccpConf);
-                });
-            });
-        });
-
+        mergePluginConfig(this.plugins, newPlugins);
         this.exposePlugins();
     }
 
