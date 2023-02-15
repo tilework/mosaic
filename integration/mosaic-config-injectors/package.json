@@ -1,6 +1,6 @@
 {
   "name": "@tilework/mosaic-config-injectors",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Configuration injectors for @tilework/mosaic",
   "main": "lib/index.js",
   "types": "./typings",
@@ -12,7 +12,7 @@
     "@tilework/mosaic-craco": "0.0.5",
     "@tilework/mosaic-dev-utils": "0.2.3",
     "@tilework/mosaic-webpack-fallback-plugin": "0.0.17",
-    "@tilework/mosaic-webpack-import-loader": "0.0.16",
+    "@tilework/mosaic-webpack-import-loader": "0.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "deepmerge": "^4.2.2",
