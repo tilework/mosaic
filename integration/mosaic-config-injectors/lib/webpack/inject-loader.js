@@ -10,18 +10,18 @@ const resolveStringEntry = (entry, context) => {
     if (!context) {
         throw new NoContextException();
     }
-    
+
     return path.resolve(context, entry);
 };
 
 const resolveObjectEntry = (entryObject, context) => {
     return Object.entries(entryObject).map(([_entryName, entry]) => {
-        if (typeof(entry) === 'string') {
+        if (typeof (entry) === 'string') {
             return resolveStringEntry(entry, context);
         }
 
-        if (typeof(entry) === 'object') {
-            if (typeof(entry.import) === 'string') {
+        if (typeof (entry) === 'object') {
+            if (typeof (entry.import) === 'string') {
                 return resolveStringEntry(entry.import, context);
             }
         }
@@ -37,12 +37,12 @@ const getEntryTest = (webpackConfig, entryMatcher) => {
 
     const { entry, context } = webpackConfig;
 
-    if (typeof(entry) === 'string') {
+    if (typeof (entry) === 'string') {
         return resolveStringEntry(entry, context);
     }
 
-    if (typeof(entry) === 'object') {
-        if (typeof(entry.main) === 'string') {
+    if (typeof (entry) === 'object') {
+        if (typeof (entry.main) === 'string') {
             return resolveStringEntry(entry.main, context);
         }
 
@@ -65,8 +65,9 @@ const addImportInjectorLoader = (webpackConfig, entryMatcher) => {
     }
 
     webpackConfig.module.rules.push({
-        test,
-        loader: require.resolve('@tilework/mosaic-webpack-import-loader')
+        test: /\.(tsx|jsx|ts|js)?$/,
+        loader: require.resolve('@tilework/mosaic-webpack-import-loader'),
+        options: { entrypoint: test }
     });
 
     return webpackConfig;

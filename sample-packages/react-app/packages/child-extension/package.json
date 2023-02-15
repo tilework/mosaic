@@ -5,7 +5,7 @@
     "mosaic": {
         "type": "extension",
         "build": {
-            "plugins": [
+            "cracoPlugins": [
                 "./build-config/plugin.js"
             ]
         }

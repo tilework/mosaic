@@ -10,4 +10,11 @@ class App extends ParentApp {
     }
 }
 
+/** @namespace Hello/Wo */
+function test() {
+    console.log('source');
+}
+
+test();
+
 export default App;

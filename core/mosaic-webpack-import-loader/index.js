@@ -1,15 +1,20 @@
-const getAllExtensionImports = require('./util/get-all-extension-imports');
+const { getPluginImportsForFile } = require('./util/get-plugins-to-add');
 
 /**
  * This injects plugins into the application
  * Mosaic must be globally provided for this
  */
 module.exports = function injectImports(source) {
-    const filename = this._module.resource;
-    const injectableCode = `Mosaic.setPlugins([${ getAllExtensionImports(filename) }]);\n`;
+    const options = this.query;
+
+    const pluginImports = getPluginImportsForFile(options.entrypoint, source);
+
+    if (!pluginImports) {
+        return source;
+    }
 
     return [
-        injectableCode,
+        `Mosaic.addPlugins([${pluginImports}]);\n`,
         source
     ].join('');
 };

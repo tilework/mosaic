@@ -77,7 +77,7 @@ const handleRegularSection = (overallConfig, namespace, handlerType, membersPlug
 };
 
 const DEFAULT_POSITION = 100;
-const sortPluginArray = (plugins) => plugins.sort(
+export const sortPluginArray = (plugins) => plugins.sort(
     ({ position: a = DEFAULT_POSITION }, { position: b = DEFAULT_POSITION }) => a - b
 );
 
@@ -110,7 +110,7 @@ const sortConfig = (config) => {
 /**
  * Entry point
  */
-const generateConfig = (extensions) => {
+export const generateConfig = (extensions) => {
     const config = extensions.reduce(
         (overallConfig, extension) => {
             Object.entries(extension).forEach(([namespace, plugins]) => {
@@ -135,4 +135,56 @@ const generateConfig = (extensions) => {
     return config;
 };
 
-export default generateConfig;
+
+function mergePluginArray(targetPlugins, sourcePlugins) {
+    return sortPluginArray(
+        targetPlugins.reduce((acc, pluginA) => {
+            if (acc.indexOf(pluginA) === -1) {
+                acc.push(pluginA);
+            }
+
+            return acc;
+        }, sourcePlugins)
+    );
+}
+
+export function mergePluginConfig(configTarget, configSource) {
+    Object.entries(configSource).forEach(([namespace, pConf]) => {
+        if (!configTarget[namespace]) {
+            configTarget[namespace] = {};
+        }
+
+        Object.entries(pConf).forEach(([handlerType, cpConf]) => {
+            // vvv handles reduced plugins case
+            if (Array.isArray(cpConf)) {
+                if (!configTarget[namespace][handlerType]) {
+                    configTarget[namespace][handlerType] = [];
+                }
+
+                configTarget[namespace][handlerType] = mergePluginArray(
+                    cpConf,
+                    configTarget[namespace][handlerType]
+                );
+
+                return;
+            }
+
+            // vvv handles regular plugin case
+            if (!configTarget[namespace][handlerType]) {
+                configTarget[namespace][handlerType] = {};
+            }
+
+            Object.entries(cpConf).forEach(([memberName, ccpConf]) => {
+                if (!configTarget[namespace][handlerType][memberName]) {
+                    configTarget[namespace][handlerType][memberName] = [];
+                }
+
+                configTarget[namespace][handlerType][memberName] = mergePluginArray(
+                    ccpConf,
+                    configTarget[namespace][handlerType][memberName]
+                );
+            });
+        });
+    });
+}
+
