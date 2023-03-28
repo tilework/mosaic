@@ -1,6 +1,6 @@
 {
   "name": "@tilework/mosaic-config-injectors",
-  "version": "0.2.4-alpha.0+8a7483e",
+  "version": "0.2.4-alpha.1+4b5ef68",
   "description": "Configuration injectors for @tilework/mosaic",
   "main": "lib/index.js",
   "types": "./typings",
@@ -8,17 +8,17 @@
   "dependencies": {
     "@babel/plugin-transform-arrow-functions": "7.13.0",
     "@babel/plugin-transform-async-to-generator": "7.13.0",
-    "@tilework/babel-plugin-mosaic-middleware-decorator": "0.0.19-alpha.5+8a7483e",
-    "@tilework/mosaic-craco": "0.0.6-alpha.38+8a7483e",
-    "@tilework/mosaic-dev-utils": "0.2.4-alpha.5+8a7483e",
-    "@tilework/mosaic-webpack-fallback-plugin": "0.0.18-alpha.5+8a7483e",
-    "@tilework/mosaic-webpack-import-loader": "0.1.1-alpha.0+8a7483e",
+    "@tilework/babel-plugin-mosaic-middleware-decorator": "0.0.19-alpha.6+4b5ef68",
+    "@tilework/mosaic-craco": "0.0.6-alpha.39+4b5ef68",
+    "@tilework/mosaic-dev-utils": "0.2.4-alpha.6+4b5ef68",
+    "@tilework/mosaic-webpack-fallback-plugin": "0.0.18-alpha.6+4b5ef68",
+    "@tilework/mosaic-webpack-import-loader": "0.1.1-alpha.1+4b5ef68",
     "babel-loader": "8.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "deepmerge": "^4.2.2",
     "globby": "^11.0.2"
   },
-  "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55",
+  "gitHead": "4b5ef6887477505c76f75f55787fee8bc4159a47",
   "peerDependencies": {
     "@babel/core": "^7.14.0"
   }

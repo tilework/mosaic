@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic",
     "description": "Core Mosaic runtime package",
-    "version": "1.0.1-alpha.0+8a7483e",
+    "version": "1.0.1-alpha.1+4b5ef68",
     "main": "dist/mosaic.js",
     "browser": "dist/mosaic.js",
     "files": [
@@ -15,7 +15,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55",
+    "gitHead": "4b5ef6887477505c76f75f55787fee8bc4159a47",
     "devDependencies": {
         "@babel/core": "^7.13.15",
         "@rollup/plugin-babel": "^5.3.0",

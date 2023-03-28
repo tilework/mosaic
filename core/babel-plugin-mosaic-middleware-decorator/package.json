@@ -1,15 +1,15 @@
 {
   "name": "@tilework/babel-plugin-mosaic-middleware-decorator",
-  "version": "0.0.19-alpha.5+8a7483e",
+  "version": "0.0.19-alpha.6+4b5ef68",
   "description": "Babel plugin to transform @namespace comments into JS functionality",
   "main": "index.js",
   "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
   "license": "MIT",
   "dependencies": {
-    "@tilework/mosaic-dev-utils": "0.2.4-alpha.5+8a7483e"
+    "@tilework/mosaic-dev-utils": "0.2.4-alpha.6+4b5ef68"
   },
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55"
+  "gitHead": "4b5ef6887477505c76f75f55787fee8bc4159a47"
 }

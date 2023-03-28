@@ -1,16 +1,16 @@
 {
   "name": "@tilework/mosaic-test-utils",
-  "version": "0.0.37-alpha.0+8a7483e",
+  "version": "0.0.37-alpha.1+4b5ef68",
   "description": "Testing utils for Mosaic",
   "author": "Jegors Batovs <yegor@scandipwa.com>",
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.2.6",
-    "@tilework/mosaic": "1.0.1-alpha.0+8a7483e",
-    "@tilework/mosaic-config-injectors": "0.2.4-alpha.0+8a7483e",
-    "@tilework/mosaic-dev-utils": "0.2.4-alpha.5+8a7483e",
-    "@tilework/mosaic-nextjs-scripts": "0.1.29-alpha.0+8a7483e",
+    "@tilework/mosaic": "1.0.1-alpha.1+4b5ef68",
+    "@tilework/mosaic-config-injectors": "0.2.4-alpha.1+4b5ef68",
+    "@tilework/mosaic-dev-utils": "0.2.4-alpha.6+4b5ef68",
+    "@tilework/mosaic-nextjs-scripts": "0.1.29-alpha.1+4b5ef68",
     "babel-jest": "26.6.3",
     "babel-preset-react-app": "10.0.0",
     "react": "17.0.1"
@@ -18,5 +18,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55"
+  "gitHead": "4b5ef6887477505c76f75f55787fee8bc4159a47"
 }
