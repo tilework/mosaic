@@ -4,6 +4,11 @@ import getWrapperFromPlugin from '../plugins/get-wrapper-from-plugin';
 import getNamespacesFromMiddlewarable from '../namespace/get-namespaces-from-middlewarable';
 
 function postProcessInstance(instance, constructorArguments) {
+    if (instance.__isConstructorCalled !== undefined) {
+        // do not re-apply plugins second time
+        return instance;
+    }
+
     const namespaces = getNamespacesFromMiddlewarable(Object.getPrototypeOf(instance).constructor);
 
     // Get all member-property plugins
@@ -30,7 +35,7 @@ function postProcessInstance(instance, constructorArguments) {
     );
 
     // Handle construct logic
-    if (instance.__construct && instance.__isConstructorCalled === undefined) {
+    if (instance.__construct) {
         // Call the "magic" __construct member function
         instance.__construct(...constructorArguments);
         instance.__isConstructorCalled = true;
