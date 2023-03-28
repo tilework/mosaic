@@ -23,9 +23,9 @@
         "react-scripts": "4.0.1"
     },
     "license": "MIT",
-    "version": "0.0.5",
+    "version": "0.0.6-alpha.38+8a7483e",
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "ef9c400f7d5bd03165cb66e0e11eb1a4f30e384d"
+    "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55"
 }

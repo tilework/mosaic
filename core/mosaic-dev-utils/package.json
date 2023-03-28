@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-dev-utils",
     "description": "Development utilities used by CSA.",
-    "version": "0.2.3",
+    "version": "0.2.4-alpha.5+8a7483e",
     "dependencies": {
         "chalk": "^4.1.0",
         "ext-ip": "^0.3.9",
@@ -14,5 +14,5 @@
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "ef9c400f7d5bd03165cb66e0e11eb1a4f30e384d"
+    "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55"
 }

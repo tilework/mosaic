@@ -1,7 +1,7 @@
 {
     "name": "@tilework/eslint-plugin-mosaic",
     "description": "ESLint plugin used by CSA.",
-    "version": "0.0.9",
+    "version": "0.0.10-alpha.23+8a7483e",
     "keywords": [
         "eslint",
         "eslintplugin",
@@ -27,5 +27,5 @@
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "ef9c400f7d5bd03165cb66e0e11eb1a4f30e384d"
+    "gitHead": "8a7483ee612008fddd5b6ec5f7ce9e88accdfa55"
 }
