@@ -18,6 +18,7 @@ const {
 
 const when = require('./lib/when');
 const { cracoPlugins } = require('./lib/build-plugins');
+const { getProcessEnv } = require('./lib/env');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -99,12 +100,8 @@ module.exports = () => {
                     // vvv This fixes process is not defined browser error
                     process: {
                         env: {
-                            ...Object
-                                .entries(process.env)
-                                .reduce((result, [k, v]) => ({
-                                    ...result,
-                                    [k]: JSON.stringify(v)
-                                }), {}),
+                            // vvv get safe process.env, only specific variables are allowed
+                            ...getProcessEnv(),
                             REBEM_MOD_DELIM: JSON.stringify('_'),
                             REBEM_ELEM_DELIM: JSON.stringify('-')
                         }
