@@ -13,12 +13,12 @@ const PHP_ENVIRONMENTS = [
     'PHPIZE_DEPS',
     'PHP_SHA256',
     'PHP_PATH',
-    'PHPBREW_PHP',
+    'PHPBREW_PHP'
 ];
 
 const COMPOSER_ENVIRONMENTS = [
     'COMPOSER_AUTH',
-    'COMPOSER_MEMORY_LIMIT',
+    'COMPOSER_MEMORY_LIMIT'
 ];
 
 const BASE_ENVIRONMENTS = [
@@ -38,7 +38,7 @@ const BASE_ENVIRONMENTS = [
     'SKIP_PREFLIGHT_CHECK',
     'FAST_REFRESH',
     'FORCE_COLOR',
-    'NODE_ENV',
+    'NODE_ENV'
 ];
 
 const GIT_ENVIRONMENTS = [
@@ -46,7 +46,7 @@ const GIT_ENVIRONMENTS = [
     'GIT_AUTHOR_EMAIL',
     'GIT_AUTHOR_NAME',
     'GIT_TERMINAL_PROMPT',
-    'GIT_COMMITTER_EMAIL',
+    'GIT_COMMITTER_EMAIL'
 ];
 
 const MISC_ENVIRONMENTS = [
@@ -54,7 +54,7 @@ const MISC_ENVIRONMENTS = [
     'DEBUG_FD',
     'GRAPHQL_ENDPOINT',
     'REBEM_MOD_DELIM',
-    'REBEM_ELEM_DELIM',
+    'REBEM_ELEM_DELIM'
 ];
 
 /**
@@ -70,7 +70,7 @@ const getEnvironments = (envs) => {
         if (val in process.env) {
             return {
                 ...acc,
-                [val]: JSON.stringify(process.env[val]),
+                [val]: JSON.stringify(process.env[val])
             };
         }
 
@@ -86,12 +86,12 @@ const getProcessEnv = () => [
     COMPOSER_ENVIRONMENTS,
     BASE_ENVIRONMENTS,
     GIT_ENVIRONMENTS,
-    MISC_ENVIRONMENTS,
+    MISC_ENVIRONMENTS
 ].map(getEnvironments).reduce((acc, val) => ({
     ...acc,
-    ...val,
+    ...val
 }), {});
 
 module.exports = {
-    getProcessEnv,
+    getProcessEnv
 };

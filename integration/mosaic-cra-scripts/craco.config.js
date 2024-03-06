@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-param-reassign */
 const fs = require('fs');
 const webpack = require('webpack');
 const sassResourcesLoader = require('craco-sass-resources-loader');
