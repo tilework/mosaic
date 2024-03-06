@@ -1,7 +1,7 @@
 {
     "name": "@tilework/mosaic-nextjs-scripts",
     "description": "Scripts and configuration used by CSA.",
-    "version": "0.1.29-alpha.1+4b5ef68",
+    "version": "0.1.29",
     "bin": {
         "nextjs-scripts": "./bin/nextjs-scripts.js"
     },
@@ -17,9 +17,9 @@
     "dependencies": {
         "@babel/core": "^7.14.0",
         "@babel/preset-react": "^7.13.13",
-        "@tilework/mosaic-config-injectors": "0.2.4-alpha.1+4b5ef68",
-        "@tilework/mosaic-dev-utils": "0.2.4-alpha.6+4b5ef68",
-        "@tilework/mosaic-test-utils": "0.0.37-alpha.1+4b5ef68",
+        "@tilework/mosaic-config-injectors": "0.2.4",
+        "@tilework/mosaic-dev-utils": "0.2.4",
+        "@tilework/mosaic-test-utils": "0.0.37",
         "chokidar": "^3.5.1",
         "cross-spawn": "^7.0.0",
         "debounce": "^1.2.0",

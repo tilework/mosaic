@@ -1,12 +1,12 @@
 {
   "name": "@tilework/mosaic-webpack-import-loader",
-  "version": "0.1.1-alpha.1+4b5ef68",
+  "version": "0.1.1",
   "description": "Loader to automatically inject modules' imports into the source code of the application.",
   "main": "index.js",
   "author": "Jegors Batovs <jegors.batovs@scandiweb.com>",
   "license": "MIT",
   "dependencies": {
-    "@tilework/mosaic-dev-utils": "0.2.4-alpha.6+4b5ef68"
+    "@tilework/mosaic-dev-utils": "0.2.4"
   },
   "publishConfig": {
     "access": "public"
