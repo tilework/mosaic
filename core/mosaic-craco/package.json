@@ -23,7 +23,7 @@
         "react-scripts": "4.0.1"
     },
     "license": "MIT",
-    "version": "0.0.6-alpha.39+4b5ef68",
+    "version": "0.0.6",
     "publishConfig": {
         "access": "public"
     },

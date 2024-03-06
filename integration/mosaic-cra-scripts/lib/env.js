@@ -15,7 +15,7 @@ const BASE_ENVIRONMENTS = [
     'SKIP_PREFLIGHT_CHECK',
     'FAST_REFRESH',
     'FORCE_COLOR',
-    'NODE_ENV',
+    'NODE_ENV'
 ];
 
 const MISC_ENVIRONMENTS = [
@@ -23,7 +23,7 @@ const MISC_ENVIRONMENTS = [
     'DEBUG_FD',
     'GRAPHQL_ENDPOINT',
     'REBEM_MOD_DELIM',
-    'REBEM_ELEM_DELIM',
+    'REBEM_ELEM_DELIM'
 ];
 
 /**
@@ -39,7 +39,7 @@ const getEnvironments = (envs) => {
         if (val in process.env) {
             return {
                 ...acc,
-                [val]: JSON.stringify(process.env[val]),
+                [val]: JSON.stringify(process.env[val])
             };
         }
 
@@ -55,9 +55,9 @@ const getProcessEnv = () => [
     MISC_ENVIRONMENTS,
 ].map(getEnvironments).reduce((acc, val) => ({
     ...acc,
-    ...val,
+    ...val
 }), {});
 
 module.exports = {
-    getProcessEnv,
+    getProcessEnv
 };
