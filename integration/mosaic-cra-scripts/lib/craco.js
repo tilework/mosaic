@@ -40,7 +40,7 @@ module.exports = (script) => {
          * - anything else to kill parent immediately
          */
         child = spawn(
-            require.resolve('@tilework/mosaic-craco/bin/craco'),
+            require.resolve('@tilework/mosaic-craco/dist/bin/craco'),
             [
                 ...args,
                 '--config', path.join(__dirname, '../craco.config.js')

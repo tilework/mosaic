@@ -27,7 +27,7 @@
         "glob": "^7.1.6",
         "jest": "^26.6.3",
         "next": "10.0.5",
-        "react-scripts": "^4.0.3",
+        "react-scripts": "^5.0.0",
         "resolve": "^1.20.0",
         "tree-kill": "^1.2.2"
     },
