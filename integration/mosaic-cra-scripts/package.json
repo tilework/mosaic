@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@tilework/mosaic-config-injectors": "0.2.4",
-        "@tilework/mosaic-craco": "0.0.6",
+        "@tilework/mosaic-craco": "1.0.0",
         "@tilework/mosaic-dev-utils": "0.2.4",
         "@tilework/mosaic-test-utils": "0.0.37",
         "@tilework/mosaic-webpack-fallback-plugin": "0.0.18",
