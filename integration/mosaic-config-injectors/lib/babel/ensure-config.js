@@ -97,11 +97,15 @@ const getExistingConfigPath = () => {
 };
 
 const getConfigInclude = (initialInclude = []) => {
-    const extendedInclude = ['src/**/*'];
+    const extendedInclude = [];
 
     // Go through themes and include there relative path
     getParentThemePaths().forEach((parentThemePath) => {
-        extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/src/**/*`);
+        const isThemeIncluded = initialInclude.find((path) => path.includes(parentThemePath));
+
+        if (!isThemeIncluded) {
+            extendedInclude.push(`${path.relative(process.cwd(), parentThemePath)}/src/**/*`);
+        }
     });
 
     // Go through extensions and include there relative path
@@ -109,12 +113,20 @@ const getConfigInclude = (initialInclude = []) => {
         extendedInclude.push(extensionPath);
     });
 
+    const isProjectFilesIncluded = initialInclude.find(
+        (path) => path === 'src/**/*' || path == './src/**/*'
+    );
+
+    if (!isProjectFilesIncluded) {
+        extendedInclude.push('src/**/*');
+    }
+
     // Filter out include paths that already exists in existing one. Removing duplicates.
     const filteredExtendedInclude = extendedInclude.filter((path) => !initialInclude.includes(path));
 
     return [
-        ...initialInclude,
-        ...filteredExtendedInclude
+        ...filteredExtendedInclude,
+        ...initialInclude
     ];
 };
 
