@@ -7,19 +7,19 @@ const BASE_ENVIRONMENTS = [
 ];
 
 /**
- * @param {string[]} envs
+ * @param {string[]} variables
  * @returns {Record<string, string>}
  */
-const getEnvironments = (envs) => {
-    if (!envs?.length) {
+const getEnvVariables = (variables) => {
+    if (!variables?.length) {
         return {};
     }
 
-    return envs.reduce((acc, val) => {
+    return variables.reduce((acc, val) => {
         if (val in process.env) {
             return {
                 ...acc,
-                [val]: JSON.stringify(process.env[val])
+                [`process.env.${val}`]: JSON.stringify(process.env[val])
             };
         }
 
@@ -31,8 +31,8 @@ const getEnvironments = (envs) => {
  * @returns {Record<string, string>}
  */
 const getProcessEnv = () => [
-    BASE_ENVIRONMENTS,
-].map(getEnvironments).reduce((acc, val) => ({
+    BASE_ENVIRONMENTS
+].map(getEnvVariables).reduce((acc, val) => ({
     ...acc,
     ...val
 }), {});
