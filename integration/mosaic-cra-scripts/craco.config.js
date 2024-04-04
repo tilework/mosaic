@@ -96,15 +96,10 @@ module.exports = () => {
                 // TODO spwa
                 // Provide BEM specific variables
                 new webpack.DefinePlugin({
-                    // vvv This fixes process is not defined browser error
-                    process: {
-                        env: {
-                            // vvv get safe process.env, only specific variables are allowed
-                            ...getProcessEnv(),
-                            REBEM_MOD_DELIM: JSON.stringify('_'),
-                            REBEM_ELEM_DELIM: JSON.stringify('-')
-                        }
-                    }
+                    // vvv get safe process.env, only specific variables are allowed
+                    ...getProcessEnv(),
+                    'process.env.REBEM_MOD_DELIM': JSON.stringify('_'),
+                    'process.env.REBEM_ELEM_DELIM': JSON.stringify('-')
                 })
             ],
             configure: (webpackConfig) => {
