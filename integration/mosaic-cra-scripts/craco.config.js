@@ -10,10 +10,7 @@ const { getPackageJson } = require('@tilework/mosaic-dev-utils/package-json');
 
 const { injectBabelConfig, injectWebpackConfig } = require('@tilework/mosaic-config-injectors');
 
-const {
-    ESLINT_MODES,
-    whenDev
-} = require('@tilework/mosaic-craco');
+const { whenDev } = require('@tilework/mosaic-craco');
 
 const when = require('./lib/when');
 const { cracoPlugins } = require('./lib/build-plugins');
@@ -25,7 +22,7 @@ const getESLintConfig = () => {
     const usersESLintConfig = getPackageJson(process.cwd()).eslintConfig;
     if (usersESLintConfig) {
         return {
-            mode: ESLINT_MODES.extends,
+            mode: 'extends',
             // Ensure we are extending the mosaic-eslint config
             configure: usersESLintConfig
         };
